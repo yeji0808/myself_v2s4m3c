@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.restrnts.RestrntsDAOInter"> 
+   <insert id="create" parameterType="RestrntsVO">
+     INSERT INTO restrnts(restno, rcateno, memberno, rname, rmain, rintro, rtime, rcall, 
+                                  rzipcode, raddress1, raddress2, rword, rrecom, rcnt, reviewcnt,
+                                  fname, fupname, thumb, fsize)
+     VALUES((SELECT NVL(MAX(restno), 0) + 1 as restno FROM restrnts),
+                  #{rcateno}, #{memberno}, #{rname}, #{rmain}, #{rintro}, #{rtime}, #{rcall}, 
+                  #{rzipcode}, #{raddress1}, #{raddress2}, #{rword}, 0, 0, 0,
+                  #{fname}, #{fupname}, #{thumb}, #{fsize})
+   </insert>
+   
+   <select id="list_map" resultType="RestrntsVO">
+     SELECT restno, rcateno, memberno, rname, rmain, rintro, rtime, rcall,
+                rzipcode, raddress1, raddress2, rword, rrecom, rcnt, reviewcnt,
+                fname, fupname, thumb, fsize
+     FROM restrnts
+     ORDER BY restno ASC
+   </select> 
+   
+   <select id="list_by_rcateno" resultType="RestrntsVO" parameterType="int">
+     SELECT restno, rcateno, memberno, rname, rmain, rintro, rtime, rcall,
+                rzipcode, raddress1, raddress2, rword, rrecom, rcnt, reviewcnt,
+                fname, fupname, thumb, fsize
+     FROM restrnts
+     WHERE rcateno=#{rcateno}
+     ORDER BY rname ASC
+   </select> 
+   
+   <delete id="delete" parameterType="int">
+      DELETE FROM restrnts
+      WHERE restno=#{restno}
+   </delete> 
+   
+   <select id="read" resultType="RestrntsVO" parameterType="int">
+      SELECT restno, rcateno, memberno, rname, rmain, rintro, rtime, rcall, 
+             rzipcode, raddress1, raddress2, rword, rrecom, rcnt, reviewcnt,
+             fname, fupname, thumb, fsize
+      FROM restrnts
+      WHERE restno=#{restno}
+   </select>
+
+          
+</mapper>
+
+
+
+
+
