@@ -13,8 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import dev.mvc.s_write.WriteProcInter;
-import dev.mvc.s_write.WriteVO;
+import dev.mvc.s_write.S_WriteProcInter;
+import dev.mvc.s_write.S_WriteVO;
 import nation.web.tool.Tool;
 import nation.web.tool.Upload;
 
@@ -26,7 +26,7 @@ public class SomoimCont {
 
   @Autowired
   @Qualifier("dev.mvc.s_write.WriteProc") // 이름 지정
-  private WriteProcInter writeProc;
+  private S_WriteProcInter writeProc;
 
   public SomoimCont() {
     System.out.println("--> SomoimCont created.");
@@ -110,7 +110,7 @@ public class SomoimCont {
     SomoimVO somoimVO = somoimProc.read(somoimno);
     mav.addObject("somoimVO", somoimVO);
 
-    List<WriteVO> list = writeProc.list_by_somoimno(somoimno);
+    List<S_WriteVO> list = writeProc.list_by_somoimno(somoimno);
     mav.addObject("list", list);
 
     mav.setViewName("/somoim/read");

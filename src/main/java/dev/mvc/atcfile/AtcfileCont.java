@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.atcfile.AtcfileVO;
-import dev.mvc.s_write.WriteProcInter;
+import dev.mvc.s_write.S_WriteProcInter;
 import dev.mvc.somoim.SomoimVO;
 import dev.mvc.somoim.SomoimProcInter;
 import nation.web.tool.Tool;
@@ -42,7 +42,7 @@ public class AtcfileCont {
   
   @Autowired
   @Qualifier("dev.mvc.s_write.WriteProc") // 이름 지정
-  private WriteProcInter writeProc;
+  private S_WriteProcInter writeProc;
   
   public AtcfileCont() {
     System.out.println("--> AtcfileCont() created");
