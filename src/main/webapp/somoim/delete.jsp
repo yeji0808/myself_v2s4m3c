@@ -9,6 +9,7 @@
 <title>소모임</title>
  
 <link href="../css/s_style.css" rel="Stylesheet" type="text/css">
+<link href="../css/style.css" rel="Stylesheet" type="text/css">
  
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -29,6 +30,7 @@ function delete_by_somoimno() {
  
 <body>
 
+<jsp:include page="/menu/top.jsp" />
 <jsp:include page="/menu/s_top.jsp" />
 
 <FORM name='frm_delete_by_somoimno' method='POST' action='../s_write/delete_by_somoimno.do'>
@@ -74,6 +76,7 @@ function delete_by_somoimno() {
 </FORM>
 
 <jsp:include page="/menu/s_bottom.jsp" />
+<jsp:include page="/menu/bottom.jsp" />
 
 </body>
  

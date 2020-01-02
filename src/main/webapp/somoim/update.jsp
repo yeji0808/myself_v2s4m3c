@@ -7,7 +7,8 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>소모임</title>
- 
+
+<link href="../css/style.css" rel="Stylesheet" type="text/css"> 
 <link href="../css/s_style.css" rel="Stylesheet" type="text/css">
  
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -27,7 +28,7 @@
 </head> 
  
 <body>
-
+<jsp:include page="/menu/top.jsp" />
 <jsp:include page="/menu/s_top.jsp" />
 
 <DIV class='title_line' style='width: 15%; font-size: 20px;'>소모임 설정</DIV>
@@ -58,7 +59,9 @@
     </ul>
   </fieldset>
 </FORM>
+
 <jsp:include page="/menu/s_bottom.jsp" /> 
+<jsp:include page="/menu/bottom.jsp" /> 
  
 </body>
  

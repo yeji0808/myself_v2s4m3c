@@ -10,6 +10,7 @@
 <title>소모임</title>
  
 <link href="../css/s_style.css" rel="Stylesheet" type="text/css">
+<link href="../css/style.css" rel="Stylesheet" type="text/css">
  
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -28,7 +29,8 @@
 </head> 
  
 <body>
- 
+<jsp:include page="/menu/top.jsp" />
+
 <DIV class='title_line' style='width: 15%; font-size: 26px;'>소모임 생성</DIV>
  
 <FORM name='frm' method='POST' action='./create.do' enctype="multipart/form-data" class="form-horizontal">
@@ -77,7 +79,8 @@
     </ul>
   </fieldset>
 </FORM>
- 
+
+<jsp:include page="/menu/bottom.jsp" /> 
 </body>
   
 </html> 
