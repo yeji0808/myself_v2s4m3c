@@ -26,6 +26,9 @@
 	<context:component-scan base-package="dev.mvc.rest_categrp" /> <!-- 왕눈이 -->
 	<context:component-scan base-package="dev.mvc.rest_map" /> <!-- 아로미 -->
 	<context:component-scan base-package="dev.mvc.restrnts" /> <!-- 아로미 -->
+  <context:component-scan base-package="dev.mvc.somoim" />
+  <context:component-scan base-package="dev.mvc.s_write" />
+  <context:component-scan base-package="dev.mvc.atcfile" />
   
   <!-- FORM의 FILE 태그를 읽어 MultipartFile 객체로 변환 -->
   <beans:bean id="multipartResolver"

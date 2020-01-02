@@ -28,8 +28,11 @@
     <!-- 아래부분은 매핑할 xml파일이 있는 패키지경로를 설정한다. -->
     <property name="typeAliasesPackage" 
                    value="dev.mvc.rest_categrp,
-                              dev.mvc.rest_map,
-                              dev.mvc.restrnts"/>
+                            dev.mvc.rest_map,
+                            dev.mvc.restrnts,
+                            dev.mvc.somoim,
+                            dev.mvc.s_write,
+                            dev.mvc.atcfile"/>
     <!-- /src/main/resources/mybatis 폴더 -->                   
     <property name="mapperLocations" value="classpath:mybatis/*.xml" />
   </bean>
