@@ -24,6 +24,7 @@
 </head> 
  
 <body>
+<jsp:include page="/menu/top.jsp" />   
  
   <DIV class='title_line' style='width: 10%; font-size: 26px;'>소모임</DIV>
   
@@ -80,6 +81,7 @@
       </DIV>  
     </DIV><br><br>
     
+<jsp:include page="/menu/bottom.jsp" />      
 </body>
  
 </html> 

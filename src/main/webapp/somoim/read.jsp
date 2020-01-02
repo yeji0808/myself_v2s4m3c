@@ -26,7 +26,7 @@
 </head> 
  
 <body>
-
+<jsp:include page="/menu/top.jsp" />
 <jsp:include page="/menu/s_top.jsp" />
 
 
@@ -90,7 +90,8 @@
     <br><br>
   </div>   
   
-<jsp:include page="/menu/s_bottom.jsp" />  
+<jsp:include page="/menu/s_bottom.jsp" />
+<jsp:include page="/menu/bottom.jsp" />  
     
 </body>
  
