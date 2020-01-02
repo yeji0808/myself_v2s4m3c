@@ -34,7 +34,11 @@
                             dev.mvc.user_categrp,                            
                             dev.mvc.somoim,
                             dev.mvc.s_write,
-                            dev.mvc.atcfile"/>
+                            dev.mvc.atcfile,
+                            dev.mvc.board,
+                            dev.mvc.b_write,
+                            dev.mvc.w_attach,
+                            dev.mvc.wreply"/>
     <!-- /src/main/resources/mybatis 폴더 -->                   
     <property name="mapperLocations" value="classpath:mybatis/*.xml" />
   </bean>
