@@ -40,6 +40,12 @@ public class SomoimProc implements SomoimProcInter {
   public int delete(int somoimno) {
     int count = somoimDAO.delete(somoimno);
     return count;
+  }
+
+  @Override
+  public int update_image(SomoimVO somoimVO) {
+    int count = somoimDAO.update_image(somoimVO);
+    return count;
   } 
   
 }

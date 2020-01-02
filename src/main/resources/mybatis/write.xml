@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.s_write.WriteDAOInter"> 
+ 
+  <insert id="create" parameterType="WriteVO">
+     INSERT INTO s_write(writeno, somoimno, memberno, title, 
+                                 content, recom, cnt, replycnt, rdate, word)
+     VALUES ((SELECT NVL(MAX(writeno), 0) + 1 as writeno FROM s_write),
+                 #{somoimno}, #{memberno}, #{title}, #{content},
+                 0, 0, 0, sysdate, #{word}) 
+   </insert>
+   
+   <select id="list_by_somoimno" resultType="WriteVO" parameterType="int">
+     SELECT writeno, somoimno, memberno, title, content, recom, cnt, replycnt, rdate, word
+     FROM s_write
+     WHERE somoimno=#{somoimno}
+     ORDER BY writeno DESC
+   </select>
+   
+   <select id="read" resultType="WriteVO" parameterType="int">
+     SELECT writeno, somoimno, memberno, title, content, recom, cnt, replycnt, rdate, word
+     FROM s_write
+     WHERE writeno=#{writeno}
+   </select>
+   
+   <update id="update" parameterType="WriteVO">
+     UPDATE s_write
+     SET title=#{title}, content=#{content}, word=#{word}
+     WHERE writeno = #{writeno}
+   </update>
+   
+   <delete id='delete' parameterType='int'>
+     DELETE FROM s_write
+     WHERE writeno=#{writeno}
+   </delete>
+   
+   <!-- FK 컬럼 값이 사용된 레코드 갯수 산출: id="count_by_somoimno" -->
+   <select id="count_by_somoimno" resultType="int">
+     SELECT COUNT(*) as cnt
+     FROM s_write
+     WHERE somoimno = #{somoimno}
+   </select>
+      
+   <!-- FK 컬럼 값이 사용된 레코드 삭제: id="delete_by_somoimno" -->
+   <delete id="delete_by_somoimno" parameterType="int">
+     DELETE FROM s_write
+     WHERE somoimno = #{somoimno}
+   </delete>   
+     
+</mapper>

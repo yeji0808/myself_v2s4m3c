@@ -138,11 +138,14 @@ public class AtcfileCont {
    * @return
    */
   @RequestMapping(value = "/atcfile/list.do", method = RequestMethod.GET)
-  public ModelAndView list() {
+  public ModelAndView list(int somoimno) {
     ModelAndView mav = new ModelAndView();
 
     List<AtcfileVO> list = atcfileProc.list();
     mav.addObject("list", list);
+    
+    SomoimVO somoimVO = somoimProc.read(somoimno);
+    mav.addObject("somoimVO", somoimVO);
 
     mav.setViewName("/atcfile/list");
 
@@ -263,8 +266,15 @@ public class AtcfileCont {
   }
   
   @RequestMapping(value = "/atcfile/delete.do", method = RequestMethod.POST)
-  public ModelAndView delete_proc(int atcfileno) {
+  public ModelAndView delete_proc(HttpServletRequest request, int atcfileno) {
     ModelAndView mav = new ModelAndView();
+    // -----------------------------------------------------
+    // 파일 삭제
+    // -----------------------------------------------------
+    String upDir = Tool.getRealPath(request, "/atcfile/storage");
+    AtcfileVO atcfileVO_file = atcfileProc.read(atcfileno);
+    Tool.deleteFile(upDir + atcfileVO_file.getFupname());    
+    Tool.deleteFile(upDir + atcfileVO_file.getThumb());    
     
     int count = atcfileProc.delete(atcfileno);
     mav.addObject("count", count);

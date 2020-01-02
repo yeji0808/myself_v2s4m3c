@@ -2,6 +2,7 @@ package dev.mvc.s_write;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import dev.mvc.atcfile.AtcfileProcInter;
 import dev.mvc.atcfile.AtcfileVO;
 import dev.mvc.somoim.SomoimProcInter;
 import dev.mvc.somoim.SomoimVO;
+import nation.web.tool.Tool;
 
 @Controller
 public class WriteCont {
@@ -172,7 +174,7 @@ public class WriteCont {
      mav.addObject("count_by_writeno", count_by_writeno);
      
 
-    mav.setViewName("/write/delete"); // /webapp/write/delete.jsp
+    mav.setViewName("/s_write/delete"); // /webapp/write/delete.jsp
 
     return mav;
   }
@@ -252,7 +254,7 @@ public class WriteCont {
    * @return
    */
   @RequestMapping(value = "/s_write/file_delete_proc.do", method = RequestMethod.GET)
-  public ModelAndView file_delete_proc(int writeno, int atcfileno) {
+  public ModelAndView file_delete_proc(HttpServletRequest request, int writeno, int atcfileno) {
     ModelAndView mav = new ModelAndView();
 
     WriteVO writeVO = writeProc.read(writeno);
@@ -260,6 +262,14 @@ public class WriteCont {
 
     SomoimVO somoimVO = somoimProc.read(writeVO.getSomoimno());
     mav.addObject("somoimVO", somoimVO);
+    
+    // -----------------------------------------------------
+    // 파일 삭제
+    // -----------------------------------------------------
+    String upDir = Tool.getRealPath(request, "/atcfile/storage");
+    AtcfileVO atcfileVO_file = atcfileProc.read(atcfileno);
+    Tool.deleteFile(upDir + atcfileVO_file.getFupname());    
+    Tool.deleteFile(upDir + atcfileVO_file.getThumb());    
 
     // 1건의 파일 삭제
     atcfileProc.delete(atcfileno);
