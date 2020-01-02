@@ -10,6 +10,7 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title></title>
  
+<link href="../css/style.css" rel="Stylesheet" type="text/css">
 <link href="../css/s_style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -32,6 +33,7 @@
 </head>
  
 <body>
+<jsp:include page="/menu/top.jsp" flush='false' />
 <jsp:include page="/menu/s_top.jsp" flush='false' />
 
 <DIV class='title_line' style='width: 15%; font-size: 20px;'>사진첩</DIV>
@@ -69,9 +71,9 @@
       
       <%-- table 내용 --%>
       <tbody>
-        <c:forEach var="atcfileVO" items="${list }">
-          <c:set var="writeno" value="${atcfileVO.writeno }" />
-          <c:set var="fname" value="${atcfileVO.fname.toLowerCase() }" />
+        <c:forEach var="S_Write_AtcfileVO" items="${list }">
+          <c:set var="writeno" value="${S_Write_AtcfileVO.writeno }" />
+          <c:set var="fname" value="${S_Write_AtcfileVO.fname.toLowerCase() }" />
           
           <tr> 
             <td style='text-align: center; vertical-align: middle;'>${writeno}</td>
@@ -79,7 +81,7 @@
               <c:choose>
                 <c:when test="${fname.endsWith('jpg') || fname.endsWith('png') || fname.endsWith('gif')}">
                   
-                    <IMG src="./storage/${atcfileVO.thumb }"> ${atcfileVO.fname }
+                    <IMG src="./storage/${S_Write_AtcfileVO.thumb }"> ${S_Write_AtcfileVO.fname }
                
                 </c:when>
                 <c:otherwise>
@@ -87,9 +89,9 @@
                 </c:otherwise>
               </c:choose>
             </td> 
-            <td style='text-align: center; vertical-align: middle;'>${atcfileVO.rdate.substring(0, 10)}</td>
+            <td style='text-align: center; vertical-align: middle;'>${S_Write_AtcfileVO.rdate.substring(0, 10)}</td>
             <td style='text-align: center; vertical-align: middle;'>
-              <a href="javascript:delete_form(${atcfileVO.atcfileno })"><img src="./images/delete.png" title="삭제"  border='0' /></a>
+              <a href="javascript:delete_form(${S_Write_AtcfileVO.atcfileno })"><img src="./images/delete.png" title="삭제"  border='0' /></a>
             </td>
           </tr>
         </c:forEach>
@@ -100,6 +102,7 @@
   </div>
  
 <jsp:include page="/menu/s_bottom.jsp" flush='false' />
+<jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html>

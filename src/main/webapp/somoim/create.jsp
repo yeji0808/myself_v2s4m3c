@@ -9,8 +9,8 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>소모임</title>
  
-<link href="../css/s_style.css" rel="Stylesheet" type="text/css">
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
+<link href="../css/s_style.css" rel="Stylesheet" type="text/css">
  
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

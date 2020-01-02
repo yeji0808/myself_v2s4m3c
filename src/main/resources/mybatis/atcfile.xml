@@ -10,20 +10,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  #{writeno}, #{fname}, #{fupname}, #{thumb}, #{fsize}, sysdate)
   </insert>
 
-  <select id="list" resultType="atcfileVO">
+  <!-- <select id="list" resultType="atcfileVO">
     SELECT atcfileno, writeno, fname, fupname, thumb, fsize, rdate
     FROM atcfile
     ORDER BY writeno DESC,  atcfileno ASC
-  </select>
+  </select> -->
   
   <!-- Inner join -->
-  <!-- <select id="list" resultType="Contents_AtcfileVO">
-    SELECT c.title, a.atcfileno, a.writeno, a.fname, a.fupname, a.thumb, a.fsize, a.rdate
+  <select id="list" resultType="S_Write_AtcfileVO" parameterType="int">
+    SELECT c.somoimno, a.atcfileno, a.writeno, a.fname, a.fupname, a.thumb, a.fsize, a.rdate
     FROM atcfile a
-    INNER JOIN contents c
-    ON a.writeno = c.writeno
+    INNER JOIN s_write c
+    ON a.writeno = c.writeno AND somoimno=#{somoimno}
     ORDER BY c.writeno DESC,  a.atcfileno ASC
-  </select> -->
+  </select>
 
   <select id="list_by_writeno" resultType="AtcfileVO" parameterType="int">
     SELECT atcfileno, writeno, fname, fupname, thumb, fsize, rdate
