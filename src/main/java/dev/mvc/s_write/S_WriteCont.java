@@ -20,10 +20,10 @@ import dev.mvc.somoim.SomoimVO;
 import nation.web.tool.Tool;
 
 @Controller
-public class WriteCont {
+public class S_WriteCont {
   @Autowired
   @Qualifier("dev.mvc.s_write.WriteProc")
-  private WriteProcInter writeProc;
+  private S_WriteProcInter writeProc;
 
   @Autowired
   @Qualifier("dev.mvc.somoim.SomoimProc")
@@ -33,7 +33,7 @@ public class WriteCont {
   @Qualifier("dev.mvc.atcfile.AtcfileProc") // 이름 지정
   private AtcfileProcInter atcfileProc;
 
-  public WriteCont() {
+  public S_WriteCont() {
     System.out.println("--> WriteCont created.");
   }
 
@@ -64,7 +64,7 @@ public class WriteCont {
    * @return
    */
   @RequestMapping(value = "/s_write/create.do", method = RequestMethod.POST)
-  public ModelAndView create(RedirectAttributes ra, WriteVO writeVO) {
+  public ModelAndView create(RedirectAttributes ra, S_WriteVO writeVO) {
     ModelAndView mav = new ModelAndView();
 
     int count = writeProc.create(writeVO);
@@ -92,7 +92,7 @@ public class WriteCont {
   public ModelAndView list_by_somoimno(int somoimno) {
     ModelAndView mav = new ModelAndView();
 
-    List<WriteVO> list = writeProc.list_by_somoimno(somoimno);
+    List<S_WriteVO> list = writeProc.list_by_somoimno(somoimno);
     mav.addObject("list", list);
     mav.setViewName("/s_write/list_all"); // /webapp/write/list_all.jsp
 
@@ -103,7 +103,7 @@ public class WriteCont {
   public ModelAndView read(int writeno) {
     ModelAndView mav = new ModelAndView();
 
-    WriteVO writeVO = writeProc.read(writeno);
+    S_WriteVO writeVO = writeProc.read(writeno);
     mav.addObject("writeVO", writeVO);
 
     SomoimVO somoimVO = somoimProc.read(writeVO.getSomoimno());
@@ -125,7 +125,7 @@ public class WriteCont {
     SomoimVO somoimVO = somoimProc.read(somoimno);
     mav.addObject("somoimVO", somoimVO);
 
-    WriteVO writeVO = writeProc.read(writeno);
+    S_WriteVO writeVO = writeProc.read(writeno);
     mav.addObject("writeVO", writeVO);
 
     mav.setViewName("/s_write/update"); // /webapp/write/update.jsp
@@ -141,7 +141,7 @@ public class WriteCont {
    * @return
    */
   @RequestMapping(value = "/s_write/update.do", method = RequestMethod.POST)
-  public ModelAndView update(RedirectAttributes ra, WriteVO writeVO) {
+  public ModelAndView update(RedirectAttributes ra, S_WriteVO writeVO) {
     ModelAndView mav = new ModelAndView();
 
     int count = writeProc.update(writeVO);
@@ -165,7 +165,7 @@ public class WriteCont {
     SomoimVO somoimVO = somoimProc.read(somoimno);
     mav.addObject("somoimVO", somoimVO);
 
-    WriteVO writeVO = writeProc.read(writeno);
+    S_WriteVO writeVO = writeProc.read(writeno);
     mav.addObject("writeVO", writeVO);
 
     
@@ -233,7 +233,7 @@ public class WriteCont {
   public ModelAndView file_delete(int writeno) {
     ModelAndView mav = new ModelAndView();
 
-    WriteVO writeVO = writeProc.read(writeno);
+    S_WriteVO writeVO = writeProc.read(writeno);
     mav.addObject("writeVO", writeVO);
 
     SomoimVO somoimVO = somoimProc.read(writeVO.getSomoimno());
@@ -257,7 +257,7 @@ public class WriteCont {
   public ModelAndView file_delete_proc(HttpServletRequest request, int writeno, int atcfileno) {
     ModelAndView mav = new ModelAndView();
 
-    WriteVO writeVO = writeProc.read(writeno);
+    S_WriteVO writeVO = writeProc.read(writeno);
     mav.addObject("writeVO", writeVO);
 
     SomoimVO somoimVO = somoimProc.read(writeVO.getSomoimno());

@@ -4,9 +4,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="dev.mvc.s_write.WriteDAOInter"> 
+<mapper namespace="dev.mvc.s_write.S_WriteDAOInter"> 
  
-  <insert id="create" parameterType="WriteVO">
+  <insert id="create" parameterType="S_WriteVO">
      INSERT INTO s_write(writeno, somoimno, memberno, title, 
                                  content, recom, cnt, replycnt, rdate, word)
      VALUES ((SELECT NVL(MAX(writeno), 0) + 1 as writeno FROM s_write),
@@ -14,20 +14,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  0, 0, 0, sysdate, #{word}) 
    </insert>
    
-   <select id="list_by_somoimno" resultType="WriteVO" parameterType="int">
+   <select id="list_by_somoimno" resultType="S_WriteVO" parameterType="int">
      SELECT writeno, somoimno, memberno, title, content, recom, cnt, replycnt, rdate, word
      FROM s_write
      WHERE somoimno=#{somoimno}
      ORDER BY writeno DESC
    </select>
    
-   <select id="read" resultType="WriteVO" parameterType="int">
+   <select id="read" resultType="S_WriteVO" parameterType="int">
      SELECT writeno, somoimno, memberno, title, content, recom, cnt, replycnt, rdate, word
      FROM s_write
      WHERE writeno=#{writeno}
    </select>
    
-   <update id="update" parameterType="WriteVO">
+   <update id="update" parameterType="S_WriteVO">
      UPDATE s_write
      SET title=#{title}, content=#{content}, word=#{word}
      WHERE writeno = #{writeno}

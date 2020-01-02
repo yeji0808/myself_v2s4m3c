@@ -2,35 +2,35 @@ package dev.mvc.s_write;
 
 import java.util.List;
 
-public interface WriteProcInter {
+public interface S_WriteDAOInter {
   
   /**
    * 글 등록
    * @param writeVO
    * @return
    */
-  public int  create(WriteVO writeVO);
+  public int create(S_WriteVO writeVO);
 
   /**
    * 전체목록
    * @param somoimno
    * @return
    */
-  public List<WriteVO> list_by_somoimno(int somoimno);
+  public List<S_WriteVO> list_by_somoimno(int somoimno);
   
   /**
    * 글 읽기
    * @param writeno
    * @return
    */
-  public WriteVO read(int writeno);
+  public S_WriteVO read(int writeno);
   
   /**
    * 글 수정
    * @param writeVO
    * @return
    */
-  public int update(WriteVO writeVO);
+  public int update(S_WriteVO writeVO);
   
   /**
    * 글 삭제
@@ -52,5 +52,5 @@ public interface WriteProcInter {
    * @return
    */
   public int delete_by_somoimno(int somoimno);
-  
+
 }

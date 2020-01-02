@@ -6,30 +6,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component("dev.mvc.s_write.WriteProc")
-public class WriteProc implements WriteProcInter {
+public class S_WriteProc implements S_WriteProcInter {
   @Autowired
-  private WriteDAOInter writeDAO;
+  private S_WriteDAOInter writeDAO;
 
   @Override
-  public int create(WriteVO writeVO) {
+  public int create(S_WriteVO writeVO) {
     int count = writeDAO.create(writeVO);
     return count;
   }
 
   @Override
-  public List<WriteVO> list_by_somoimno(int somoimno) {
-    List<WriteVO> list = writeDAO.list_by_somoimno(somoimno);
+  public List<S_WriteVO> list_by_somoimno(int somoimno) {
+    List<S_WriteVO> list = writeDAO.list_by_somoimno(somoimno);
     return list;
   }
 
   @Override
-  public WriteVO read(int writeno) {
-    WriteVO writeVO = writeDAO.read(writeno);
+  public S_WriteVO read(int writeno) {
+    S_WriteVO writeVO = writeDAO.read(writeno);
     return writeVO;
   }
 
   @Override
-  public int update(WriteVO writeVO) {
+  public int update(S_WriteVO writeVO) {
     int count = writeDAO.update(writeVO);
     return count;
   }

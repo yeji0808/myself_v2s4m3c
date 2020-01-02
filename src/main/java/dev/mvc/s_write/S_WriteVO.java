@@ -1,6 +1,6 @@
 package dev.mvc.s_write;
 
-public class WriteVO {
+public class S_WriteVO {
 //  writeno                             NUMBER(10)       NOT NULL        PRIMARY KEY,
 //  somoimno                          NUMBER(10)     NOT NULL ,
 //  memberno                        NUMBER(10)     NOT NULL ,
