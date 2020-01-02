@@ -10,7 +10,8 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>${somoimVO.name }</title>
- 
+
+<link href="../css/style.css" rel="Stylesheet" type="text/css"> 
 <link href="../css/s_style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -26,7 +27,7 @@
 </head> 
  
 <body>
-
+<jsp:include page="/menu/top.jsp" />
 <jsp:include page="/menu/s_top.jsp" />
 
 
@@ -46,18 +47,18 @@
     <div style='width: 100%;'>
     <table class='table table-hover' style='width: 100%;'>
       <colgroup>
-        <col style="width: 15%;"></col>
         <col style="width: 60%;"></col>
         <col style="width: 10%;"></col>
+        <col style="width: 15%;"></col>
         <col style="width: 15%;"></col>
         
       </colgroup>
       <%-- table 컬럼 --%>
       <thead>
         <tr>
-          <th style='text-align: center;'>등록일</th>
           <th style='text-align: center;'>제목</th>
           <th style='text-align: center;'>추천</th>
+          <th style='text-align: center;'>등록일</th>
           <th style='text-align: center;'>기타</th>
         </tr>
       
@@ -69,11 +70,11 @@
           <c:set var='writeno' value='${writeVO.writeno }' />
         
           <tr> 
-            <td style='text-align: center;'>${writeVO.rdate.substring(0, 10)}</td>
             <td>
               <a href="../s_write/read.do?somoimno=${somoimVO.somoimno }&writeno=${writeno}">${writeVO.title}</a> 
             </td> 
             <td style='text-align: center;'>${writeVO.recom}</td>
+            <td style='text-align: center;'>${writeVO.rdate.substring(0, 10)}</td>
             <td style='text-align: center;'>
               <A href="../s_write/update.do?writeno=${writeno}&somoimno=${somoimVO.somoimno}">
               <img src="./images/update.png" title="수정" border='0'/></A>
@@ -90,7 +91,8 @@
     <br><br>
   </div>   
   
-<jsp:include page="/menu/s_bottom.jsp" />  
+<jsp:include page="/menu/s_bottom.jsp" />
+<jsp:include page="/menu/bottom.jsp" />  
     
 </body>
  

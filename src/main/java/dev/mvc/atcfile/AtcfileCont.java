@@ -141,7 +141,7 @@ public class AtcfileCont {
   public ModelAndView list(int somoimno) {
     ModelAndView mav = new ModelAndView();
 
-    List<AtcfileVO> list = atcfileProc.list();
+    List<S_Write_AtcfileVO> list = atcfileProc.list(somoimno);
     mav.addObject("list", list);
     
     SomoimVO somoimVO = somoimProc.read(somoimno);

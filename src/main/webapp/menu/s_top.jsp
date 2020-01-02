@@ -18,7 +18,7 @@
   <!-- 화면 상단 메뉴 -->
   <!-- 화면 상단 메뉴 -->
   <DIV class='top_menu'>
-    <A href="${root }/somoim/list.do"><img src='${root}/menu/images/logo.jpg' style='width: 5%; margin-left: 100px;'></A>
+    <%-- <A href="${root }/somoim/list.do"><img src='${root}/menu/images/logo.jpg' style='width: 5%; margin-left: 100px;'></A> --%>
     <NAV class='top_menu_list' style='text-align: center;'>
       <span class='top_menu1'></span>      
       <A class='menu_link'  href='${root}/somoim/read.do?somoimno=${param.somoimno}'>
@@ -33,9 +33,9 @@
   </DIV>
   
 <!-- 화면을 2개로 분할하여 좌측은 메뉴, 우측은 내용으로 구성 -->  
-<DIV class='container' style='width: 90%; margin-top: 100px;'>  
+<DIV class='container' style='width: 90%;'>  
   <div class="row">
-    <div class="col-6 col-md-4" style='width: 28%; margin-top: 40px;'>
+    <div class="col-6 col-md-4" style='width: 28%;'>
     
        <c:set var="thumb" value="${somoimVO.thumb.toLowerCase() }" />
         

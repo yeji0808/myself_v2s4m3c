@@ -234,7 +234,7 @@
   }
     
   /* Top 메뉴의 시작 -------------------------- */  
-  .top_menu {
+  /* .top_menu {
     background-image: url('./images/top_image7_1440_150.jpg');
     background-size: 100%;
     margin-top: 0px;
@@ -247,7 +247,7 @@
   }
   
   .top_menu_label {
-    position: relative; /* 속해있는 부모 태그 기준 설정 */
+    position: relative; 속해있는 부모 태그 기준 설정
     top: 1%;
     left: 0.5%;
     color: #FFFFFF;
@@ -258,9 +258,9 @@
     position: relative;
     top: 30%;
     left: 0%;
-    background-color: rgba(50, 50, 255, 0.3); /* 0.8: Alpha 투명도 */
+    background-color: rgba(50, 50, 255, 0.3); 0.8: Alpha 투명도
     color: white;
-  }
+  } */
   
   .menu_link:link{  /* 방문전 상태 */
     text-decoration: none; /* 밑줄 삭제 */

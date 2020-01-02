@@ -8,6 +8,7 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>소모임</title>
  
+<link href="../css/style.css" rel="Stylesheet" type="text/css">
 <link href="../css/s_style.css" rel="Stylesheet" type="text/css">
  
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -29,6 +30,7 @@ function delete_by_somoimno() {
  
 <body>
 
+<jsp:include page="/menu/top.jsp" />
 <jsp:include page="/menu/s_top.jsp" />
 
 <FORM name='frm_delete_by_somoimno' method='POST' action='../s_write/delete_by_somoimno.do'>
@@ -74,6 +76,7 @@ function delete_by_somoimno() {
 </FORM>
 
 <jsp:include page="/menu/s_bottom.jsp" />
+<jsp:include page="/menu/bottom.jsp" />
 
 </body>
  

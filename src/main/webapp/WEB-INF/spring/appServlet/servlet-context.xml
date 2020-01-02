@@ -32,6 +32,10 @@
   <context:component-scan base-package="dev.mvc.somoim" />
   <context:component-scan base-package="dev.mvc.s_write" />
   <context:component-scan base-package="dev.mvc.atcfile" />
+  <context:component-scan base-package="dev.mvc.b_write" />
+  <context:component-scan base-package="dev.mvc.board" />
+  <context:component-scan base-package="dev.mvc.w_attach" />
+  <context:component-scan base-package="dev.mvc.wreply" />
   
   <!-- FORM의 FILE 태그를 읽어 MultipartFile 객체로 변환 -->
   <beans:bean id="multipartResolver"

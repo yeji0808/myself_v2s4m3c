@@ -7,6 +7,7 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>Resort world</title>
  
+<link href="../css/style.css" rel="Stylesheet" type="text/css">
 <link href="../css/s_style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -18,6 +19,7 @@
 </head> 
  
 <body>
+<jsp:include page="/menu/top.jsp" flush='false' />
 <jsp:include page="/menu/s_top.jsp" flush='false' />
   <ASIDE style='float: left;'>
     <A href='../somoim/list.do'>소모임</A> > 
@@ -57,6 +59,7 @@
 
   
 <jsp:include page="/menu/s_bottom.jsp" flush='false' />
+<jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html> 
