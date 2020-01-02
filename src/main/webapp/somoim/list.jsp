@@ -10,6 +10,7 @@
 <title>소모임</title>
  
 <link href="../css/s_style.css" rel="Stylesheet" type="text/css">
+<link href="../css/style.css" rel="Stylesheet" type="text/css">
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  

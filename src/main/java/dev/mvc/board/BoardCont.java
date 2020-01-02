@@ -58,7 +58,7 @@ public class BoardCont {
      mav.setViewName("redirect:/board/create_msg.jsp?count=" + count);
      
    } else {
-     mav.setViewName("redirect:/board/list.do"); // list.jsp X
+     mav.setViewName("/board/list"); // list.jsp X
    }
        
    return mav;
@@ -75,7 +75,7 @@ public class BoardCont {
    List<BoardVO> list = boardProc.list_boardno_asc();
    
    mav.addObject("list", list);
-   mav.setViewName("/board/list"); // /webapp/board/list.jsp
+   mav.setViewName("redirect:/board/list.jsp"); // /webapp/board/list.jsp
 
    // mav.setViewName("redirect:/board/board_msg.jsp?count=" + count);
        

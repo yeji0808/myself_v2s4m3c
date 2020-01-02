@@ -29,13 +29,13 @@
   </div>
   <div class="menubar">
 <ul>
- <li style='width:25%;text-align: center;'><a href="/team1/index.do">Home</a></li>
+ <li style='width:25%;text-align: center;'><a href="${root }/index.jsp">Home</a></li>
  
  <li style='width:25%;text-align: center;'><a href="#">음식 정보</a></li>
- <li style='width:25%;text-align: center;'><a href="./somoim/list.do">소모임</a></li>
+ <li style='width:25%;text-align: center;'><a href="${root }/somoim/list.do">소모임</a></li>
  <li style='width:25%;text-align: center;'><a href="#" id="current">게시판</a>
   <ul>
-     <li><a href="http://localhost:9090/team1/board/list.do">카테고리 목록</a></li>
+     <li><a href="${root }/board/list.do">카테고리 목록</a></li>
      <li><a href="#">골라줘</a></li> 
     </ul> 
     
