@@ -19,10 +19,10 @@
        <span style="font-size: 2em;  color: #f2f2f2;">  
           <p onclick="location.href='${root }/index.do'">나 혼자 먹는다!</a> 
         </span>   
-    </div> 
+    </div>  
     <div class="login_frame" >
       <span style="font-size: 1em; ">
-        <a style="color: #dddddd; float: right; ">LOGIN</a>
+        <a style="color: #dddddd; float: right;" href='${root}/members/login.do'>LOGIN</a>
       </span> 
     </div>
     
