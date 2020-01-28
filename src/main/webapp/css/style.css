@@ -17,14 +17,40 @@
     background-color: #EEEEEE;
   }
   */
+   .update_img{
+  z-index: 2;
+  position: absolute;
+  }
+  
   .mb-4 {
   margin-top: 5%;
   }
   
-  .h-100:hover {
-  box-shadow: 0 10px 20px 0 rgba(0,0,0,0.20);
-  transition: 0.3s ease-in;
+ .h-100 {
+    box-shadow: 0 3px 7px 0 rgba(0,0,0,0.20);
+  }
+  
+  .card-img:hover {
+  cursor:pointer;
+    transform:scale(1.05); /* 마우스 오버시 이미지 크기를 1.1 배만큼 확대 */
+    -o-transform:scale(1.05); 
+    -moz-transform:scale(1.05);
+    -webkit-transform:scale(1.05);
+    transition: transform .3s;  
+    -o-transition: transform .3s;
+    -moz-transition: transform .3s;
+    -webkit-transition: transform .3s;
  
+  }
+  
+  .context {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: 15px; 
+  }
+  
+   .card-case {
+  overflow: hidden;
   }
   
   .card-title {
