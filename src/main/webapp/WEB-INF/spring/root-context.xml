@@ -34,6 +34,7 @@
                             dev.mvc.user_categrp,                            
                             dev.mvc.somoim,
                             dev.mvc.s_write,
+                            dev.mvc.s_reply,
                             dev.mvc.atcfile,
                             dev.mvc.board,
                             dev.mvc.b_write,
