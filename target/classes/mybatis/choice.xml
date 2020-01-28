@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- dev.mvc.categrp.CategrpDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+
+<mapper namespace="dev.mvc.choice.ChoiceDAOInter">
+<!-- 등록, id: create, 입력: PK, 리턴: boardno --> 
+  <insert id="create" parameterType="ChoiceVO" useGeneratedKeys="true" keyProperty="cho_no">
+     INSERT INTO choice(cho_no, 
+                              cho_title, cho_content,
+                              rdate, cho_word, memberno)
+    VALUES((SELECT NVL(MAX(cho_no), 0) + 1 as cho_no FROM choice),
+                              #{cho_title}, #{cho_content},
+                              sysdate, #{cho_word}, #{memberno})
+     <selectKey keyProperty="cho_no" resultType="int" order="BEFORE">
+       SELECT NVL(MAX(cho_no), 0) + 1 as cho_no FROM choice
+     </selectKey>        
+   </insert>
+  
+  <!-- 목록 -->
+  <select id="list" resultType="ChoiceVO" >
+    SELECT cho_no, 
+          cho_title, cho_content,
+          rdate, cho_word, memberno
+    FROM choice
+    ORDER BY cho_no desc
+  </select>
+  
+  <!-- 수정 -->
+  <update id="update" parameterType="ChoiceVO">
+    UPDATE choice
+    SET cho_title=#{cho_title}, cho_content=#{cho_content}
+    WHERE cho_no = #{cho_no}
+  </update>
+  
+  <!-- 조회 -->
+  <select id="read" parameterType="int" resultType="ChoiceVO">
+      SELECT cho_no, 
+            cho_title, cho_content,
+            rdate, cho_word, memberno
+      FROM choice
+      where cho_no = #{cho_no}
+  </select>
+  
+  <!-- 삭제 -->
+  <delete id="delete" parameterType="int" >
+    delete from choice
+    where cho_no =#{cho_no}
+  </delete>
+</mapper> 
