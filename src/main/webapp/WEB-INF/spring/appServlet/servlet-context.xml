@@ -22,13 +22,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="dev.mvc.team" />
-	<context:component-scan base-package="dev.mvc.rest_categrp" /> <!-- 왕눈이 -->
-	<context:component-scan base-package="dev.mvc.rest_map" /> <!-- 아로미 -->
-	<context:component-scan base-package="dev.mvc.restrnts" /> <!-- 아로미 -->
-	<context:component-scan base-package="dev.mvc.members" /> <!-- 아로미 -->
-	<context:component-scan base-package="dev.mvc.mypage" /> <!-- 아로미 -->
-	<context:component-scan base-package="dev.mvc.user_categrp" /> <!-- 아로미 -->
+<context:component-scan base-package="dev.mvc.team" />
+   <context:component-scan base-package="dev.mvc.rest_categrp" /> <!-- 왕눈이 -->
+   <context:component-scan base-package="dev.mvc.rest_map" /> <!-- 아로미 -->
+   <context:component-scan base-package="dev.mvc.restrnts" /> <!-- 아로미 -->
+   <context:component-scan base-package="dev.mvc.members" /> <!-- 아로미 -->
+   <context:component-scan base-package="dev.mvc.mypage" /> <!-- 아로미 -->
+   <context:component-scan base-package="dev.mvc.user_categrp" /> <!-- 아로미 -->
   <context:component-scan base-package="dev.mvc.somoim" />
   <context:component-scan base-package="dev.mvc.s_write" />
   <context:component-scan base-package="dev.mvc.atcfile" />
@@ -36,6 +36,12 @@
   <context:component-scan base-package="dev.mvc.board" />
   <context:component-scan base-package="dev.mvc.w_attach" />
   <context:component-scan base-package="dev.mvc.wreply" />
+  <context:component-scan base-package="dev.mvc.rec" />
+  <context:component-scan base-package="dev.mvc.rec_img" />
+  <context:component-scan base-package="dev.mvc.choice" />
+  <context:component-scan base-package="dev.mvc.menu" />
+  <context:component-scan base-package="dev.mvc.rattachfile" />
+  <context:component-scan base-package="dev.mvc.review" />
   
   <!-- FORM의 FILE 태그를 읽어 MultipartFile 객체로 변환 -->
   <beans:bean id="multipartResolver"

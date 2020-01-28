@@ -38,7 +38,13 @@
                             dev.mvc.board,
                             dev.mvc.b_write,
                             dev.mvc.w_attach,
-                            dev.mvc.wreply"/>
+                            dev.mvc.wreply,
+                            dev.mvc.rec,
+                            dev.mvc.rec_img,
+                            dev.mvc.choice,
+                            dev.mvc.menu,
+                            dev.mvc.rattachfile,
+                            dev.mvc.review"/>
     <!-- /src/main/resources/mybatis 폴더 -->                   
     <property name="mapperLocations" value="classpath:mybatis/*.xml" />
   </bean>
