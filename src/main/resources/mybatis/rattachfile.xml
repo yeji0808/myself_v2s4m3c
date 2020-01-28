@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.rattachfile.RattachfileDAOInter">
+  <insert id="create" parameterType="RattachfileVO">
+    INSERT INTO rattachfile(attachfileno, restno, fname, fupname, thumb, fsize)
+    VALUES((SELECT NVL(MAX(attachfileno), 0) + 1 as attachfileno FROM rattachfile),
+                 #{restno}, #{fname}, #{fupname}, #{thumb}, #{fsize})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM rattachfile
+    WHERE attachfileno = #{attachfileno}
+  </delete>
+  
+  <select id="list_by_restno" resultType="RattachfileVO" parameterType="int">
+    SELECT attachfileno, restno, fname, fupname, thumb, fsize
+    FROM rattachfile
+    WHERE restno = #{restno}
+    ORDER BY fname ASC
+  </select>
+  
+  <!-- FK 컬럼 값이 사용된 레코드 갯수 산출: id="count_by_restno" -->
+  <select id="count_by_restno" resultType="int" parameterType="int">
+    SELECT COUNT(*) as cnt
+    FROM rattachfile
+    WHERE restno=#{restno}
+  </select>
+
+</mapper> 
+ 
+ 
+
+ 
+ 

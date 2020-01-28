@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.menu.MenuDAOInter">
+  <insert id="create" parameterType="MenuVO">
+    INSERT INTO menu(menuno, restno, mname, mprice)
+    VALUES((SELECT NVL(MAX(menuno), 0) + 1 as menuno FROM menu),
+                 #{restno}, #{mname}, #{mprice})
+  </insert>
+  
+  <select id="read" resultType="MenuVO" parameterType="int">
+      SELECT mname, mprice
+      FROM menu
+      WHERE restno=#{restno}
+   </select>
+   
+   <update id='update' parameterType="MenuVO">
+     UPDATE menu
+     SET   mname=#{mname}, mprice=#{mprice}
+     WHERE restno = #{restno}
+   </update>
+
+</mapper> 
+ 
+ 
+
+ 
+ 

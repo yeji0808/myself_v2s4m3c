@@ -44,6 +44,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       FROM restrnts
       WHERE restno=#{restno}
    </select>
+   
+  <update id='update' parameterType="RestrntsVO">
+     UPDATE restrnts
+     SET   rmain=#{rmain}, rintro=#{rintro}, rtime=#{rtime}, rcall=#{rcall}, 
+             rword=#{rword}
+     WHERE restno = #{restno}
+   </update>
+   
+   <update id='update_img' parameterType="RestrntsVO">
+     UPDATE restrnts
+     SET   fname=#{fname}, fupname=#{fupname}, thumb=#{thumb}, fsize=#{fsize}
+     WHERE restno = #{restno}
+   </update>
+   
+   <select id="lastnum" resultType="int">
+    SELECT restno 
+    FROM(
+            SELECT restno
+            FROM restrnts
+            ORDER BY restno DESC)
+    WHERE ROWNUM = 1
+    </select>
 
           
 </mapper>
