@@ -41,9 +41,7 @@
     <FORM name='frm' method='POST' action='./create.do' class="form-horizontal">
                
       <!-- FK memberno 지정 -->
-      <input type='hidden' name='memberno' id='memberno' value='1'> 
-      <!-- FK boardno 지정 -->
-      <input type='hidden' name='boardno' id='boardno' value='${param.boardno }'>
+      <input type='hidden' name='memberno' id='memberno' value='${param.memberno }'> 
       
       <div class="form-group">   
         <div class="col-md-12">

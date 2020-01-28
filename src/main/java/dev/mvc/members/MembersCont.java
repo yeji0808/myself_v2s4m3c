@@ -298,7 +298,7 @@ public class MembersCont {
      // System.out.println(id + " 로그인 성공");
      MembersVO memberVO = membersProc.readById(id);
      session.setAttribute("memberno", memberVO.getMemberno());
-     session.setAttribute("id", id);
+     session.setAttribute("id", memberVO.getId());
      session.setAttribute("name", memberVO.getName());
      
      // -------------------------------------------------------------------
@@ -337,11 +337,27 @@ public class MembersCont {
      response.addCookie(ck_passwd_save);
      // -------------------------------------------------------------------
      
-     mav.setViewName("redirect:/user_categrp/list.do");  
+     mav.setViewName("redirect:/index.jsp");  
    } else {
      mav.setViewName("redirect:/members/login_fail_msg.jsp");
    }
        
+   return mav;
+ }
+ 
+ /**
+  * 로그아웃 처리
+  * @param session
+  * @return
+  */
+ @RequestMapping(value="/members/logout.do", 
+                            method=RequestMethod.GET)
+ public ModelAndView logout(HttpSession session){
+   ModelAndView mav = new ModelAndView();
+   session.invalidate(); // 모든 session 변수 삭제
+   
+   mav.setViewName("redirect:/members/logout_msg.jsp");
+   
    return mav;
  }
 }

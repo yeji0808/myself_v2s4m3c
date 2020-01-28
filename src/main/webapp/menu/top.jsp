@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
 </head>
 <body style="background-color: rgba(255, 255, 255,0.8); background-size: 100%;">
 
@@ -16,14 +16,23 @@
   <div class="headline1" style="background-image: url(${root}/css/images/main_photo.jpg);"> 
     
     <DIV class="headline2"  >  
-       <span style="font-size: 2em;  color: #f2f2f2;">  
-          <p onclick="location.href='${root }/index.do'">나 혼자 먹는다!</a> 
+       <span >  
+          <p onclick="location.href='${root }/index.do' " style="font-size: 2em;  color: #f2f2f2;">나 혼자 먹는다!</a> 
         </span>   
     </div>  
-    <div class="login_frame" >
-      <span style="font-size: 1em; ">
-        <a style="color: #dddddd; float: right;" href='${root}/members/login.do'>LOGIN</a>
-      </span> 
+    <div class="login_frame" style="float: right;">
+      
+      <c:choose>
+        <c:when test="${sessionScope.id == null}"> 
+          <span style="font-size: 1em; ">
+            <a style="color: #dddddd; " href='${root}/members/login.do'>LOGIN</a>
+          </span> 
+        </c:when>
+        <c:otherwise>
+          ${sessionScope.id }<A class='menu_link'  href='${root}/member/logout.do' style="font-size: 1em; ">Logout</A> <span class='top_menu1'> | </span>
+        </c:otherwise>
+      </c:choose>
+      
     </div>
     
   </div>

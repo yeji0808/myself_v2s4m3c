@@ -28,7 +28,9 @@
       </div>
        <div style="float: right; ">
          <A href="javascript:location.reload();">새로고침</A>
-         <A href="./create.do?boardno=${param.boardno }">등록</A>
+         <c:if test="${sessionScope!=null}"> 
+           <A href="./create.do?memberno=${sessionScope.memberno }">등록</A>
+         </c:if>
       </div>
     <table class="table table-condensed" style='width: 100%;  margin-top: 20px'>
       <colgroup>
@@ -58,14 +60,16 @@
           <tr> 
             <td style='text-align: center;'>${writeVO.rdate.substring(0, 10)}</td>
             <td>
-              <a href="./read.do?wno=${wno}&boardno=${boardVO.boardno}" >
+              <a href="./read.do?wno=${wno}&memberno=${sessionScope.memberno }" >
               <span style="font-style: oblique; font-weight: 600;">${writeVO.wtitle}</span>(${writeVO.wreplycnt})</a> 
             </td> 
             <td style='text-align: center;'>${writeVO.wrecom}</td> 
             <td style='text-align: center;'>
-              <a href="./update.do?wno=${wno}&boardno=${boardVO.boardno}"><img src="./images/update.png" title="수정"></a>
-              <a href="./delete.do?wno=${wno}&boardno=${boardVO.boardno}"><img src="./images/delete.png" title="삭제"></a>
-              <a href="../attachfile/create.do?wno=${wno}&boardno=${boardVO.boardno}"><img src="./images/upload.png" title="파일 업로드"></a>
+              <a href="./update.do?wno=${wno}&memberno=${sessionScope.memberno }"><img src="./images/update.png" title="수정"></a>
+              <c:forEach var="memberno" items="writeVO.memberno">
+              <a href="./delete.do?wno=${wno}&memberno=${memberno}"><img src="./images/delete.png" title="삭제"></a>
+              </c:forEach>
+              <a href="../attachfile/create.do?wno=${wno}&memberno=${sessionScope.memberno }"><img src="./images/upload.png" title="파일 업로드"></a>
             </td>
           </tr>
         </c:forEach>
