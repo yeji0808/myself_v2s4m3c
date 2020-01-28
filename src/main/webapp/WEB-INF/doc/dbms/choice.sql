@@ -1,32 +1,15 @@
-/**********************************/
-/* Table Name: 게시판 */
-/**********************************/
-CREATE TABLE board(
-		boardno                       		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-		name                          		VARCHAR2(300)		 NOT NULL,
-		count                         		NUMBER(10)		 DEFAULT 0		 NOT NULL
-);
-COMMENT ON TABLE board is '게시판';
-COMMENT ON COLUMN board.boardno is '게시판번호';
-COMMENT ON COLUMN board.name is '게시판이름';
-COMMENT ON COLUMN board.count is '게시판등록자료수';
-
-
 
 /**********************************/
 /* Table Name: 선택 */
 /**********************************/
-drop table choice cascade constraints
+drop table choice cascade constraint
 CREATE TABLE choice(
 		cho_no                        		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		cho_title                     		VARCHAR2(100)		 NOT NULL,
-		cho_content                   		VARCHAR2(100)		 NOT NULL,
-		cho_rec_cnt                   		NUMBER(10)		 DEFAULT 0		 NOT NULL,
+		cho_content                   		VARCHAR2(3000)		 NOT NULL,
 		rdate                         		DATE		 NOT NULL,
 		cho_word                      		VARCHAR2(100)		 NULL ,
-		boardno                       		NUMBER(10)		 NULL ,
 		memberno                       		NUMBER(10)		 NULL ,
-  FOREIGN KEY (boardno) REFERENCES board (boardno),
   FOREIGN KEY (memberno) REFERENCES members (memberno)
 );
 
@@ -34,49 +17,47 @@ COMMENT ON TABLE choice is '선택';
 COMMENT ON COLUMN choice.cho_no is '선택 번호';
 COMMENT ON COLUMN choice.cho_title is '선택 제목';
 COMMENT ON COLUMN choice.cho_content is '선택 내용';
-COMMENT ON COLUMN choice.cho_rec_cnt is '선택 추천 수';
 COMMENT ON COLUMN choice.rdate is '등록일';
 COMMENT ON COLUMN choice.cho_word is '검색어';
-COMMENT ON COLUMN choice.boardno is '게시판번호';
 
 -- 1)등록
 INSERT INTO choice(cho_no, 
-                         cho_title, cho_content, cho_rec_cnt, 
-                         rdate, cho_word, boardno, memberno)
+                         cho_title, cho_content, 
+                         rdate, cho_word, memberno)
 VALUES((SELECT NVL(MAX(cho_no), 0) + 1 as cho_no FROM choice),
-             '산천어 축제', '아이 좋아', 0,
-             sysdate, '감사',2,1);
+             '산천어 축제', '아이 좋아',
+             sysdate, '감사',1);
 INSERT INTO choice(cho_no, 
-                         cho_title, cho_content, cho_rec_cnt, 
-                         rdate, cho_word, boardno, memberno)
+                         cho_title, cho_content, 
+                         rdate, cho_word, memberno)
 VALUES((SELECT NVL(MAX(cho_no), 0) + 1 as cho_no FROM choice),
-             '산천어 축제', '아이 좋아', 0,
-             sysdate, '감사',2,1 );
+             '산천어 축제', '아이 좋아',
+             sysdate, '감사',1 );
 INSERT INTO choice(cho_no, 
-                         cho_title, cho_content, cho_rec_cnt, 
-                         rdate, cho_word, boardno, memberno)
+                         cho_title, cho_content, 
+                         rdate, cho_word, memberno)
 VALUES((SELECT NVL(MAX(cho_no), 0) + 1 as cho_no FROM choice),
-             '산천어 축제', '아이 좋아', 0,
-             sysdate, '감사4',2,1);
+             '산천어 축제', '아이 좋아',
+             sysdate, '감사4',1);
 INSERT INTO choice(cho_no, 
-                         cho_title, cho_content, cho_rec_cnt, 
-                         rdate, cho_word, boardno, memberno)
+                         cho_title, cho_content, 
+                         rdate, cho_word, memberno)
 VALUES((SELECT NVL(MAX(cho_no), 0) + 1 as cho_no FROM choice),
-             '산천어 축제', '아이 좋아', 0,
-             sysdate, '감사3',2,1);
+             '산천어 축제', '아이 좋아',
+             sysdate, '감사3',1);
 INSERT INTO choice(cho_no, 
-                         cho_title, cho_content, cho_rec_cnt, 
-                         rdate, cho_word, boardno, memberno)
+                         cho_title, cho_content, 
+                         rdate, cho_word, memberno)
 VALUES((SELECT NVL(MAX(cho_no), 0) + 1 as cho_no FROM choice),
-             '산천어 축제', '아이 좋아', 0,
-             sysdate, '감사2',2,1);
+             '산천어 축제', '아이 좋아',
+             sysdate, '감사2',1);
 
 
 
 -- 2) 목록
 SELECT cho_no, 
-          cho_title, cho_content, cho_rec_cnt, 
-          rdate, cho_word, boardno, memberno
+          cho_title, cho_content, 
+          rdate, cho_word, memberno
 FROM choice
 ORDER BY cho_no asc;
 
@@ -90,28 +71,6 @@ ORDER BY cho_no asc;
       6 산천어 축제    아이 좋아                 0 2019-12-26 14:47:41.0 감사4            2        1
       7 산천어 축제    아이 좋아                 0 2019-12-26 14:47:42.0 감사3            2        1
       8 산천어 축제    아이 좋아                 0 2019-12-26 14:47:43.0 감사2            2        1
-
-
-
--- 2-2) Boardno 별 출력 순서
-SELECT cho_no, 
-          cho_title, cho_content, cho_rec_cnt, 
-          rdate, cho_word, boardno, memberno
-FROM choice
-where boardno =2
-order by cho_no desc
-   
- CHO_NO CHO_TITLE CHO_CONTENT CHO_REC_CNT RDATE                 CHO_WORD BOARDNO MEMBERNO
- ------ --------- ----------- ----------- --------------------- -------- ------- --------
-      8 산천어 축제    아이 좋아                 0 2019-12-26 14:47:43.0 감사2            2        1
-      7 산천어 축제    아이 좋아                 0 2019-12-26 14:47:42.0 감사3            2        1
-      6 산천어 축제    아이 좋아                 0 2019-12-26 14:47:41.0 감사4            2        1
-      5 산천어 축제    아이 좋아                 0 2019-12-26 14:47:40.0 감사             2        1
-      4 산천어 축제    아이 좋아                 0 2019-12-26 14:47:39.0 감사             2        1
-      3 산천어 축제    아이 좋아                 0 2019-12-26 14:46:59.0 감사4            2        1
-      2 산천어 축제    아이 좋아                 0 2019-12-26 14:46:58.0 감사             2        1
-      1 산천어 축제    아이 좋아                 0 2019-12-26 14:46:57.0 감사             2        1
-
 
       
 -- 3) 전체 레코드 수
@@ -143,10 +102,10 @@ SELECT * from choice;
 
 
 
--- 5) 하나만 조회할 때 read
+-- 5) 하나만 조회할 때 read 
 SELECT cho_no, 
           cho_title, cho_content, cho_rec_cnt, 
-          rdate, cho_word, boardno, memberno
+          rdate, cho_word, memberno
 FROM choice
 where cho_no = 2;
 
@@ -165,20 +124,5 @@ where cho_no =3;
       4 산천어 축제    아이 좋아                 0 2019-12-18 18:53:08.0 감사3            5
       5 산천어 축제    아이 좋아                 0 2019-12-18 18:53:09.0 감사2            5
       
--- 8) boardno별 레코드 갯수 산출
-SELECT COUNT(*) as cnt
-FROM choice
-where boardno = 2;
-
- CNT
- ---
-   7
-     
--- 9) boardno별 레코드 삭제
-delete FROM choice
-where boardno = 2;  
    
-
-   (7 rows affected)
-
 
