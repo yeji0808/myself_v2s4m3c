@@ -313,6 +313,103 @@ public class Tool {
  
     return date;
   }
+  
+  /**
+   * 2010-12-14 형식의 날짜를 리턴합니다.
+   * 
+   * @return 2010-01-14, 2019-12-25 형식의 문자열 리턴
+   */
+  public static String getDate(int year, int month, int day) {
+    SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+
+    String date = sd.format(new Date(year - 1900, month, day));
+
+    return date;
+  }
+  
+  /**
+   * 2019 형식의 날짜를 리턴합니다.
+   * 
+   * @return 2019 형식의 문자열 리턴
+   */
+  public static String getYear() {
+    SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+    
+    Date date = new Date();
+    String str = sd.format(date);
+    // System.out.println("str: " + str);
+    
+    return str.substring(0, 4);
+  }
+  
+  /**
+   * 12 형식의 월을 리턴합니다.
+   * 
+   * @return 12 형식의 문자열 리턴
+   */
+  public static String getMonth() {
+    SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+    
+    Date date = new Date();
+    String str = sd.format(date);
+    // System.out.println("str: " + str);
+    
+    return str.substring(5, 7);
+  }
+  
+  /**
+   * 01 형식의 일을 리턴합니다.
+   * 
+   * @return 01 형식의 문자열 리턴
+   */
+  public static String getDay() {
+    SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+    
+    Date date = new Date();
+    String str = sd.format(date);
+    // System.out.println("str: " + str);
+    
+    return str.substring(8, 10);
+  }
+  
+  /**
+   * 주어진 날짜와 기간을 계산하여 새글 여부 판단 현재 날짜가 2013-02-04 글을 등록날짜 2013-02-02
+   * getTimeNew("2013-02-04", 2) : 새글 처리, true getTimeNew("2013-02-04", 3) : 새글
+   * 처리, false
+   * 
+   * @param date 문자열로 된 날짜
+   * @param period 새글로 지정할 기간
+   * @return
+   */
+  public static boolean isNew(String date, int period) {
+    boolean sw = false;
+
+    Date _date = new Date();
+    SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+    try {
+      _date = sd.parse(date);
+    } catch (Exception e) {
+    }
+    // System.out.println(date);
+    // 1970년1월1일부터 시간을 1000을 1초로하여 계산하여 리턴
+    long time = _date.getTime(); // 글을 작성한 시간
+
+    // 현재 시간을 1970년 1월 1일부터 수치형식으로 리턴
+    long currentTime = System.currentTimeMillis();
+
+    // 현재 시간과 글 등록시간의 차이를 계산
+    long diff = currentTime - time;
+
+    // 1일 86,400,000 ms: 1초를 1000으로 하루를 계산
+    // 0.0001 --> 1: 오늘 날짜
+    // 1.00002 --> 2: 어제 날짜
+    int day = (int) Math.ceil(((double) diff / 86400000));
+
+    if (day <= period) {
+      sw = true; // 최신글 처리
+    }
+    return sw;
+  }  
  
   
 }

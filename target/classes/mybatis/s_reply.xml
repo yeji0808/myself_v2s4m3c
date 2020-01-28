@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.s_reply.S_ReplyDAOInter">
+  
+  <insert id="create" parameterType="S_ReplyVO">
+    INSERT INTO s_reply(replyno, writeno, memberno, content, passwd, rdate)
+    VALUES((SELECT NVL(MAX(replyno), 0) + 1 as replyno FROM s_reply),
+               #{writeno}, #{memberno}, #{content}, #{passwd}, sysdate);
+  </insert>
+  
+  <select id="list" resultType="S_ReplyVO">
+    SELECT replyno, writeno, memberno, content, passwd, rdate
+    FROM s_reply
+    ORDER BY replyno DESC
+  </select>
+  
+  <select id="list_by_writeno" resultType="S_ReplyVO" parameterType="int">
+    SELECT replyno, writeno, memberno, content, passwd, rdate
+    FROM s_reply
+    WHERE writeno = #{writeno}
+    ORDER BY replyno DESC
+  </select>
+  
+  <select id="list_by_writeno_join" resultType="S_ReplyMemberVO" parameterType="int">
+    SELECT m.id, m.name,
+              r.replyno, r.writeno, r.memberno, r.content, r.passwd, r.rdate
+    FROM members m, s_reply r
+    WHERE (m.memberno = r.memberno) AND r.writeno = #{writeno}
+    ORDER BY r.replyno DESC
+  </select>
+ 
+  <!-- <select id="checkPasswd" resultType="int" parameterType="HashMap"> -->
+  <!-- <select id="checkPasswd" resultType="int" parameterType="ReplyVO"> -->
+  <select id="checkPasswd" resultType="int" parameterType="Map">
+    SELECT COUNT(*) as cnt
+    FROM s_reply
+    WHERE replyno=#{replyno} AND passwd=#{passwd}
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM s_reply
+    WHERE replyno=#{replyno}
+  </delete>
+  
+  <update id="update" parameterType="S_ReplyVO">
+    UPDATE s_reply
+    SET content=#{content}
+    WHERE replyno=#{replyno}
+  </update>
+  
+</mapper>

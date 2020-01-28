@@ -240,5 +240,26 @@ public class SomoimCont {
 
     return mav;
   }
+  
+  /**
+   * Á¶È¸ http://localhost:9090/team1/menu/s_top.do?somoimno=1
+   * 
+   * @param contentsno
+   * @return
+   */
+  @RequestMapping(value = "/menu/s_top.do", method = RequestMethod.GET)
+  public ModelAndView s_top(int somoimno) {
+    ModelAndView mav = new ModelAndView();
+
+    SomoimVO somoimVO = somoimProc.read(somoimno);
+    mav.addObject("somoimVO", somoimVO);
+
+    List<S_WriteVO> list = writeProc.list_by_somoimno(somoimno);
+    mav.addObject("list", list);
+
+    mav.setViewName("/menu/s_top");
+
+    return mav;
+  }
 
 }

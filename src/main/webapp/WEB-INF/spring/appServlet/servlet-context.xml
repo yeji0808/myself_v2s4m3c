@@ -31,6 +31,7 @@
    <context:component-scan base-package="dev.mvc.user_categrp" /> <!-- 아로미 -->
   <context:component-scan base-package="dev.mvc.somoim" />
   <context:component-scan base-package="dev.mvc.s_write" />
+  <context:component-scan base-package="dev.mvc.s_reply" />
   <context:component-scan base-package="dev.mvc.atcfile" />
   <context:component-scan base-package="dev.mvc.b_write" />
   <context:component-scan base-package="dev.mvc.board" />
