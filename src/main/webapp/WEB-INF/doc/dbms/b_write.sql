@@ -3,6 +3,7 @@
 /**********************************/
 /* Table Name: È¸¿ø */
 /**********************************/
+drop table members cascade constraint 
 CREATE TABLE members(
 		memberno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY
 );
