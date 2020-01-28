@@ -13,7 +13,7 @@
 <body style="background-color: rgba(255, 255, 255,0.8); background-size: 100%;">
 
   <!-- 화면 상단 메뉴 --> 
-  <div class="headline1" style="background-image: url(${root}/menu/images/main_photo.jpg);"> 
+  <div class="headline1" style="background-image: url(${root}/css/images/main_photo.jpg);"> 
     
     <DIV class="headline2"  >  
        <span style="font-size: 2em;  color: #dddddd;">  
@@ -29,14 +29,14 @@
   </div>
   <div class="menubar">
 <ul>
- <li style='width:25%;text-align: center;'><a href="${root }/index.jsp">Home</a></li>
+ <li style='width:25%;text-align: center;'><a href="/team1/index.do">Home</a></li>
  
  <li style='width:25%;text-align: center;'><a href="#">음식 정보</a></li>
- <li style='width:25%;text-align: center;'><a href="${root }/somoim/list.do">소모임</a></li>
- <li style='width:25%;text-align: center;'><a href="#" id="current">게시판</a>
-  <ul>
-     <li><a href="${root }/board/list.do">카테고리 목록</a></li>
-     <li><a href="#">골라줘</a></li> 
+ <li style='width:25%;text-align: center;'><a href="${root}/somoim/list.do">소모임</a></li>
+ <li style='width:25%;text-align: center;' ><a href="" id="current">게시판</a>
+  <ul> 
+     <li><a href="${root }/b_write/list.do">자유게시판</a></li>
+     <li><a href="${root }/choice/list.do">추천해주세요</a></li> 
     </ul> 
     
  </li>
