@@ -121,3 +121,18 @@ TITLE atcfileNO writeNO FNAME           FUPNAME         THUMB             FSIZE 
  크리스마스          1          1 christmas04.jpg christmas04.jpg christmas04_t.jpg  56303 2019-12-17 12:48:42.0
  크리스마스          2          1 christmas05.jpg christmas05.jpg christmas05_t.jpg 211480 2019-12-17 12:48:42.0
  크리스마스          4          1 christmas15.jpg christmas15.jpg christmas15_t.jpg  77757 2019-12-17 12:48:42.0
+ 
+SELECT c.somoimno, a.atcfileno, a.writeno, a.fname, a.fupname, a.thumb, a.fsize, a.rdate
+FROM atcfile a
+INNER JOIN s_write c
+ON a.writeno = c.writeno AND somoimno=1
+ORDER BY c.writeno DESC,  a.atcfileno ASC;
+
+
+
+
+
+
+
+
+ 

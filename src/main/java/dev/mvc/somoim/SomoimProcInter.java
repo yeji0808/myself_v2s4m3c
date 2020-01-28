@@ -2,6 +2,8 @@ package dev.mvc.somoim;
 
 import java.util.List;
 
+import dev.mvc.s_reply.S_ReplyVO;
+
 public interface SomoimProcInter {
 
   /**

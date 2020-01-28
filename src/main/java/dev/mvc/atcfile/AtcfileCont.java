@@ -97,6 +97,7 @@ public class AtcfileCont {
     // 전송 파일이 없어서도 fnamesMF 객체가 생성됨.
     List<MultipartFile> fnamesMF = atcfileVO.getFnamesMF(); 
     int count = fnamesMF.size(); // 전송 파일 갯수
+    
     if (count > 0) {
       for (MultipartFile multipartFile:fnamesMF) { // 파일 추출
         fsize = multipartFile.getSize();  // 파일 크기

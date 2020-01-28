@@ -1,20 +1,25 @@
 package dev.mvc.s_write;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.atcfile.AtcfileProcInter;
 import dev.mvc.atcfile.AtcfileVO;
+import dev.mvc.s_reply.S_ReplyProcInter;
 import dev.mvc.somoim.SomoimProcInter;
 import dev.mvc.somoim.SomoimVO;
 import nation.web.tool.Tool;
@@ -32,6 +37,10 @@ public class S_WriteCont {
   @Autowired
   @Qualifier("dev.mvc.atcfile.AtcfileProc") // 이름 지정
   private AtcfileProcInter atcfileProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.s_reply.S_ReplyProc") // 이름 지정
+  private S_ReplyProcInter s_replyProc;
 
   public S_WriteCont() {
     System.out.println("--> WriteCont created.");
@@ -280,6 +289,36 @@ public class S_WriteCont {
     mav.setViewName("/s_write/file_delete"); // file_delete.jsp
 
     return mav;
+  }
+  
+  /**
+   * 댓글 삭제폼
+   * http://localhost:9090/ojt/contents/reply_delete.do?replyno=1&passwd=1
+   * @param replyno
+   * @param passwd
+   * @return
+   */
+  @ResponseBody
+  @RequestMapping(value = "/s_write/s_reply_delete.do", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+  public String reply_delete(int replyno, String passwd) {
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("replyno", replyno);
+    map.put("passwd", passwd);
+  
+        
+    int count = s_replyProc.checkPasswd(map);
+    int delete_count = 0;
+    
+    // 패스워드 일치 여부
+    if (count == 1) {
+      delete_count = s_replyProc.delete(replyno);
+    } 
+    
+    JSONObject obj = new JSONObject();
+    obj.put("count", count);
+    obj.put("delete_count", delete_count);
+    
+    return obj.toString();
   }
 
 }
