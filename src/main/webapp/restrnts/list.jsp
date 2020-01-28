@@ -17,7 +17,19 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-
+<script type="text/javascript">
+function update_img_form(restno) {
+  // alert('admin2no: ' + admin2no);
+  
+  var url = './update_img.do?restno=' + restno;
+  var win = window.open(url, '카테고리 그룹 수정', 'width=600px, height=300px');
+  
+  var x = (screen.width - 600) / 2;
+  var y = (screen.height - 300) / 2;
+  
+  win.moveTo(x, y); // 지정된 좌표로 이동    
+} 
+</script>
 </head>
  
 
@@ -31,24 +43,27 @@
         <c:set var="restrntsno" value="${restrntsVO.restno }" />
         <c:set var="fname" value="${restrntsVO.fname.toLowerCase() }" />
       <div class="col mb-4">
-        <div class="card h-100" onclick="location.href='./read.do?restno=${restrntsno}'">
+        <div class="card h-100" >
+        <div class="card-case">
+        <A href="javascript: update_img_form(${restrntsVO.restno});"><img src="./images/png.png" title="대표사진 수정"  class="update_img"/></a>
           <c:choose>
             <c:when test="${fname.endsWith('jpg') || fname.endsWith('png') || fname.endsWith('gif')}">
-              <IMG src="./storage/${restrntsVO.thumb}" class="card-img">
+              <a href="./read.do?restno=${restrntsVO.restno}"><IMG src="./storage/${restrntsVO.thumb}" class="card-img"></a>
             </c:when>
             <c:otherwise>
               ${restrntsVO.fname }
             </c:otherwise>
           </c:choose>
+          </div>
           <div class="card-body">
             <p class="card-title">${restrntsVO.rname}</p>
             <h5 class="card-text">${restrntsVO.rmain}</h5>
             <p class="card-text2" style="align: right;">
-              <small class="text-muted"><IMG src='./images/good.png' title='추천수'> ${restrntsVO.rrecom}</small>
+              <small class="text-muted"><IMG src='./images/good.png' title='추천수' > ${restrntsVO.rrecom}</small>
               <small class="text-muted"><IMG src='./images/view.png' title='조회수'> ${restrntsVO.rcnt}</small>
               <small class="text-muted"><IMG src='./images/review.png' title='댓글수'> ${restrntsVO.reviewcnt}</small>
-              <a href="./update.do?restno=${restno}&rcateno=${restcategrpVO.rcateno}"><img src="./images/update.png" title="수정" /></a>
-              <a href="./delete.do?restno=${restno}&rcateno=${restcategrpVO.rcateno}"><img src="./images/delete.png" title="삭제" /></a>
+              <a href="./update_info.do?restno=${restrntsVO.restno}&rcateno=${restcategrpVO.rcateno}"><img src="./images/update.png" title="글 수정" /></a>
+              <a href="./delete.do?restno=${restrntsVO.restno}&rcateno=${restcategrpVO.rcateno}"><img src="./images/delete.png" title="삭제" /></a>
             </p>
           </div>
         </div>

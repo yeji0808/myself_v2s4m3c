@@ -26,26 +26,26 @@
   <fieldset class='fieldset_basic'>
     <UL>
       <c:choose>
-        <c:when test="${param.count == 1 }">
+        <c:when test="${param.cnt == 1 }">
           <LI class='li_none'>
-            <span class='span_success'>해당 음식점을 삭제했습니다.</span>
+            <span class='span_success'>해당 음식점을 등록했습니다.</span>
           </LI>
           <LI class='li_none'>
             <button type='button' 
-                        onclick="location.href='./list.do?rcateno=${param.rcateno}'"
-                        class="btn btn-info">목록</button>                        
+                        onclick="location.href='../restrnts/read.do?restno=${param.restno}'"
+                        class="btn btn-info">확인</button>                        
           </LI>
         </c:when>
         <c:otherwise>
           <LI class='li_none'>
-            <span class='span_fail'>음식점 삭제에 실패했습니다.</span>
+            <span class='span_fail'>음식점 등록에 실패했습니다.</span>
           </LI>
           <LI class='li_none'>
             <button type='button' 
                         onclick="history.back();"
                         class="btn btn-info">재시도</button>
             <button type='button' 
-                        onclick="location.href='./list.do?rcateno=${param.rcateno}'"
+                        onclick="location.href='../restrnts/read.do?restno=${param.restno}'"
                         class="btn btn-info">목록</button>                        
           </LI>
         </c:otherwise>

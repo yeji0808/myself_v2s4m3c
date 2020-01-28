@@ -28,9 +28,12 @@
       <c:choose>
         <c:when test="${param.count == 1 }">
           <LI class='li_none'>
-            <span class='span_success'>해당 음식점을 삭제했습니다.</span>
+            <span class='span_success'>컨텐츠를 수정했습니다.</span>
           </LI>
           <LI class='li_none'>
+            <button type='button' 
+                        onclick="location.href='./read.do?rcateno=${param.rcateno}&restno=${param.restno}'"
+                        class="btn btn-info">변경 확인</button>
             <button type='button' 
                         onclick="location.href='./list.do?rcateno=${param.rcateno}'"
                         class="btn btn-info">목록</button>                        
@@ -38,7 +41,7 @@
         </c:when>
         <c:otherwise>
           <LI class='li_none'>
-            <span class='span_fail'>음식점 삭제에 실패했습니다.</span>
+            <span class='span_fail'>컨텐츠 수정에 실패했습니다.</span>
           </LI>
           <LI class='li_none'>
             <button type='button' 

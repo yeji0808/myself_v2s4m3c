@@ -27,27 +27,19 @@
     <UL>
       <c:choose>
         <c:when test="${param.count == 1 }">
-          <LI class='li_none'>
-            <span class='span_success'>해당 음식점을 삭제했습니다.</span>
-          </LI>
-          <LI class='li_none'>
-            <button type='button' 
-                        onclick="location.href='./list.do?rcateno=${param.rcateno}'"
-                        class="btn btn-info">목록</button>                        
-          </LI>
+          <script type="text/javascript">
+            opener.location.reload(); // 카테고리 목록 새로고침
+            window.close();              // 창 닫기
+          </script>
         </c:when>
         <c:otherwise>
           <LI class='li_none'>
-            <span class='span_fail'>음식점 삭제에 실패했습니다.</span>
+            <span class='span_fail'>대표사진 수정에 실패했습니다.</span>
           </LI>
           <LI class='li_none'>
-            <button type='button' 
-                        onclick="history.back();"
-                        class="btn btn-info">재시도</button>
-            <button type='button' 
-                        onclick="location.href='./list.do?rcateno=${param.rcateno}'"
-                        class="btn btn-info">목록</button>                        
+            <span class='span_fail'>다시 시도해주세요.</span>
           </LI>
+          
         </c:otherwise>
       </c:choose>
      </UL>

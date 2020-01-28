@@ -39,23 +39,18 @@
             
       <div class="form-group">   
         <div class="col-md-12" style='text-align: center; margin: 30px;'>
-          삭제되는 음식점: ${restrntsVO.rname }<br><br>
-          삭제하시겠습니까? 삭제하시면 복구할 수 없습니다.<br><br>
+          ${restrntsVO.rname }<br><br>
+          삭제하시겠습니까? 삭제하시면 복구할 수 없습니다.<br>
           
           <c:choose>
-            <c:when test="${count_by_contentsno > 0 }">
+            <c:when test="${count_by_restno > 0 }">
               <DIV style="text-decoration: underline;">
-                관련된 첨부파일 ${count_by_contentsno } 건도 함께 삭제됩니다.
-              </DIV>
-              <DIV> 
-                <span style='color: #FF0000'>첨부파일이 삭제되면 복구 할 수 없습니다.</span><br>
+                (관련된 첨부파일 ${count_by_restno } 건도 함께 삭제됩니다.)
               </DIV>
             </c:when>
-            <c:otherwise>
-              <button type = "submit" class="btn btn-info">삭제 진행</button>
-            </c:otherwise>
           </c:choose>
-          
+          <br><br>
+          <button type = "submit" class="btn btn-info">삭제 진행</button>
           <button type = "button" onclick = "history.back()" class="btn btn-info">취소</button>
         </div>
       </div>   

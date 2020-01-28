@@ -94,7 +94,7 @@ WHERE contentsno = 1;
 
 -- 7) 삭제
 DELETE FROM restrnts
-WHERE restno=4;
+WHERE rcateno=1;
 -- 8) FK 부모 테이블별 레코드 갯수 산출
 SELECT contentsno, memberno, categrpno, title
 FROM contents
@@ -111,3 +111,10 @@ WHERE categrpno=6;
 -- 9) FK 부모 테이블별 레코드 삭제
 DELETE FROM contents
 WHERE categrpno=6;
+
+SELECT restno 
+    FROM(
+            SELECT restno
+            FROM restrnts
+            ORDER BY restno DESC)
+    WHERE ROWNUM = 1

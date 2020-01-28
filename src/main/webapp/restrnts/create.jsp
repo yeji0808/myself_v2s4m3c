@@ -17,28 +17,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
  
 <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
- 
+
 </head> 
  
 <body>
 
-<jsp:include page="/menu/top.jsp" flush='false' />
-  <ASIDE style='float: left;'>
-    <A href='../categrp/list.do'>카테고리 그룹</A> > 
-    <A href='./list.do?categrpno=${categrpVO.categrpno }'>${categrpVO.name }</A> >
-    신규 등록
-  </ASIDE>
-  <ASIDE style='float: right;'>
-    <A href='./list.do?categrpno=${param.categrpno }'>목록</A>
-    <!-- <span class='menu_divide' >│</span> --> 
-  </ASIDE> 
- 
-  <div class='menu_line'></div>
+<jsp:include page="/menu/top.jsp" flush='false' /> 
+  
+    <DIV class='title_line'>음식점 등록하기</DIV>
   <DIV style='margin-left: 30%; margin-top: 5%; width: 50%;'>
-    <FORM name='frm' method='POST' action='./create.do' enctype="multipart/form-data"  class="form-horizontal">
+    <FORM name='frm' method='POST' action='./create_info.do' enctype="multipart/form-data"  class="form-horizontal">
                
       <!-- FK memberno 지정 -->
-      <input type='hidden' name='memberno' id='memberno' value='1'>
   
      <div class="form-group ">
         <div class="form-group col-md-6">
@@ -58,27 +48,34 @@
       </div>
      
       <div class="form-group">
+      <div class="form-group col-md-10">
         <label>메인요리 (ex. 돼지고기구이) *</label>
         <input type="text" class="form-control form-control-lg" required="required" id="rmain" name='rmain'  placeholder="표지에 띄울 메인요리">
-      </div>
+      </div>      
+      </div>  
       <div class="form-group">
+      <div class="form-group col-md-10">
         <label>한줄 소개</label>
         <input type="text" class="form-control form-control-lg"  id="rintro" name='rintro' placeholder="음식점을 간단하게 소개해주세요">
       </div>
+      </div>
       <div class="form-group">
+      <div class="form-group col-md-10">
         <label>영업 시간 *</label>
         <input type="text" class="form-control form-control-lg" required="required" id="rtime" name='rtime' >
       </div>
+      </div>
       <div class="form-group">
+      <div class="form-group col-md-10">
         <label>전화번호</label>
         <input type="text" class="form-control form-control-lg" id="rcall" name='rcall' >
+      </div>
       </div>
       <div class="form-group">
        <label>주소 *</label>    
          <input type='text' class="form-control form-control-lg" name='rzipcode' id='rzipcode' 
-                   value='12345' required="required" style='width: 30%;' placeholder="우편번호">
-         <input type="button" onclick="DaumPostcode()" value="우편번호 찾기" class="btn btn-info btn-lg">
-      </div>  
+                   required="required" style='width: 30%;' placeholder="우편번호">
+         <input type="button" onclick="DaumPostcode()" value="우편번호 찾기" class="btn btn-info btn-lg">  
       <!-- ----- DAUM 우편번호 API 시작 ----- -->
       <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
         <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
@@ -146,7 +143,7 @@
           }
       </script>
       <!-- ----- DAUM 우편번호 API 종료----- -->
-      
+      </div>
       <div class="form-group">
           <input type='text' class="form-control form-control-lg" name='raddress1' id='raddress1' 
                      value='' required="required" style='width: 80%;' placeholder="주소">
@@ -156,8 +153,10 @@
                      value='' required="required" style='width: 80%;' placeholder="상세 주소">
       </div>   
       <div class="form-group">
+      <div class="form-group col-md-10">
         <label>검색어</label>
         <input type="text" class="form-control form-control-lg" id="rword" name='rword'  placeholder="종로맛집, 고기, 매운음식">
+      </div>
       </div>
       <div class="form-group">   
         <label>음식점 대표사진</label>
@@ -165,12 +164,13 @@
           value='' placeholder="파일 선택"></input>
       </div>
 
-      <DIV class='content_bottom_menu'>
-        <button type="submit" class="btn btn-info btn-lg" >음식점 등록</button>
+      <DIV class='content_bottom_menu' style="padding-right: 20%;">
+        <button type="submit" class="btn btn-info btn-lg" >다음</button>
       </DIV>
        
     </FORM>
   </DIV>
+
 
   
 <jsp:include page="/menu/bottom.jsp" flush='false' />
