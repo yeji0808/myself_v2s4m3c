@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.somoim.SomoimDAOInter"> 
+  
+  <insert id="create" parameterType="SomoimVO">
+     INSERT INTO somoim(somoimno, name, somoimtype, seqno, visible, rdate, membercnt, fname, fupname, thumb, fsize)
+     VALUES ((SELECT NVL(MAX(somoimno), 0) + 1 as somoimno FROM somoim),
+                 #{name}, #{somoimtype}, 1, 'y', sysdate, 0, #{fname}, #{fupname}, #{thumb}, #{fsize})
+   </insert>
+   
+   <select id="list_somoimno_asc" resultType="SomoimVO">
+     SELECT somoimno, name, somoimtype, seqno, visible, TO_CHAR(rdate, 'YYYY-MM-DD hh:mi:ss') as rdate, membercnt, fname, fupname, thumb, fsize
+     FROM somoim
+     ORDER BY somoimno ASC
+   </select>
+   
+   <select id="read" resultType="SomoimVO" parameterType="int">
+     SELECT somoimno, name, somoimtype, seqno, visible, rdate, membercnt, fname, fupname, thumb, fsize
+     FROM somoim
+     WHERE somoimno = #{somoimno}
+   </select>
+   
+   <update id="update" parameterType="SomoimVO">
+     UPDATE somoim
+     SET name=#{name}, seqno=#{seqno}, visible=#{visible}
+     WHERE somoimno=#{somoimno}
+   </update>
+   
+   <update id="update_image" parameterType="SomoimVO">
+     UPDATE somoim
+     SET fname=#{fname}, fupname=#{fupname}, thumb=#{thumb}, fsize=#{fsize}
+     WHERE somoimno=#{somoimno}
+   </update>
+   
+   <delete id="delete" parameterType="int">
+     DELETE FROM somoim
+     WHERE somoimno=#{somoimno}
+   </delete>
+     
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- dev.mvc.categrp.CategrpDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+
+<mapper namespace = "dev.mvc.rec.RecDAOInter">
+  <!-- 등록 -->
+   <insert id="create" parameterType="RecVO" useGeneratedKeys="true" keyProperty="recom_no">
+     INSERT INTO recommand(recom_no, 
+                         content, cnt, cho_no)
+     VALUES((SELECT NVL(MAX(recom_no), 0) + 1 as recom_no FROM recommand),
+             #{content}, #{cnt}, #{cho_no})
+     <selectKey keyProperty="recom_no" resultType="int" order="BEFORE">
+       SELECT NVL(MAX(recom_no), 0) + 1 as recom_no FROM recommand
+     </selectKey>        
+   </insert>
+   
+  <!-- 목록 -->
+  <select id="list" resultType="RecVO" >
+    SELECT recom_no, 
+                         content, cnt, cho_no, list_cnt
+    FROM recommand
+    ORDER BY recom_no asc
+  </select>
+  <!-- 조회 -->
+  <select id="read" parameterType="int" resultType="RecVO">
+    SELECT recom_no, 
+                         content, cnt, cho_no, list_cnt
+    FROM recommand
+    Where recom_no=#{recom_no}
+  </select>
+  
+  <!-- 수정 -->
+  <update id="update" parameterType="RecVO">
+    UPDATE recommand
+    SET content=#{content}
+    WHERE recom_no = #{recom_no}
+  </update>
+  
+  <!-- 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM recommand
+    WHERE recom_no = #{recom_no}
+  </delete>
+
+  
+  <!-- 추천수 증가 -->
+  <update id="increase_cnt" parameterType="int">
+    update recommand
+    set cnt = cnt+1
+    where recom_no=#{recom_no}
+  </update>
+  <!-- 
+  <select id="list_by_wno_join" resultType="WreplyMembersVO" parameterType="int">
+    SELECT m.id,
+           r.wreplyno, r.wno, r.memberno, r.rcontent, r.rpasswd, r.rrdate
+    FROM members m,  wreply r
+    WHERE (m.memberno = r.memberno) AND r.wno=#{wno}
+    ORDER BY r.wreplyno DESC
+  </select> -->
+  
+  
+  <!-- cho_no별 목록 -->
+  <select id="list_by_cho_no" resultType="RecVO" parameterType="int">
+    SELECT recom_no,
+              content, cnt, cho_no,list_cnt
+    FROM recommand 
+    where cho_no = #{cho_no}
+     ORDER BY recom_no desc
+  </select>
+  
+</mapper> 

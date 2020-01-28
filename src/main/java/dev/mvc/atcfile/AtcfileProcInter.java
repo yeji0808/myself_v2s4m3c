@@ -6,7 +6,7 @@ public interface AtcfileProcInter {
   
   public int create(AtcfileVO atcfileVO);
   
-  public List<AtcfileVO> list();
+  public List<S_Write_AtcfileVO> list(int somoimno);
   
   public List<AtcfileVO> list_by_writeno(int writeno);
   

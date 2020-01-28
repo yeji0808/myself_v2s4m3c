@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.atcfile.AtcfileDAOInter">
+  <insert id="create" parameterType="AtcfileVO">
+    INSERT INTO atcfile(atcfileno, writeno, fname, fupname, thumb, fsize, rdate)
+    VALUES((SELECT NVL(MAX(atcfileno), 0) + 1 as atcfileno FROM atcfile),
+                 #{writeno}, #{fname}, #{fupname}, #{thumb}, #{fsize}, sysdate)
+  </insert>
+
+  <!-- <select id="list" resultType="atcfileVO">
+    SELECT atcfileno, writeno, fname, fupname, thumb, fsize, rdate
+    FROM atcfile
+    ORDER BY writeno DESC,  atcfileno ASC
+  </select> -->
+  
+  <!-- Inner join -->
+  <select id="list" resultType="S_Write_AtcfileVO" parameterType="int">
+    SELECT c.somoimno, a.atcfileno, a.writeno, a.fname, a.fupname, a.thumb, a.fsize, a.rdate
+    FROM atcfile a
+    INNER JOIN s_write c
+    ON a.writeno = c.writeno AND somoimno=#{somoimno}
+    ORDER BY c.writeno DESC,  a.atcfileno ASC
+  </select>
+
+  <select id="list_by_writeno" resultType="AtcfileVO" parameterType="int">
+    SELECT atcfileno, writeno, fname, fupname, thumb, fsize, rdate
+    FROM atcfile
+    WHERE writeno = #{writeno}
+    ORDER BY fname ASC
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM atcfile
+    WHERE atcfileno = #{atcfileno}
+  </delete>
+  
+  <!-- FK 컬럼 값이 사용된 레코드 갯수 산출: id="count_by_writeno" -->
+  <select id="count_by_writeno" resultType="int" parameterType="int">
+    SELECT COUNT(*) as cnt
+    FROM atcfile 
+    WHERE writeno = #{writeno}
+  </select>
+  
+  <!-- FK 컬럼 값이 사용된 레코드 삭제: id="delete_by_writeno" -->
+  <delete id="delete_by_writeno" parameterType="int">
+    DELETE FROM atcfile
+    WHERE writeno = #{writeno}
+  </delete>
+  
+  <select id="read" resultType="AtcfileVO" parameterType="int">
+    SELECT atcfileno, writeno, fname, fupname, thumb, fsize, rdate 
+    FROM atcfile
+    WHERE atcfileno = #{atcfileno}
+  </select>
+  
+</mapper> 
+ 

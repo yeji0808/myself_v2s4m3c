@@ -51,10 +51,10 @@ CREATE TABLE wreply(
 		rpasswd                       		NUMBER(10)		 NOT NULL,
 		wno                           		NUMBER(10)		 NOT NULL ,
 		memberno                       NUMBER(10)   NOT NULL,
-  FOREIGN KEY (wno) REFERENCES b_write (wno),
+  FOREIGN KEY (wno) REFERENCES b_write (wno) on delete cascade,
   FOREIGN KEY (memberno) REFERENCES members (memberno)
 );
-
+drop table wreply
 COMMENT ON TABLE wreply is '글 댓글';
 COMMENT ON COLUMN wreply.wreplyno is '댓글번호';
 COMMENT ON COLUMN wreply.rcontent is '댓글내용';
@@ -155,7 +155,7 @@ ORDER BY r.wreplyno DESC;
 8) 삭제용 패스워드 검사
 SELECT COUNT(*) as cnt
 FROM wreply
-WHERE wreplyno=1 AND passwd='1234';
+WHERE wreplyno=1 AND rpasswd='1234';
 
  CNT
  ---

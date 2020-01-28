@@ -17,8 +17,8 @@ public class AtcfileProc implements AtcfileProcInter {
   }
 
   @Override
-  public List<AtcfileVO> list() {
-    List<AtcfileVO> list = atcfileDAO.list();
+  public List<S_Write_AtcfileVO> list(int somoimno) {
+    List<S_Write_AtcfileVO> list = atcfileDAO.list(somoimno);
     return list;
   }
 

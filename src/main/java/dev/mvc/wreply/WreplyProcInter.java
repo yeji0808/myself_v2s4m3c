@@ -1,6 +1,7 @@
 package dev.mvc.wreply;
 
 import java.util.List;
+import java.util.Map;
 
 public interface WreplyProcInter {
   /** ´ñ±Û µî·Ï
@@ -17,4 +18,25 @@ public interface WreplyProcInter {
    * @return
    */
   public List<WreplyVO> list();
+  
+  /**
+   * <xmp>
+   * <select id="list_by_wno" resultType="WreplyVO" parameterType="int">
+   * </xmp>
+   * @param wno
+   * @return
+   */
+  public List<WreplyVO> list_by_wno(int wno);
+  /**<xmp>
+   *  <select id="list_by_wno_join" resultType="WreplyMembersVO" parameterType="int">
+   * </xmp>
+   * @param wno
+   * @return
+   */
+  public List<WreplyMembersVO> list_by_wno_join(int wno);
+  
+  public int checkPasswd(Map<String, Object> map);
+
+  public int delete(int wreplyno);
+
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.wreply.WreplyDAOInter">
+  <insert id="create">
+    INSERT INTO wreply(wreplyno, wno, rcontent, rpasswd, rrdate, memberno)
+    VALUES((SELECT NVL(MAX(wreplyno), 0) + 1 as wreplyno FROM wreply),
+                #{wno}, #{rcontent}, #{rpasswd}, sysdate, #{memberno})
+  </insert>
+
+  <select id="list" resultType="WreplyVO">
+    SELECT wreplyno, wno, rcontent, rpasswd, rrdate, memberno
+    FROM wreply
+    ORDER BY wreplyno DESC;
+  </select>
+
+  <select id="list_by_wno" resultType="WreplyVO" parameterType="int">
+    SELECT wreplyno, wno, rcontent, rpasswd, rrdate, memberno
+    FROM wreply
+    WHERE wno=#{wno}
+    ORDER BY wreplyno DESC
+  </select>
+  
+  <select id="list_by_wno_join" resultType="WreplyMembersVO" parameterType="int">
+    SELECT m.id,
+           r.wreplyno, r.wno, r.memberno, r.rcontent, r.rpasswd, r.rrdate
+    FROM members m,  wreply r
+    WHERE (m.memberno = r.memberno) AND r.wno=#{wno}
+    ORDER BY r.wreplyno DESC
+  </select>
+  
+  <!-- <select id="checkPasswd" parameterType="HashMap" resultType="int"> -->
+  <!-- <select id="checkPasswd" parameterType="ReplyVO" resultType="int"> -->
+  <!-- <select id="checkPasswd" parameterType="Map" resultType="int">-->
+   <select id="checkPasswd" parameterType="Map" resultType="int">
+    SELECT COUNT(*) as cnt
+    FROM wreply
+    WHERE wreplyno=#{wreplyno} AND rpasswd=#{rpasswd}
+  </select>
+   
+  <delete id="delete" parameterType="int">
+    DELETE FROM wreply
+    WHERE wreplyno=#{wreplyno}
+  </delete>
+    
+</mapper> 
+
+
+
+
+
+
+
+
+

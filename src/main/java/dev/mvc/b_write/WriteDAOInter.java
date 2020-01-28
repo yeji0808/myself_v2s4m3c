@@ -18,7 +18,7 @@ public interface WriteDAOInter {
    * </xmp>
    * @return
    */
-  public List<WriteVO> list(int boardno);
+  public List<WriteVO> list();
   /**조회
    * <xmp>
    * <select id="read" resultType="WriteVO" parameterType="int">
@@ -47,20 +47,6 @@ public interface WriteDAOInter {
    */
   public int delete(int wno);
   
-  /**<xmp>
-   * <!-- FK 컬럼 값이 사용된 레코드 갯수 산출: id="count_by_boardno" -->
-   * </xmp>
-   * @return
-   */
-  public int count_by_boardno(int boardno);
- 
- /**<xmp>
-  * <!-- FK 컬럼 값이 사용된 레코드 삭제: id="delete_by_boardno" -->
-  * </xmp>
-  * @param boardno
-  * @return
-  */
- public int delete_by_boardno(int boardno);
  /** 추천수 증가
   * <xmp>
   * <update id="increase_recom" parameterType="int">
@@ -69,4 +55,12 @@ public interface WriteDAOInter {
   * @return
   */
  public int increase_recom(int wno);
+ /** 댓글수 증가
+  * <xmp>
+  * <update id="increase_wreplycnt" parameterType="int">
+  * </xmp>
+  * @param wno
+  * @return
+  */
+ public int increase_wreplycnt(int wno);
 }

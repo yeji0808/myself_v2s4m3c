@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "dev.mvc.w_attach.W_attachDAOInter">
+
+  <!-- 파일첨부 등록 -->
+  <insert id="create" parameterType="W_attachVO">
+      INSERT INTO w_attach(w_attachno, 
+                                   w_attachname, w_attachupfile, w_attachthumb, w_attachfsize, wno, w_file_rdate)
+      VALUES((SELECT NVL(MAX(w_attachno), 0) + 1 as w_attachno FROM w_attach),
+                 #{w_attachname}, #{w_attachupfile}, #{w_attachthumb}, #{w_attachfsize}, #{wno}, sysdate)
+  </insert>
+  
+  <!-- 
+  <select id="list" resultType="w_attachVO"> 
+    SELECT w_attachno, wno, fname, fupname, thumb, fsize, rdate
+    FROM w_attach
+    ORDER BY wno DESC,  w_attachno ASC
+  </select>
+-->
+ <!--  Inner join -->
+  <select id="list" resultType="Write_W_attachVO">
+   SELECT w.wtitle, 
+               a.w_attachno, a.wno, a.w_attachname, a.w_attachupfile, a.w_attachthumb, a.w_attachfsize, a.w_file_rdate
+    FROM b_write w, w_attach a
+    WHERE w.wno = a.w_attachno
+    ORDER BY w.wno DESC,  a.w_attachno ASC
+  </select>
+ 
+  <select id="list_by_wno" resultType="W_attachVO" parameterType="int">
+    SELECT w_attachno, wno, w_attachname, w_attachupfile, w_attachthumb, w_attachfsize, w_file_rdate
+    FROM w_attach
+    WHERE wno = #{wno}
+    ORDER BY w_attachname ASC
+  </select>
+   
+   <!-- 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM w_attach
+    WHERE w_attachno = #{w_attachno}
+  </delete>
+<!--FK 컬럼 값이 사용된 레코드 갯수 산출: id="count_by_wno" -->
+  <select id="count_by_wno" resultType="int" parameterType="int">
+    SELECT COUNT(*) as cnt
+    FROM w_attach
+    WHERE wno=#{wno}
+  </select>
+  
+  <!-- FK 컬럼 값이 사용된 레코드 삭제: id="delete_by_wno" -->
+  <delete id="delete_by_wno" parameterType="int">
+    DELETE FROM w_attach
+    WHERE wno=#{wno}
+  </delete> 
+</mapper> 
+ 
+ 
+
+ 
+ 

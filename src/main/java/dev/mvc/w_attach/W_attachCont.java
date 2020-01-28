@@ -23,8 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import dev.mvc.board.BoardProcInter;
-import dev.mvc.board.BoardVO;
 import nation.web.tool.Tool;
 import nation.web.tool.Upload;
 
@@ -35,9 +33,6 @@ public class W_attachCont {
   @Autowired
   @Qualifier("dev.mvc.w_attach.W_attachProc")
   private W_attachProcInter w_attachProc;
-  @Autowired
-  @Qualifier("dev.mvc.board.BoardProc")
-  private BoardProcInter boardProc;
   
   public W_attachCont(){
     System.out.println("--> W_attachCont created.");
@@ -52,11 +47,9 @@ public class W_attachCont {
    */
   //http://172.16.12.7:9090/team1/w_attach/create.do?boardno=5&wno=1
   @RequestMapping(value="/w_attach/create.do", method=RequestMethod.GET)
-  public ModelAndView create(int boardno, int wno) {
+  public ModelAndView create(int wno) {
     ModelAndView mav = new ModelAndView();
 
-    BoardVO boardVO = boardProc.read(boardno);
-    mav.addObject("boardVO", boardVO);
 
     mav.setViewName("/w_attach/create"); // /webapp/w_attach/create.jsp
 
@@ -66,8 +59,7 @@ public class W_attachCont {
   @RequestMapping(value = "/w_attach/create.do", method = RequestMethod.POST)
   public ModelAndView create(RedirectAttributes ra,
                                            HttpServletRequest request,
-                                           W_attachVO w_attachVO,
-                                           int boardno) {
+                                           W_attachVO w_attachVO) {
     // System.out.println("--> boardno: " + boardno);
     ModelAndView mav = new ModelAndView();
     // -----------------------------------------------------
@@ -110,7 +102,6 @@ public class W_attachCont {
     // -----------------------------------------------------
     
     ra.addAttribute("upload_count", upload_count);
-    ra.addAttribute("boardno", boardno);
     ra.addAttribute("wno", w_attachVO.getWno());
     
     mav.setViewName("redirect:/w_attach/create_msg.jsp");
@@ -119,9 +110,9 @@ public class W_attachCont {
   
   /**
    * 목록
-   * http://localhost:9090/ojt/w_attach/list.do
+   * http://localhost:9090/team1/w_attach/list.do
    * 
-   * @param categrpno
+   * 
    * @return
    */
   @RequestMapping(value = "/w_attach/list.do", method = RequestMethod.GET)
@@ -225,15 +216,13 @@ public class W_attachCont {
   @RequestMapping(value = "/w_attach/delete_by_wno.do", 
                              method = RequestMethod.POST)
   public ModelAndView delete_by_wno(RedirectAttributes ra,
-                                                                 int wno,
-                                                                 int boardno) {
+                                                                 int wno) {
     ModelAndView mav = new ModelAndView();
 
     int count = w_attachProc.delete_by_wno(wno); 
 
     ra.addAttribute("count", count); // 삭제된 레코드 갯수
     ra.addAttribute("wno", wno);
-    ra.addAttribute("boardno", boardno);
     
     mav.setViewName("redirect:/w_attach/delete_by_wno_msg.jsp");
 

@@ -43,14 +43,14 @@ function delete_form(boardno) {
 } 
 
 </script>
- 
+  
 </head> 
  
 <body>
  <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='title_line'>게시판 목록</DIV>
  
-  <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
+  <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 80%; text-align: center; margin: 0px auto'>
     <FORM name='frm_create' id='frm_create' method='POST' action='./create.do'>
       <!-- <input type='hidden' name='lang' id='lang' value='en'> --> <!-- ko, en -->
       <label>게시판 이름</label>
@@ -60,17 +60,17 @@ function delete_form(boardno) {
       <button type="button" onclick="cancel();">취소</button>
     </FORM>
   </DIV>
-  
-<TABLE class='table table-striped'>
+<div style='width: 80%;margin: 0px auto; '>
+<table class="table table-condensed" style='width: 100%;  margin-top: 20px'>
   <colgroup>
     <col style='width: 70%;'/>    
     <col style='width: 30%;'/>
   </colgroup>
  
-  <thead>  
+  <thead>   
   <TR>
-    <TH class='th_basic'>게시판이름</TH>
-    <TH class='th_basic'>기타</TH>
+    <TH style='text-align: center;'>게시판이름</TH>
+    <TH style='text-align: center;'>기타</TH>
   </TR>
   </thead>
   
@@ -93,7 +93,7 @@ function delete_form(boardno) {
   
 </TABLE>
  
- 
+ </div>
 </body>
  
 </html> 

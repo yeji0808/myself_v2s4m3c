@@ -1,15 +1,8 @@
 package dev.mvc.somoim;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class SomoimVO {
-  /*
-   * somoimno                            NUMBER(10)       NOT NULL        PRIMARY KEY,
-  name                                VARCHAR2(100)        NOT NULL,
-  somoimtype                          VARCHAR2(50)         NOT NULL,
-  seqno                               NUMBER(7)        NOT NULL,
-  visible                             CHAR(1)      DEFAULT 'Y'         NOT NULL,
-  rdate                               DATE         NOT NULL,
-  membercnt                           NUMBER(7)        NOT NULL
-  */
   /** 소모임 번호 */
   private int somoimno;
   /** 소모임 이름 */
@@ -30,6 +23,22 @@ public class SomoimVO {
   private long size1;
   /** 회원 수 */
   private int membercnt;
+  /** 원본 파일명 */
+  private String fname;
+  /** 업로드 파일명 */
+  private String fupname;
+  /** Thumb 이미지 */
+  private String thumb;
+  /** 파일크기 */
+  private long fsize;
+  
+  /** Form의 파일을 MultipartFile로 변환하여 저장  */
+  private MultipartFile fnameMF;
+  
+  /** 파일 단위 출력 */
+  private String flabel;
+  
+  
   public int getSomoimno() {
     return somoimno;
   }
@@ -90,5 +99,44 @@ public class SomoimVO {
   public void setMembercnt(int membercnt) {
     this.membercnt = membercnt;
   }
+  public String getFname() {
+    return fname;
+  }
+  public void setFname(String fname) {
+    this.fname = fname;
+  }
+  public String getFupname() {
+    return fupname;
+  }
+  public void setFupname(String fupname) {
+    this.fupname = fupname;
+  }
+  public String getThumb() {
+    return thumb;
+  }
+  public void setThumb(String thumb) {
+    this.thumb = thumb;
+  }
+  public long getFsize() {
+    return fsize;
+  }
+  public void setFsize(long fsize) {
+    this.fsize = fsize;
+  }
+  public MultipartFile getFnameMF() {
+    return fnameMF;
+  }
+  public void setFnameMF(MultipartFile fnameMF) {
+    this.fnameMF = fnameMF;
+  }
+  public String getFlabel() {
+    return flabel;
+  }
+  public void setFlabel(String flabel) {
+    this.flabel = flabel;
+  }
+
+  
+  
   
 }

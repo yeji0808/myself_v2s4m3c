@@ -32,7 +32,7 @@
 <DIV class='title_line' style='width: 20%;'>로그인</DIV>
  
 <DIV style='width: 80%; margin: 0px auto;'>
-  <FORM name='frm' method='POST' action='./login.do'>
+  <FORM name='frm' method='POST' action='./login.do'> 
   
     <div class="form-group">
       <label class="col-md-2 control-label" style='font-size: 0.8em;'>아이디</label>    

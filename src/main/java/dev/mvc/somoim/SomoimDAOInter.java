@@ -44,6 +44,13 @@ public interface SomoimDAOInter {
   public int update(SomoimVO somoimVO);
   
   /**
+   * 소모임 대표이미지 수정
+   * @param somoimVO
+   * @return
+   */
+  public int update_image(SomoimVO somoimVO);
+  
+  /**
    * 소모임 그룹 삭제
    * <xmp>
    * <delete id="delete" parameterType="int">

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- dev.mvc.categrp.CategrpDAOInter 패키지에 등록된 interface 명시,
+      패키지명과 인터페이스명은 실제로 존재해야함,
+      Spring이 내부적으로 자동으로 interface를 구현해줌. -->
+
+<mapper namespace = "dev.mvc.rec_img.Rec_imgDAOInter">
+ 
+  <!-- 파일첨부 등록 -->
+  <insert id="create" parameterType="Rec_imgVO">
+      INSERT INTO rec_img(img_no, fname, fupname, thumb, fsize, recom_no)
+      VALUES((SELECT NVL(MAX(img_no), 0) + 1 as img_no FROM rec_img),
+             #{fname}, #{fupname}, #{thumb}, #{fsize}, #{recom_no})
+  </insert>
+  
+  <!-- 
+  <select id="list" resultType="w_attachVO"> 
+    SELECT w_attachno, wno, fname, fupname, thumb, fsize, rdate
+    FROM w_attach
+    ORDER BY wno DESC,  w_attachno ASC
+  </select>
+-->
+ 
+  <select id="list_by_recom_no" resultType="Rec_imgVO" parameterType="int">
+    SELECT img_no, fname, fupname, thumb, fsize, recom_no
+    FROM rec_img
+    WHERE recom_no =#{recom_no}
+    ORDER BY fname ASC
+  </select>
+   
+    <select id="list" resultType="Rec_Rec_ImgVO">
+    SELECT r.content, 
+               i.img_no, i.recom_no, i.fname, i.fupname, i.thumb, i.fsize
+    FROM recommand r, rec_img i
+    WHERE r.recom_no = i.recom_no
+    ORDER BY r.recom_no DESC,  i.img_no ASC
+  </select>
+</mapper> 

@@ -1,70 +1,9 @@
-/**********************************/
-/* Table Name: 게시판 */
-/**********************************/
-drop table w_attach;
-CREATE TABLE board(
-		boardno                       		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-		name                          		VARCHAR2(300)		 NOT NULL,
-		count                         		NUMBER(10)		 DEFAULT 0		 NOT NULL
-);
-
-COMMENT ON TABLE board is '게시판';
-COMMENT ON COLUMN board.boardno is '게시판번호';
-COMMENT ON COLUMN board.name is '게시판이름';
-COMMENT ON COLUMN board.count is '게시판등록자료수';
-
-
-/**********************************/
-/* Table Name: 예약 */
-/**********************************/
-CREATE TABLE reservation(
-		resno                         		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-		resname                       		VARCHAR2(10)		 NOT NULL,
-		phonenum                      		NUMBER(10)		 NOT NULL,
-		store                         		VARCHAR2(10)		 NULL ,
-		resdate                       		DATE		 NOT NULL,
-		rescount                      		NUMBER(10)		 DEFAULT 1		 NOT NULL
-);
-
-COMMENT ON TABLE reservation is '예약';
-COMMENT ON COLUMN reservation.resno is '예약번호';
-COMMENT ON COLUMN reservation.resname is '에약자';
-COMMENT ON COLUMN reservation.phonenum is '연락처';
-COMMENT ON COLUMN reservation.store is '상호명';
-COMMENT ON COLUMN reservation.resdate is '예약일 수';
-COMMENT ON COLUMN reservation.rescount is '예약자 수';
-
-
-/**********************************/
-/* Table Name: 글 */
-/**********************************/
-CREATE TABLE b_write(
-		wno                           		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-		wtitle                        		VARCHAR2(100)		 NOT NULL,
-		wcontent                      		CLOB(10)		 NOT NULL,
-		wrecom                        		NUMBER(10)		 DEFAULT 0		 NOT NULL,
-		wreplycnt                     		INTEGER(10)		 DEFAULT 0		 NULL ,
-		rdate                         		DATE		 NOT NULL,
-		wword                         		VARCHAR2(100)		 NULL ,
-		boardno                       		NUMBER(10)		 NULL ,
-  FOREIGN KEY (boardno) REFERENCES board (boardno)
-);
-
-COMMENT ON TABLE b_write is '글';
-COMMENT ON COLUMN b_write.wno is '글 번호';
-COMMENT ON COLUMN b_write.wtitle is '글 제목 ';
-COMMENT ON COLUMN b_write.wcontent is '글 내용';
-COMMENT ON COLUMN b_write.wrecom is '추천 수';
-COMMENT ON COLUMN b_write.wreplycnt is '뎃글 수';
-COMMENT ON COLUMN b_write.rdate is '등록 일자';
-COMMENT ON COLUMN b_write.wword is '검색어';
-COMMENT ON COLUMN b_write.boardno is '게시판번호';
-
 
 /**********************************/
 /* Table Name: 첨부파일 */
 /**********************************/
 DROP table w_attach
+delete from b_write where wno=1 
 CREATE TABLE w_attach(
 		w_attachno                    		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		w_attachname              		VARCHAR2(200)		 NOT NULL,
@@ -73,7 +12,7 @@ CREATE TABLE w_attach(
 		w_attachfsize                 		NUMBER(10)		 NOT NULL,
 		wno                           		NUMBER(10)		 NULL ,
 		w_file_rdate                  		DATE		 NOT NULL,
-  FOREIGN KEY (wno) REFERENCES b_write (wno)
+  FOREIGN KEY (wno) REFERENCES b_write (wno) on delete cascade
 );
 
 COMMENT ON TABLE w_attach is '첨부파일';
@@ -123,6 +62,7 @@ SELECT w_attachno, w_attachname, w_attachupfile, w_attachthumb, w_attachfsize, w
 FROM w_attach
 ORDER BY wno asc,  w_attachno desc;
 
+delete from b_write where wno = 1
  W_ATTACHNO W_ATTACHNAME W_ATTACHUPFILE W_ATTACHTHUMB  W_ATTACHFSIZE WNO W_FILE_RDATE
  ---------- ------------ -------------- -------------- ------------- --- ---------------------
           4 samyang4.jpg samyang_4.jpg  samyang_4t.jpg          1000   1 2019-12-17 18:12:00.0
