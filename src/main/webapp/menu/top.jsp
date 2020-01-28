@@ -30,17 +30,24 @@
   <div class="menubar">
 <ul>
  <li style='width:25%;text-align: center;'><a href="${root }/index.do">Home</a></li>
- 
- <li style='width:25%;text-align: center;'><a href="#">음식 정보</a></li>
- <li style='width:25%;text-align: center;'><a href="${root}/somoim/list.do">소모임</a></li>
- <li style='width:25%;text-align: center;' ><a href="" id="current">게시판</a>
-  <ul> 
-     <li><a href="${root }/b_write/list.do">자유게시판</a></li>
-     <li><a href="${root }/choice/list.do">추천해주세요</a></li> 
-    </ul> 
-    
- </li>
-</ul>
+
+      <li style='width: 25%; text-align: center;'><a href="#">음식
+          정보</a>
+        <ul>
+          <li><a href="${root }/rest_categrp/list.do">카테고리로 찾기</a></li>
+          <li><a href="${root }/rest_map/map.do">지도로 찾기</a></li>
+          <li><a href="${root }/restrnts/create_info.do">음식점등록하기</a></li> 
+        </ul>
+      </li>
+      <li style='width: 25%; text-align: center;'><a
+        href="${root}/somoim/list.do">소모임</a></li>
+      <li style='width: 25%; text-align: center;'><a href=""
+        id="current">게시판</a>
+        <ul>
+          <li><a href="${root }/b_write/list.do">자유게시판</a></li>
+          <li><a href="${root }/choice/list.do">추천해주세요</a></li>
+        </ul></li>
+    </ul>
 </div>                                   
     
   
