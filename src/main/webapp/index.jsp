@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
  
- <c:set var="root" value="${pageContext.request.contextPath}" />
+<c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -48,7 +48,7 @@
   
  <div style="width: 100%; height: 500px;  margin-top: 50px; background-color: #ffcc99">
       <div style=" width:30%;  float:left; height: 500px; text-align: center; padding-top: 50px;"  id="food">
-          <a href="#"><span style="font-size: 5em;">FOOD </span><br> 
+          <a href="./rest_categrp/list.do"><span style="font-size: 5em;">FOOD </span><br> 
           <span>Information</span></a>
       </div>
       <div style=" width:30%; float:left; height: 500px; text-align: center; padding-top: 200px;">
@@ -82,7 +82,7 @@
  <br><br><br> <br><br><br> <br><br><br>
    <div style="width: 100%; height: 500px;  margin-top: 50px; background-color: rgba(110,213,245,60);">
       <div style=" width:30%;  float:left; height: 500px; text-align: center; padding-top: 165px;"  id="food">
-          <a href="./board/list.do"><span style="font-size: 5em;">Write </span><br>
+          <a href="./b_write/list.do"><span style="font-size: 5em;">Write </span><br>
           <span>scribble</span></a>
       </div> 
       
