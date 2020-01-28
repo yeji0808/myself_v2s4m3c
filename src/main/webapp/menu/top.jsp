@@ -16,8 +16,8 @@
   <div class="headline1" style="background-image: url(${root}/css/images/main_photo.jpg);"> 
     
     <DIV class="headline2"  >  
-       <span style="font-size: 2em;  color: #dddddd;">  
-          Lorem Ipsum Dolor 
+       <span style="font-size: 2em;  color: #f2f2f2;">  
+          <p onclick="location.href='${root }/index.do'">나 혼자 먹는다!</a> 
         </span>   
     </div> 
     <div class="login_frame" >
@@ -29,7 +29,7 @@
   </div>
   <div class="menubar">
 <ul>
- <li style='width:25%;text-align: center;'><a href="/team1/index.do">Home</a></li>
+ <li style='width:25%;text-align: center;'><a href="${root }/index.do">Home</a></li>
  
  <li style='width:25%;text-align: center;'><a href="#">음식 정보</a></li>
  <li style='width:25%;text-align: center;'><a href="${root}/somoim/list.do">소모임</a></li>
