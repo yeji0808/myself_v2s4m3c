@@ -14,8 +14,8 @@ public class RestrntsProc implements RestrntsProcInter {
   private RestrntsDAOInter restrntsDAO; 
   
   @Override
-  public int create(RestrntsVO restcategrpVO) {
-    int cnt = restrntsDAO.create(restcategrpVO);
+  public int create(RestrntsVO restrntsVO) {
+    int cnt = restrntsDAO.create(restrntsVO);
     
     return cnt;
   }
@@ -47,13 +47,26 @@ public class RestrntsProc implements RestrntsProcInter {
     
     return count;
   }
-  
-/*
+
   @Override
-  public int update(RestrntsVO restcategrpVO) {
-    // TODO Auto-generated method stub
-    return 0;
-  }*/
+  public int update(RestrntsVO restrntsVO) {
+    int count = restrntsDAO.update(restrntsVO);
+    
+    return count;
+  }
+  
+  @Override
+  public int update_img(RestrntsVO restrntsVO) {
+    int count = restrntsDAO.update_img(restrntsVO);
+    
+    return count;
+  }
+
+  public int lastnum() {
+    int restno = restrntsDAO.lastnum();
+    
+    return restno;
+  }
 
 
 }

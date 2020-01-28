@@ -41,12 +41,22 @@ public interface RestrntsProcInter {
    */
   public int delete(int rcateno);
   
-/*  *//**
+  /**
    * 수정
-   * @param restcategrpVO
+   * @param restrntsVO
    * @return 수정된 레코드 갯수
-   *//*
-  public int update(RestrntsVO restcategrpVO);*/
+   */
+  public int update(RestrntsVO restrntsVO);
+  
+  /**
+   * 사진 수정
+   * @param restrntsVO
+   * @return 수정된 레코드 갯수
+   */
+  public int update_img(RestrntsVO restrntsVO);
+
+  // 마지막 restno
+  public int lastnum();
 
   
 }

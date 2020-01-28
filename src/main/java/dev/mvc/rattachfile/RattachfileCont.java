@@ -1,16 +1,7 @@
 package dev.mvc.rattachfile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,53 +16,38 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.rest_categrp.RestCategrpProcInter;
 import dev.mvc.rest_categrp.RestCategrpVO;
+import dev.mvc.restrnts.RestrntsProcInter;
+import dev.mvc.restrnts.RestrntsVO;
 import nation.web.tool.Tool;
 import nation.web.tool.Upload;
 
 @Controller
 public class RattachfileCont {
-  @Autowired
-  @Qualifier("dev.mvc.rest_categrp.RestCategrpProc") // 이름 지정
-  private RestCategrpProcInter restcategrpProc;
 
   @Autowired
   @Qualifier("dev.mvc.rattachfile.RattachfileProc") // 이름 지정
   private RattachfileProcInter rattachfileProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.restrnts.RestrntsProc") // 이름 지정
+  private RestrntsProcInter restrntsProc;
+  
   public RattachfileCont(){
     System.out.println("--> RattachfileCont created.");
   }
+ 
   
-  /**
-   * 파일 등록폼
-   * @param categrpno 카테고리 그룹 FK
-   * @param contentsno 컨텐츠 번호 FK
-   * @return
-   */
-  // http://localhost:9090/ojt/rattachfile/create.do?rcateno=1&restno=1
-  @RequestMapping(value = "/rattachfile/create.do", method = RequestMethod.GET)
-  public ModelAndView create(int rcateno, int restno) {
-    ModelAndView mav = new ModelAndView();
-
-    RestCategrpVO restcategrpVO = restcategrpProc.read(rcateno);
-    mav.addObject("restcategrpVO", restcategrpVO);
-
-    mav.setViewName("/rattachfile/create"); // /webapp/rattachfile/create.jsp
-
-    return mav;
-  }
-  
-  @RequestMapping(value = "/rattachfile/create.do", method = RequestMethod.POST)
+  @RequestMapping(value = "/rattachfile/create_ratf.do", method = RequestMethod.POST)
   public ModelAndView create(RedirectAttributes ra,
                                            HttpServletRequest request,
                                            RattachfileVO rattachfileVO,
-                                           int rcateno) {
+                                           int rcateno, int restno) {
     
     ModelAndView mav = new ModelAndView();
+    int cnt = 0;
     // -----------------------------------------------------
     // 파일 전송 코드 시작
     // -----------------------------------------------------
-    int restno = rattachfileVO.getRestno(); // 부모글 번호
     String fname = ""; // 원본 파일명
     String fupname = ""; // 업로드된 파일명
     long fsize = 0;  // 파일 사이즈
@@ -106,11 +82,11 @@ public class RattachfileCont {
     // -----------------------------------------------------
     // 파일 전송 코드 종료
     // -----------------------------------------------------
-    
-    ra.addAttribute("upload_count", upload_count);
-    ra.addAttribute("rcateno", rcateno);
-    ra.addAttribute("restno", rattachfileVO.getRestno());
-    
+    if(upload_count > 0) {
+      cnt = 1;
+    }
+    ra.addAttribute("cnt", cnt);
+    ra.addAttribute("restno", restno);
     mav.setViewName("redirect:/rattachfile/create_msg.jsp");
     return mav;
   }

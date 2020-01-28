@@ -17,23 +17,23 @@ public interface RestCategrpDAOInter {
   
   /**
    * 목록
-   * <xmp>
+   * <Xmp>
    * <select id="list" resultType="RestCategrpVO">
-   * </xmp> 
+   * </Xmp> 
    * @return
    */
   public List<RestCategrpVO> list_categrpno_asc();
 
   /**
    * 조회
-   * @param contentsno
+   * @param rcateno
    * @return
    */
   public RestCategrpVO read(int rcateno);
   
   /**
    * 수정
-   * @param contentsVO
+   * @param restcategrpVO
    * @return 수정된 레코드 갯수
    */
   public int update(RestCategrpVO restcategrpVO);
