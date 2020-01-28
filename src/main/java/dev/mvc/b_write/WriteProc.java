@@ -18,8 +18,8 @@ public class WriteProc implements WriteProcInter {
   }
   
   @Override
-  public List<WriteVO> list(int boardno) {
-    List<WriteVO> list = writeDAO.list(boardno);
+  public List<WriteVO> list() {
+    List<WriteVO> list = writeDAO.list();
     return list;
   }
 
@@ -41,21 +41,15 @@ public class WriteProc implements WriteProcInter {
     return count;
   }
 
-  @Override
-  public int count_by_boardno(int boardno){
-    int count = writeDAO.count_by_boardno(boardno);
-    return count;
-  }
-
-  @Override
-  public int delete_by_boardno(int boardno) {
-    int count = writeDAO.delete_by_boardno(boardno);
-    return count;
-  }
 
   @Override
   public int increase_recom(int wno) {
     int count = writeDAO.increase_recom(wno);
+    return count;
+  }
+  @Override
+  public int increase_wreplycnt(int wno) {
+    int count = writeDAO.increase_wreplycnt(wno);
     return count;
   }
 

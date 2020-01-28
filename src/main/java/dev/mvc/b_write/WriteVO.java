@@ -28,8 +28,6 @@ public class WriteVO {
   private String rdate;
   /** 글쓰기 검색어 **/
   private String wword;
-  /** 글쓰기 보드 넘버 **/
-  private int boardno;
   /** 회원 번호 **/
   private int memberno;
   
@@ -81,12 +79,6 @@ public class WriteVO {
   }
   public void setWword(String wword) {
     this.wword = wword;
-  }
-  public int getBoardno() {
-    return boardno;
-  }
-  public void setBoardno(int boardno) {
-    this.boardno = boardno;
   }
 
 }
