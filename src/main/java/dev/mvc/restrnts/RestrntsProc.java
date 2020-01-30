@@ -68,6 +68,13 @@ public class RestrntsProc implements RestrntsProcInter {
     return restno;
   }
 
+  @Override
+  public int increaseCnt(int restno) {
+    int count = restrntsDAO.increaseCnt(restno);
+    
+    return count;
+  }
+
 
 }
 

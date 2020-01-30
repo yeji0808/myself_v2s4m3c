@@ -47,6 +47,24 @@ public class RestCategrpProc implements RestCategrpProcInter {
     
     return cnt;
   }
+  
+  @Override
+  public int increaseCnt(int rcateno) {
+    int count = restcategrpDAO.increaseCnt(rcateno);
+    return count;
+  }
+
+  @Override
+  public int decreaseCnt(int rcateno) {
+    int count = restcategrpDAO.decreaseCnt(rcateno);
+    return count;
+  }
+
+  @Override
+  public int cnt_zero(int rcateno) {
+    int count = restcategrpDAO.cnt_zero(rcateno);
+    return count;
+  }
 
 
 }

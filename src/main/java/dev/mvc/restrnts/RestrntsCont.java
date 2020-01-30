@@ -105,6 +105,7 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
       restrntsVO.setRestno(restno);
       
       if(count == 1) {
+        restcategrpProc.increaseCnt(restrntsVO.getRcateno());
         mav.setViewName("redirect:/menu/create.jsp?restno="+restno+"&rcateno="+restrntsVO.getRcateno());
       }
       
@@ -177,6 +178,9 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
     if (memberno == contentsProc.read(contentsno).getMemberno()) {
     */
       int count = restrntsProc.delete(restno);
+      if (count == 1) {
+        restcategrpProc.decreaseCnt(rcateno);
+      }
 
       ra.addAttribute("count", count);
       ra.addAttribute("rcateno", rcateno);
@@ -198,8 +202,8 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
     
     RestrntsVO restrntsVO = restrntsProc.read(restno);
     mav.addObject("restrntsVO", restrntsVO);
-    
-    RestCategrpVO restcategrpVO = restcategrpProc.read(restrntsVO.getRestno());
+
+    RestCategrpVO restcategrpVO = restcategrpProc.read(restrntsVO.getRcateno());
     mav.addObject("restcategrpVO", restcategrpVO);
     
     List<RattachfileVO> attachfile_list = rattachfileProc.list_by_restno(restno);
@@ -208,6 +212,7 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
     List<MenuVO> menu_list = menuProc.read(restno);
     mav.addObject("menu_list", menu_list);
     
+    restrntsProc.increaseCnt(restno);
     mav.setViewName("/restrnts/read");
 
     return mav;

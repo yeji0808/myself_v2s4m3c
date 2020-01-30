@@ -14,8 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    List<CategrpVO> list = new ArrayList<CategrpVO>(); 
    -->
    <insert id="create" parameterType="RestCategrpVO">
-    INSERT INTO rest_categrp(rcateno, rcatename, rcnt)
-    VALUES((SELECT NVL(MAX(rcateno), 0) + 1 as rcateno FROM rest_categrp), #{rcatename} , #{rcnt})
+    INSERT INTO rest_categrp(rcateno, rcatename)
+    VALUES((SELECT NVL(MAX(rcateno), 0) + 1 as rcateno FROM rest_categrp), #{rcatename})
    </insert>
    
    <select id="list_categrpno_asc" resultType="RestCategrpVO">
@@ -43,6 +43,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      DELETE FROM rest_categrp
      WHERE rcateno = #{rcateno}
    </delete>
+   
+   <update id="increaseCnt" parameterType="int">
+     UPDATE rest_categrp 
+     SET rcnt = rcnt + 1 
+     WHERE rcateno = #{rcateno}
+   </update>
+  
+   <update id="decreaseCnt" parameterType="int">
+     UPDATE rest_categrp 
+     SET rcnt = rcnt - 1 
+     WHERE rcateno = #{rcateno}
+   </update>
+  
+   <!-- FK 컬럼 값이 사용된 레코드 갯수 산출: id="cnt_zero" -->
+   <update id="cnt_zero" parameterType="int">
+     UPDATE rest_categrp 
+     SET rcnt = 0 
+     WHERE rcateno = #{rcateno}
+   </update>
    
 </mapper>
 

@@ -41,7 +41,7 @@ public interface RestrntsDAOInter {
    * @param rcateno
    * @return 처리된 레코드 갯수
    */
-  public int delete(int rcateno);
+  public int delete(int restno);
   
   
   /**
@@ -60,6 +60,11 @@ public interface RestrntsDAOInter {
   
   // 마지막 restno
   public int lastnum();
+  
+  /**
+   * 조회수 증가
+   */
+  public int increaseCnt(int restno);
 
 }
 

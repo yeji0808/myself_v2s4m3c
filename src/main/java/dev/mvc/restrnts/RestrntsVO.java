@@ -30,11 +30,11 @@ public class RestrntsVO {
   /** 검색어*/
   private String rword;
   /** 추천수*/
-  private String rrecom;
+  private int rrecom;
   /** 조회수*/
-  private String rcnt;
+  private int rcnt;
   /** 리뷰수*/
-  private String reviewcnt;
+  private int reviewcnt;
   /** 원본 파일명*/
   private String fname;
   /** 업로드 파일명*/
@@ -143,27 +143,27 @@ public class RestrntsVO {
     this.rword = rword;
   }
 
-  public String getRrecom() {
+  public int getRrecom() {
     return rrecom;
   }
 
-  public void setRrecom(String rrecom) {
+  public void setRrecom(int rrecom) {
     this.rrecom = rrecom;
   }
 
-  public String getRcnt() {
+  public int getRcnt() {
     return rcnt;
   }
 
-  public void setRcnt(String rcnt) {
+  public void setRcnt(int rcnt) {
     this.rcnt = rcnt;
   }
 
-  public String getReviewcnt() {
+  public int getReviewcnt() {
     return reviewcnt;
   }
 
-  public void setReviewcnt(String reviewcnt) {
+  public void setReviewcnt(int reviewcnt) {
     this.reviewcnt = reviewcnt;
   }
 

@@ -43,6 +43,22 @@ public interface RestCategrpProcInter {
    */
   public int delete(int rcateno);
   
+  /**
+   * 음식점 수 증가
+   */
+  public int increaseCnt(int rcateno);
+  
+  /**
+   * 음식점 수 감소
+   */
+  public int decreaseCnt(int rcateno);
+
+  /**
+   * 음식점 수 0  
+   */
+  public int cnt_zero(int rcateno);
+
+  
 }
 
 

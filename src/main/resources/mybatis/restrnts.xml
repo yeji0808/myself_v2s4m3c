@@ -7,11 +7,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.restrnts.RestrntsDAOInter"> 
    <insert id="create" parameterType="RestrntsVO">
      INSERT INTO restrnts(restno, rcateno, memberno, rname, rmain, rintro, rtime, rcall, 
-                                  rzipcode, raddress1, raddress2, rword, rrecom, rcnt, reviewcnt,
+                                  rzipcode, raddress1, raddress2, rword,
                                   fname, fupname, thumb, fsize)
      VALUES((SELECT NVL(MAX(restno), 0) + 1 as restno FROM restrnts),
                   #{rcateno}, #{memberno}, #{rname}, #{rmain}, #{rintro}, #{rtime}, #{rcall}, 
-                  #{rzipcode}, #{raddress1}, #{raddress2}, #{rword}, 0, 0, 0,
+                  #{rzipcode}, #{raddress1}, #{raddress2}, #{rword},
                   #{fname}, #{fupname}, #{thumb}, #{fsize})
    </insert>
    
@@ -66,6 +66,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ORDER BY restno DESC)
     WHERE ROWNUM = 1
     </select>
+    
+   <update id="increaseCnt" parameterType="int">
+     UPDATE restrnts
+     SET rcnt = rcnt + 1 
+     WHERE restno = #{restno}
+   </update>
 
           
 </mapper>
