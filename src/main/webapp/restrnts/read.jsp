@@ -203,19 +203,15 @@ function reply_delete_proc(replyno) {
   <c:set var="restno" value="${restrntsVO.restno }" />
   
   <jsp:include page="/menu/top.jsp" flush='false' />
-  
       <ASIDE style='float: right;'>
       <A href="javascript:location.reload();">새로고침</A>
+      
       <span class='menu_divide' > | </span> 
-      <A href='./list.do?categrpno=${categrpno }'>목록</A>
+      <A href='./list.do?rcateno=${rcateno }'>목록</A>
         <span class='menu_divide' > | </span> 
-        <A href='./update.do?categrpno=${categrpno }&contentsno=${contentsno}'>수정</A>
+        <A href='./update_info.do?restno=${restno}&rcateno=${rcateno}'>수정</A>
         <span class='menu_divide' > | </span> 
-        <a href="../attachfile/create.do?contentsno=${contentsno}&categrpno=${categrpVO.categrpno}">첨부 파일 등록</A>
-        <span class='menu_divide' > | </span> 
-        <a href="./file        _delete.do?contentsno=${contentsno}&categrpno=${categrpVO.categrpno}">첨부 파일 삭제</A>
-        <span class='menu_divide' > | </span> 
-        <A href='./delete.do?categrpno=${categrpno }&contentsno=${contentsno}'>삭제</A>
+        <A href='./delete.do?restno=${restno}&rcateno=${rcateno}'>삭제</A>
     </ASIDE> 
 
  
