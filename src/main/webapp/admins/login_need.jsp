@@ -20,13 +20,13 @@
 </head> 
  
 <body>
- 
+ <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='message'>
     <H3>관리자 로그인이 필요한 페이지입니다.</H3>
     <BR><BR>
     [<A href='${pageContext.request.contextPath}/admins/login.do'>로그인</A>]
   </DIV>
-
+<jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html> 

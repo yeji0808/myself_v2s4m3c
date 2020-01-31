@@ -27,7 +27,7 @@
 </head> 
  
 <body>
-
+<jsp:include page="/menu/top.jsp" flush='false' />
 <FORM name='frm' method='POST' action='./update.do'>
   <input type='hidden' name='userno' value='${categrpVO.userno }'>
   <fieldset class='fieldset_basic'>
@@ -59,7 +59,7 @@
     </ul>
   </fieldset>
 </FORM>
- 
+ <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html> 

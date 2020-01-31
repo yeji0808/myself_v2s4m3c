@@ -25,7 +25,7 @@
 </head> 
  
 <body>
- 
+ <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV id='main_panel'></DIV>
  
   <!-- Modal -->
@@ -224,7 +224,7 @@
       </div>
     </div>   
   </FORM>
- 
+ <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html> 

@@ -64,6 +64,7 @@
   
 </head><!--/head-->
 <body>
+<jsp:include page="/menu/top.jsp" flush='false' />
 <!-- 마이 페이지 첫 화면 + 찜 목록 조회 페이지 -->
     <section id="single-page-slider" class="no-margin">
         <div class="carousel slide" data-ride="carousel">
@@ -189,5 +190,6 @@
 					</div>
         </section><!-- section -->
     </div>
+    <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
 </html>

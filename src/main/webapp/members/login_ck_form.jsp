@@ -28,7 +28,7 @@
 </head> 
  
 <body>
- 
+ <jsp:include page="/menu/top.jsp" flush='false' />
 <DIV class='title_line' style='width: 20%;'>로그인</DIV>
  
 <DIV style='width: 80%; margin: 0px auto;'>
@@ -70,7 +70,7 @@
   </FORM>
 </DIV>
  
-
+<jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html>

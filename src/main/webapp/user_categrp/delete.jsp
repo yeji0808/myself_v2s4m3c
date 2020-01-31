@@ -28,7 +28,7 @@
 </head> 
  
 <body>
-
+<jsp:include page="/menu/top.jsp" flush='false' />
 <DIV  style='display: table; width: 100%; height: 300px;'>
 <DIV style='display: table-cell; vertical-align: middle;'>
  
@@ -53,6 +53,7 @@
  
  </DIV>
  </DIV>
+ <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html> 

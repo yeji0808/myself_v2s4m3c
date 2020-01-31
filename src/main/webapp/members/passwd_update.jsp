@@ -40,7 +40,7 @@ function send() {
  
  
 <body>
- 
+ <jsp:include page="/menu/top.jsp" flush='false' />
   <!-- Modal -->
   <div class="modal fade" id="modal_panel" role="dialog">
     <div class="modal-dialog">
@@ -114,7 +114,7 @@ function send() {
       </div>
     </div>   
 </FORM>
- 
+ <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html> 
