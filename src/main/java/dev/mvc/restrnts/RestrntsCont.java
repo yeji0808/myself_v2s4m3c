@@ -23,6 +23,7 @@ import dev.mvc.menu.MenuProcInter;
 import dev.mvc.menu.MenuVO;
 import dev.mvc.rattachfile.RattachfileProcInter;
 import dev.mvc.rattachfile.RattachfileVO;
+import dev.mvc.rec.RecVO;
 import dev.mvc.rest_categrp.RestCategrpProcInter;
 import dev.mvc.rest_categrp.RestCategrpVO;
 import dev.mvc.review.ReviewProcInter;
@@ -348,6 +349,27 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
    
    return obj.toString();
  }
+ 
+/* *//**
+  * http://localhost:9090/team1/rec/increase_cnt.do?recom_no=27
+  * @param wno
+  * @return
+  *//*
+ @ResponseBody
+ @RequestMapping(value = "/rec/increase_cnt.do", 
+                         method = RequestMethod.POST,
+                         produces = "text/plain;charset=UTF-8")
+ public String increase_cnt(int rrecom) { 
+   int count = restrntsProc.increase_cnt(rrecom);
+   RecVO recVO = restrntsProc.read(recom_no);
+   
+   int cnt= recVO.getCnt();
+   JSONObject obj = new JSONObject();
+   obj.put("cnt", cnt);
+   obj.put("count", count);
+   
+   return obj.toString();
+ }*/
 }
   
  

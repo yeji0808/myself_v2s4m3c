@@ -11,17 +11,15 @@
 <title>Resort world</title>
 
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
-
-<!-- Fotorama -->
-  <link href="fotorama.css" rel="stylesheet">
-  <script src="fotorama.js"></script>
   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+<!-- Fotorama -->
+  <link href="fotorama.css" rel="stylesheet">
+  <script src="fotorama.js"></script>
 
 <script type="text/javascript">
 $(function() { // 자동 실행
@@ -39,11 +37,16 @@ function create_reply() {
   var frm_reply = $('#frm_reply');
   var params = frm_reply.serialize();
 
+  len = $('#memberno', frm_reply).val().length;
+  // alert('length: ' + len);
+  // return;
   
-  if ($('#memberno', frm_reply).val().length == 0) {
+  if (len == 0) {
+    alert('로그인 안됨');
     $('#modal_title').html('댓글 등록'); // 제목 
     $('#modal_content').html("로그인해야 등록 할 수 있습니다."); // 내용
     $('#modal_panel').modal();            // 다이얼로그 출력
+    
     return;  // 실행 종료
   }
   
@@ -193,14 +196,14 @@ function reply_delete_proc(reviewno) {
 }
 
 //추천수 증가
-function increase_recom(recom_no) {
+function increase_recom(cnt) {
   var frm_recom = $('#frm_recom');
-  var params ="recom_no=" +recom_no;
+  var params ="cnt=" +cnt;
   //alert(params);
 
 
   $.ajax({
-    url: "../rec/increase_cnt.do", // action 대상 주소
+    url: "../restrnts/increase_recom.do", // action 대상 주소
     type: "post",           // get, post
     cache: false,          // 브러우저의 캐시영역 사용안함.
     async: true,           // true: 비동기
@@ -330,7 +333,7 @@ function increase_recom(recom_no) {
             </c:forEach>
           </div>
           </div>
-          <!-- 첨부사진 영역 종료-->
+          <!-- 첨부사진 영역 종료--> 
         
           <!-- 정보 영역 시작 -->
           <div class="col-6" style="padding: 0%;">
@@ -338,7 +341,7 @@ function increase_recom(recom_no) {
             <h5 class="card-text">${restrntsVO.rmain}</h5>
             <br><br>
             <button type="submit" class="btn btn-info btn-lg" >예약하기</button>
-            <img onclick="increase_recom(${restrntsVO.rrecom});" src='./images/heart.png' style='padding-left:0.5em; padding-right:0.3em;'title='추천수' ><span id="panel_recom_cnt_${restrntsVO.rrecom}" style='font-size: 15px;'>${restrntsVO.rrecom}</span>
+<%--             <img onclick="increase_recom(${restrntsVO.rrecom});" src='./images/heart.png' style='padding-left:0.5em; padding-right:0.3em;'title='추천수' ><span id="panel_recom_cnt_${restrntsVO.rrecom}" style='font-size: 15px;'>${restrntsVO.rrecom}</span> --%>
             <hr>
             <div class="context"><IMG src='./images/clock.png' style='padding: 0em 1em;'>${restrntsVO.rtime}</div>
             <hr>
