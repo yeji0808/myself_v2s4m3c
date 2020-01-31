@@ -191,6 +191,35 @@ function reply_delete_proc(reviewno) {
 
   
 }
+
+//추천수 증가
+function increase_recom(recom_no) {
+  var frm_recom = $('#frm_recom');
+  var params ="recom_no=" +recom_no;
+  //alert(params);
+
+
+  $.ajax({
+    url: "../rec/increase_cnt.do", // action 대상 주소
+    type: "post",           // get, post
+    cache: false,          // 브러우저의 캐시영역 사용안함.
+    async: true,           // true: 비동기
+    dataType: "json",   // 응답 형식: json, xml, html...
+    data: params,        // 서버로 전달하는 데이터 
+    success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
+      
+      $('#panel_recom_cnt_'+recom_no,frm_recom).html(rdata.cnt);
+      
+    }, 
+    // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+    error: function(request, status, error) { // callback 함수
+      var msg = 'ERROR<br><br>';
+      msg += '<strong>request.status</strong><br>'+request.status + '<hr>';
+      msg += '<strong>error</strong><br>'+error + '<hr>';
+      console.log(msg);
+    }
+  });
+}
 </script>
 
 </head>
@@ -232,7 +261,7 @@ function reply_delete_proc(reviewno) {
         <div class="modal-body">
           <form name='frm_reply_delete' id='frm_reply_delete' method='POST' 
                     action='./review_delete.do'>
-            <input type='hidden' name='replyno' id='replyno' value=''>
+            <input type='hidden' name='reviewno' id='reviewno' value=''>
             
             <label>패스워드</label>
             <input type='password' name='passwd' id='passwd' class='form-control'>
@@ -285,9 +314,7 @@ function reply_delete_proc(reviewno) {
 
  
       <DIV style='margin: 5% 18%; width: 70%;'>
-      <FORM name='frm' method="get" action='./update.do'>
-      <input type="hidden" name="restno" value="${restno}">
-        
+      <FORM name='frm_recom' id='frm_recom'>        
         <div class="container">
         <div class="row"> 
           <!-- 첨부사진 영역 시작-->
@@ -311,6 +338,7 @@ function reply_delete_proc(reviewno) {
             <h5 class="card-text">${restrntsVO.rmain}</h5>
             <br><br>
             <button type="submit" class="btn btn-info btn-lg" >예약하기</button>
+            <img onclick="increase_recom(${restrntsVO.rrecom});" src='./images/heart.png' style='padding-left:0.5em; padding-right:0.3em;'title='추천수' ><span id="panel_recom_cnt_${restrntsVO.rrecom}" style='font-size: 15px;'>${restrntsVO.rrecom}</span>
             <hr>
             <div class="context"><IMG src='./images/clock.png' style='padding: 0em 1em;'>${restrntsVO.rtime}</div>
             <hr>

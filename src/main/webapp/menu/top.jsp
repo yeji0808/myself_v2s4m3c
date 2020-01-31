@@ -22,7 +22,7 @@
         </span>   
     </div>  
     <div class="login_frame" style="float: right;"> 
-      
+
       <c:choose>
         <c:when test="${sessionScope.id_admin == null && sessionScope.id == null}">
           <A class=''  href='${root}/admins/login.do' style="color: #dddddd;">관리자 Login</A>
