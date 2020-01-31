@@ -1,5 +1,7 @@
 package dev.mvc.choice;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface ChoiceDAOInter {
@@ -50,5 +52,6 @@ public interface ChoiceDAOInter {
    * @return
    */
   public int delete(int cho_no);
-  
+ 
+ 
 }

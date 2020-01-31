@@ -32,7 +32,7 @@ public class WreplyCont {
   
   @ResponseBody
   @RequestMapping(value = "/wreply/create.do",
-                            method = RequestMethod.GET,
+                            method = RequestMethod.POST,
                             produces = "text/plain;charset=UTF-8")
   public String create(WreplyVO wreplyVO) {
     int count = wreplyProc.create(wreplyVO);

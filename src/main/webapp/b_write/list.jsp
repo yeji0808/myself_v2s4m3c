@@ -28,7 +28,7 @@
       </div>
        <div style="float: right; ">
          <A href="javascript:location.reload();">새로고침</A>
-         <c:if test="${sessionScope!=null}"> 
+         <c:if test="${sessionScope.memberno!=null}"> 
            <A href="./create.do?memberno=${sessionScope.memberno }">등록</A>
          </c:if>
       </div>
@@ -53,10 +53,11 @@
       
       <%-- table 내용 --%>
       <tbody>
+      
         <c:forEach var="writeVO" items="${list }">
           <c:set var="wno" value="${writeVO.wno }" />
           <c:set var="boardno" value="${param.boardno }" />
-          
+           
           <tr> 
             <td style='text-align: center;'>${writeVO.rdate.substring(0, 10)}</td>
             <td>

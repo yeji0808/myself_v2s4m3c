@@ -105,12 +105,11 @@ function delete_recom(recom_no) {
   });
 } 
 //추천수 증가시키기
-function increase_cnt(recom_no) {
+function increase_cnt(recom_no, memberno) {
   var frm_recom = $('#frm_recom');
-  var params ="recom_no=" +recom_no;
-  //alert(params);
-
-
+  var params ="recom_no=" +recom_no+"&memberno=" + memberno;
+  //alert(params); 
+  //return;  
   $.ajax({
     url: "../rec/increase_cnt.do", // action 대상 주소
     type: "post",           // get, post
@@ -119,8 +118,11 @@ function increase_cnt(recom_no) {
     dataType: "json",   // 응답 형식: json, xml, html...
     data: params,        // 서버로 전달하는 데이터 
     success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
-      
+      if(rdata.cnt ==99999){
+        alert("중복 추천은 안됩니다.");
+      } else{
       $('#panel_recom_cnt_'+recom_no,frm_recom).html(rdata.cnt);
+      }
       
     }, 
     // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
@@ -141,6 +143,8 @@ function panel_img_w(file) {
   $('#w_attach_panel').html(tag);
   $('#w_attach_panel').show();
 }
+
+
 </script> 
 </head>
 
@@ -194,18 +198,32 @@ function panel_img_w(file) {
           <c:set var="recom_no" value="${recVO.recom_no }" /> 
           <div>
             <div style="float: left; width: 80%;"><span style="font-size: 2em; font-weight: bold;">${stat.count}. ${recVO.content }<br></span>
+            <c:if test="${sessionScope.memberno==writeVO.memberno&&sessionScope.memberno!=null }">
                      <A href='../rec_img/create.do?recom_no=${recom_no}&cho_no=${param.cho_no}' style='margin: 4px;'><IMG src='./images/upload.png'  ></A>
                      <A href='../rec/update.do?cho_no=${param.cho_no}&recom_no=${recom_no}' style='margin: 4px;'><IMG src='./images/update.png' ></A>
                      <A href='javascript:delete_recom(${recom_no})' style='margin: 4px;'><IMG src='./images/delete.png' ></a>
+            </c:if>
                      <script type="text/javascript">load_recom_image(${recom_no });</script> 
                      <div id='recom_image_panel_${recom_no }'></div> 
             </div>   
             
           </div>     
-          <div id="btn_group" style="margin-top: 10px;" >   
-          <button id="test_btn1" type="button" onclick="increase_cnt(${recom_no });" >좋아요<br><span id="panel_recom_cnt_${recom_no }" >${recVO.cnt }</span></button>
-          
-          </div>
+          <div id="btn_group" style="margin-top: 10px;" >
+          <c:choose>
+            <c:when test="${sessionScope.memberno!=null}">
+              <button id="test_btn1" type="button"
+                onclick="increase_cnt(${recom_no }, ${memberno});">
+                좋아요<br>
+                <span id="panel_recom_cnt_${recom_no }">${recVO.cnt }</span>
+              </button>
+            </c:when>
+            <c:otherwise>
+              <button id="test_btn1" type="button"
+                onclick="location.href='../members/login.do'">
+                좋아요는<br> 로그인이 필요합니다.<br>
+            </c:otherwise>
+          </c:choose>
+        </div>
           <div style="clear: both;"></div> 
         </c:forEach>
       </DIV>
