@@ -10,8 +10,12 @@ CREATE TABLE review(
 		content                       		VARCHAR2(1000)		 NOT NULL,
 		passwd                        		VARCHAR2(20)		 NOT NULL,
 		rdate                              DATE NOT NULL,
-  FOREIGN KEY (restno) REFERENCES restrnts (restno),
-  FOREIGN KEY (memberno) REFERENCES member (memberno)
+	CONSTRAINT review_restno_fk	
+  FOREIGN KEY (restno) REFERENCES restrnts (restno)
+  ON DELETE CASCADE,
+  CONSTRAINT review_memberno_fk
+  FOREIGN KEY (memberno) REFERENCES members (memberno)
+  ON DELETE CASCADE
 );
 
 COMMENT ON TABLE review is '´ñ±Û';
@@ -48,7 +52,7 @@ ORDER BY reviewno DESC;
 3) restno º° ¸ñ·Ï
 SELECT reviewno, restno, memberno, content, passwd, rdate
 FROM review
-WHERE restno=1
+WHERE memberno=1
 ORDER BY reviewno DESC;
 
  reviewNO restno MEMBERNO CONTENT PASSWD RDATE

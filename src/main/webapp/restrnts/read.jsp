@@ -12,9 +12,6 @@
 
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
 
-<!-- jQuery -->
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-
 <!-- Fotorama -->
   <link href="fotorama.css" rel="stylesheet">
   <script src="fotorama.js"></script>
@@ -31,7 +28,7 @@ $(function() { // 자동 실행
   list_by_restno(${restrntsVO.restno });  // JS의 EL 접근
   
   if ('${sessionScope.memberno}' != '') { // 로그인된 경우
-    // alert('sessionScope.memberno: ' + '${sessionScope.memberno}');
+    //alert('sessionScope.memberno: ' + '${sessionScope.memberno}');
 
     var frm_reply = $('#frm_reply');
     $('#content', frm_reply).attr('placeholder', '댓글 작성');
@@ -41,8 +38,8 @@ $(function() { // 자동 실행
 function create_reply() {
   var frm_reply = $('#frm_reply');
   var params = frm_reply.serialize();
-  // alert('checkId() 호출됨: ' + params);
-  // return;
+
+  
   if ($('#memberno', frm_reply).val().length == 0) {
     $('#modal_title').html('댓글 등록'); // 제목 
     $('#modal_content').html("로그인해야 등록 할 수 있습니다."); // 내용
@@ -58,14 +55,14 @@ function create_reply() {
   } 
   
   $.ajax({
-    url: "../reply/create.do", // action 대상 주소
+    url: "../review/create.do", // action 대상 주소
     type: "post",           // get, post
     cache: false,          // 브러우저의 캐시영역 사용안함.
     async: true,           // true: 비동기
     dataType: "json",   // 응답 형식: json, xml, html...
     data: params,        // 서버로 전달하는 데이터
     success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
-      // alert(rdata);
+
       var msg = "";
       
       if (rdata.count > 0) {
@@ -98,15 +95,15 @@ function list_by_restno(restno) {
   // alert(contentsno);
   var params = 'restno=' + restno;
 
+  
   $.ajax({
-    url: "../reply/list_by_restno_join.do", // action 대상 주소
+    url: "../review/list_by_restno_join.do", // action 대상 주소
     type: "get",           // get, post
     cache: false,          // 브러우저의 캐시영역 사용안함.
     async: true,           // true: 비동기
     dataType: "json",   // 응답 형식: json, xml, html...
     data: params,        // 서버로 전달하는 데이터
     success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
-      // alert(rdata);
       var msg = '';
       
       $('#panel_reply').html(''); // 패널 초기화, val(''): 안됨
@@ -118,7 +115,7 @@ function list_by_restno(restno) {
         msg += "<span style='font-weight: bold;'>" + row.id + "</span>";
         msg += "  " + row.rdate;
         if ('${sessionScope.memberno}' == row.memberno) { // 글쓴이 일치여부 확인
-          msg += " <A href='javascript:reply_delete("+row.replyno+")'><IMG src='./images/delete.png'></A>";
+          msg += " <A href='javascript:reply_delete("+row.reviewno+")'><IMG src='./images/delete.png'></A>";
         }
         msg += "  " + "<br>";
         msg += row.content;
@@ -139,19 +136,19 @@ function list_by_restno(restno) {
 }
 
 //삭제 레이어 출력
-function reply_delete(replyno) {
-  // alert('replyno: ' + replyno);
+function reply_delete(reviewno) {
+  // alert('reviewno: ' + reviewno);
   var frm_reply_delete = $('#frm_reply_delete');
-  $('#replyno', frm_reply_delete).val(replyno); // 삭제할 댓글 번호 저장
+  $('#replyno', frm_reply_delete).val(reviewno); // 삭제할 댓글 번호 저장
   $('#modal_panel_delete').modal();               // 삭제폼 다이얼로그 출력
 }
 
 // 삭제 처리
-function reply_delete_proc(replyno) {
+function reply_delete_proc(reviewno) {
   // alert('replyno: ' + replyno);
   var params = $('#frm_reply_delete').serialize();
   $.ajax({
-    url: "./reply_delete.do", // action 대상 주소
+    url: "./review_delete.do", // action 대상 주소
     type: "post",           // get, post
     cache: false,          // 브러우저의 캐시영역 사용안함.
     async: true,           // true: 비동기
@@ -166,7 +163,7 @@ function reply_delete_proc(replyno) {
 
           $('#btn_frm_reply_delete_close').trigger("click"); // 삭제폼 닫기, click 발생 
           
-          list_by_contentsno(${contentsVO.contentsno }); // 목록을 다시 읽어옴
+          list_by_restno(${restrntsVO.restno }); // 목록을 다시 읽어옴
           
           return; // 함수 실행 종료
         } else {  // 삭제 실패
@@ -203,6 +200,78 @@ function reply_delete_proc(replyno) {
   <c:set var="restno" value="${restrntsVO.restno }" />
   
   <jsp:include page="/menu/top.jsp" flush='false' />
+  
+    <!-- Modal 알림창 시작 -->
+  <div class="modal fade" id="modal_panel" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title" id='modal_title'></h4><!-- 제목 -->
+        </div>
+        <div class="modal-body">
+          <p id='modal_content'></p>  <!-- 내용 -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> <!-- Modal 알림창 종료 -->
+  
+  <!-- 삭제폼 -->
+  <div class="modal fade" id="modal_panel_delete" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">댓글 삭제</h4><!-- 제목 -->
+        </div>
+        <div class="modal-body">
+          <form name='frm_reply_delete' id='frm_reply_delete' method='POST' 
+                    action='./review_delete.do'>
+            <input type='hidden' name='replyno' id='replyno' value=''>
+            
+            <label>패스워드</label>
+            <input type='password' name='passwd' id='passwd' class='form-control'>
+            <div style='text-align: right; margin: 5px;'>
+              <button type='button' class='btn btn-success' 
+                           onclick="reply_delete_proc(this.form.replyno.value);this.form.passwd.value='';">삭제</button>
+            </div> 
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" 
+                       id='btn_frm_reply_delete_close'>Close</button>
+        </div>
+      </div>
+    </div>
+  </div> <!-- 삭제폼 종료 -->
+  
+  <!-- 삭제폼 알림창 시작 -->
+  <div class="modal fade" id="modal_panel_delete_msg" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"
+                       onclick="$('#modal_panel_delete').show();">×</button>
+          <h4 class="modal-title">비밀번호 에러</h4><!-- 제목 -->
+        </div>
+        <div class="modal-body">
+          <p id='modal_panel_delete_msg_content'></p>  <!-- 내용 -->
+        </div>
+        <div class="modal-footer">
+          <!-- 현재 창은 삭제되면서 삭제폼이 다시 출력됨. -->
+          <button type="button" class="btn btn-default" data-dismiss="modal"
+                      onclick="$('#modal_panel_delete').show();">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> <!-- Modal 알림창 종료 -->
+  
       <ASIDE style='float: right;'>
       <A href="javascript:location.reload();">새로고침</A>
       

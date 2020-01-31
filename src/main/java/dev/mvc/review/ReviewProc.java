@@ -32,10 +32,10 @@ public class ReviewProc implements ReviewProcInter {
     String content = "";
     
     // 특수 문자 변경
-    for (ReviewVO replyVO:list) {
-      content = replyVO.getContent();
+    for (ReviewVO reviewVO:list) {
+      content = reviewVO.getContent();
       content = Tool.convertChar(content);
-      replyVO.setContent(content);
+      reviewVO.setContent(content);
     }
     return list;
   }
@@ -46,10 +46,10 @@ public class ReviewProc implements ReviewProcInter {
     String content = "";
     
     // 특수 문자 변경
-    for (ReviewMemberVO replyMemberVO:list) {
-      content = replyMemberVO.getContent();
+    for (ReviewMemberVO reviewMemberVO:list) {
+      content = reviewMemberVO.getContent();
       content = Tool.convertChar(content);
-      replyMemberVO.setContent(content);
+      reviewMemberVO.setContent(content);
     }
     return list;
   }
@@ -61,11 +61,17 @@ public class ReviewProc implements ReviewProcInter {
   }
 
   @Override
-  public int delete(int replyno) {
-    int count = reviewDAO.delete(replyno);
+  public int delete(int reviewno) {
+    int count = reviewDAO.delete(reviewno);
     return count;
   }
-  
+
+  @Override
+  public int increaseCnt(int restno) {
+    int count = reviewDAO.increaseCnt(restno);
+    
+    return count;
+  }
   
 }
 

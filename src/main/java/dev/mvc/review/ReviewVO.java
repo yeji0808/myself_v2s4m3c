@@ -2,7 +2,7 @@ package dev.mvc.review;
 
 public class ReviewVO {
   /** 댓글 번호 */
-  private int replyno;
+  private int reviewno;
   /** 관련 글 번호 */
   private int restno;
   /** 회원 번호 */
@@ -14,13 +14,13 @@ public class ReviewVO {
   /** 등록일 */
   private String rdate;
   
-  public int getReplyno() {
-    return replyno;
-  }
-  public void setReplyno(int replyno) {
-    this.replyno = replyno;
-  }
 
+  public int getReviewno() {
+    return reviewno;
+  }
+  public void setReviewno(int reviewno) {
+    this.reviewno = reviewno;
+  }
   public int getRestno() {
     return restno;
   }

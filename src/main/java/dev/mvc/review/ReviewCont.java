@@ -31,11 +31,15 @@ public class ReviewCont {
     System.out.println("--> ReviewCont created.");
   }
   
+  @ResponseBody
   @RequestMapping(value = "/review/create.do",
                             method = RequestMethod.POST,
                             produces = "text/plain;charset=UTF-8")
   public String create(ReviewVO reviewVO) {
     int count = reviewProc.create(reviewVO);
+    if (count == 1) {
+      reviewProc.increaseCnt(reviewVO.getRestno());
+    }
     
     JSONObject obj = new JSONObject();
     obj.put("count",count);
@@ -60,25 +64,8 @@ public class ReviewCont {
     
     return mav;
   }*/
-
-  /**
-   <xmp>
-   http://localhost:9090/ojt/review/list_by_contentsno.do?contentsno=1
-   ±ÛÀÌ ¾ø´Â °æ¿ì: {"list":[]}
-   ±ÛÀÌ ÀÖ´Â °æ¿ì
-   {"list":[
-            {"memberno":1,"rdate":"2019-12-18 16:46:43","passwd":"123","reviewno":3,"content":"´ñ±Û 3","contentsno":1}
-            ,
-            {"memberno":1,"rdate":"2019-12-18 16:46:39","passwd":"123","reviewno":2,"content":"´ñ±Û 2","contentsno":1}
-            ,
-            {"memberno":1,"rdate":"2019-12-18 16:46:35","passwd":"123","reviewno":1,"content":"´ñ±Û 1","contentsno":1}
-            ] 
-   }
-   </xmp>  
-   * @param contentsno
-   * @return
-   */
-  @RequestMapping(value = "/review/list_by_contentsno.do",
+ 
+  @RequestMapping(value = "/review/list_by_restno.do",
                             method = RequestMethod.GET,
                             produces = "text/plain;charset=UTF-8")
   public String list_by_restno(int restno) {
@@ -92,29 +79,12 @@ public class ReviewCont {
   }
   
   /**
-   * {"list":[
-          {"memberno":1,
-        "rdate":"2019-12-18 16:46:35",
-      "passwd":"123",
-      "reviewno":1,
-      "id":"user1",
-      "content":"´ñ±Û&nbsp;1",
-      "contentsno":1}
-    ,
-        {"memberno":1,
-       "rdate":"2019-12-18 16:46:35",
-       "passwd":"123",
-       "reviewno":1,
-       "id":"user1",
-       "content":"´ñ±Û&nbsp;1",
-       "contentsno":1}
-    ]
-}
    * http://localhost:9090/ojt/review/list_by_contentsno_join.do?contentsno=1
    * @param contentsno
    * @return
    */
-  @RequestMapping(value = "/review/list_by_contentsno_join.do",
+  @ResponseBody
+  @RequestMapping(value = "/review/list_by_restno_join.do",
                               method = RequestMethod.GET,
                               produces = "text/plain;charset=UTF-8")
   public String list_by_restno_join(int restno) {

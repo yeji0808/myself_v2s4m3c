@@ -10,11 +10,13 @@ public interface ReviewDAOInter {
   
   public List<ReviewVO> list_by_restno(int restno);
   
-  public List<ReviewMemberVO> list_by_restno_join(int resetno);
+  public List<ReviewMemberVO> list_by_restno_join(int restno);
   
   public int checkPasswd(Map<String, Object> map);
 
   public int delete(int reviewno);
+
+  public int increaseCnt(int restno);
 
 }
 

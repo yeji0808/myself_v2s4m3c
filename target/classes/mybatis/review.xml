@@ -43,6 +43,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     DELETE FROM review
     WHERE reviewno=#{reviewno}
   </delete>
+  
+   <update id="increaseCnt" parameterType="int">
+     UPDATE restrnts
+     SET reviewcnt = reviewcnt + 1 
+     WHERE restno = #{restno}
+   </update>
     
 </mapper> 
 
