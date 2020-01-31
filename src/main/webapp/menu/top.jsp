@@ -37,7 +37,7 @@
         </c:when>
         <c:when test="${sessionScope.id != null }">
           <div style="color: #8A0829; font-weight: bold;">${sessionScope.id } 님 환영합니다!</div>
-          <A href="${root}/mypage/mypage.jsp" style="color: #dddddd;">마이페이지</A> 
+          <%-- <A href="${root}/mypage/mypage.jsp" style="color: #dddddd;">마이페이지</A>  --%>
           <A href='${root}/members/logout.do' style="color: #dddddd;">회원 Logout</A> <span class=''> | </span>
          </c:when>        
       </c:choose>
@@ -66,5 +66,7 @@
           <li><a href="${root }/b_write/list.do">자유게시판</a></li>
           <li><a href="${root }/choice/list.do">추천해주세요</a></li>
         </ul></li>
+        <li style='width: 25%; text-align: center;'><a
+        href="${root}/mypage/mypage.jsp">마이페이지</a></li>
     </ul>
 </div>
