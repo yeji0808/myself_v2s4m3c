@@ -10,18 +10,35 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>Resort world</title>
 
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
+<link href="../css/style.css" rel="Stylesheet" type="text/css"> 
+
+<!-- jQuery 1.8 or later, 33 KB -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Fotorama from CDNJS, 19 KB -->
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+$(function() { // 자동 실행
+  list_by_wno(${writeVO.wno });  // JS의 EL 접근
+  
+  if ('${sessionScope.memberno}' != '') { // 로그인된 경우
+    //alert('sessionScope.memberno: ' + '${sessionScope.memberno}');
+
+    var frm_wreply = $('#frm_wreply');
+    $('#content', frm_wreply).attr('placeholder', '댓글 작성');
+  }
+}); 
   function create_wreply() {
     var frm_reply = $('#frm_reply');
     var params = frm_reply.serialize();
      //alert('checkId() 호출됨: ' + params);
-     //return;
+     //return; 
     if ($('#memberno', frm_reply).val().length == 0) {
       $('#modal_title').html('댓글 등록'); // 제목 
       $('#modal_content').html("로그인해야 등록 할 수 있습니다."); // 내용
@@ -37,7 +54,7 @@
       $('#modal_content').html("댓글 내용은 300자이상 입력 할 수 없습니다."); // 내용
       $('#modal_panel').modal();           // 다이얼로그 출력
       return;  // 실행 종료
-    }
+    } 
     
     $.ajax({
       url: "../wreply/create.do", // action 대상 주소
@@ -54,7 +71,7 @@
           $('#modal_content').attr('class', 'alert alert-success'); // CSS 변경
           msg = "댓글을 등록했습니다.";
           
-          list_by_contentsno(${writeVO.wno }) // 목록을 새로 읽어옴.
+          list_by_wno(${writeVO.wno }) // 목록을 새로 읽어옴.
           
         } else {
           $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
@@ -122,7 +139,7 @@
   function panel_img_w(file) {
     var tag = "";
     tag   = "<A href=\"javascript: $('#w_attach_panel').hide();\">";
-    tag += "  <IMG src='../w_attach/storage/" + file + "' style='width: 100%;'>"; 
+    tag += "  <IMG src='${root}/w_attach/storage/" + file + "' style='width: 100%;'>"; 
     tag += "</A>";
     
     $('#w_attach_panel').html(tag);
@@ -191,20 +208,22 @@
       <input type="hidden" name="wno" value="${wno}">
       <input type="hidden" name=boardno value="${param.boardno}">
       <div style="width:80%; margin:0px auto; padding-top: 50px">
-       <div style="float: left;clear:both;">
-        <A href='./list.do?boardno=${param.boardno }'>${boardVO.name }</A> 
+      <div style="float: left; clear: both;">
+        <A href='./list.do'>자유게시판</A> 
       </div>
        <div style="float: right; ">
          <A href="javascript:location.reload();">새로고침</A>
       </div>
       <fieldset class="fieldset" style="width:100% ;margin: 0px auto">
         <ul>
-          <li class="li_none" style='border-bottom: solid 1px #AAAAAA;'>
+          <li class="li_none" style='border-bottom: solid 1px #AAAAAA; height: 50px;'>
             <span class="glyphicon glyphicon-list-alt"></span> 
             <span style="font-style: oblique; font-weight: bold;">${writeVO.wtitle}</span>
             <span style="float: right; padding-right: 5px">[${writeVO.rdate.substring(0, 16)}]</span>
             <span id='wrecom_span' style="float:right; padding-right:15px"> ${writeVO.wrecom}</span>
             <span style="float: right">LIKE :</span>
+            <button type="button" onclick="increase_recom();" 
+                          class="btn btn-info" style="float: right; margin: 8px; ">LIKE IT</button>
           </li>
            <li class="li_none">
             <DIV id='w_attach_panel' style="width: 80%; margin: 0px auto;"></DIV> 원본 이미지 출력
@@ -214,7 +233,10 @@
           </li> 
           
           <li class="li_none">
-            <DIV>${writeVO.wcontent }${thumb}</DIV>
+          
+            <DIV>
+              ${writeVO.wcontent }${thumb}
+            </DIV>
           </li>
           <li class="li_none">
             <DIV style='text-decoration: none;'>
@@ -234,17 +256,21 @@
                 <c:set var="w_attachname" value="${w_attachVO.w_attachname.toLowerCase() }" />
                 <A href='${root}/download2?dir=/w_attach/storage&filename=${w_attachVO.w_attachupfile}&downname=${w_attachVO.w_attachname}'>${w_attachVO.w_attachname}</A> /              
               </c:forEach> 
-            </DIV>  
-                  <c:forEach var="w_attachVO" items="${w_attach_list }">
-              <c:set var="thumb" value="${w_attachVO.w_attachthumb.toLowerCase() }" />
-              
-              <c:choose>
-                <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
-                  <A href="javascript:panel_img_w('${w_attachVO.w_attachname }')"><IMG src='../w_attach/storage/${thumb }' style='margin-top: 2px;'></A>
-                </c:when>
-              </c:choose>
-            </c:forEach>
-              </DIV>
+            </DIV>
+                <c:forEach var="w_attachVO" items="${w_attach_list }">
+                  <c:set var="thumb"
+                    value="${w_attachVO.w_attachthumb.toLowerCase() }" />
+
+                  <c:choose>
+                    <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
+                     
+                        <A href="javascript:panel_img_w('${w_attachVO.w_attachname }')">  
+                          <IMG src='../w_attach/storage/${thumb }' style='margin-top: 2px;'>
+                        </A> 
+                    </c:when>
+                  </c:choose>
+                </c:forEach>
+            </DIV>
              <br>
          </li>                    
         </ul>
@@ -256,7 +282,8 @@
             <input type='hidden' name='wno' id='wno' value='${param.wno}'> 
             
      <%-- <input type='hidden' name='memberno' id='memberno' value='${sessionScope.memberno}'> --%>
-      
+       <c:if test="${sessionScope.memberno==writeVO.memberno}"> 
+    
             <DIV style="width: 80%; margin: 0px auto; ">
       
               <button type="button"
@@ -275,22 +302,25 @@
                 onclick="location.href='./update.do?boardno=${param.boardno }&wno=${wno}'"
                 class="btn btn-info" style="float: right; margin: 2px">
                 글 수정</button>
-               <button type="button" onclick="increase_recom();" 
-                          class="btn btn-info" style="float: right; margin: 2px ">LIKE IT</button>
+                  </c:if>
+               
             </DIV> <!-- 기타 기능 영역 종료 --> 
+               
             </form>
              
  
  <!-- 댓글 영역 시작 -->
- <div style='border-top: solid 1px #AAAAAA; width:80%; margin:0px auto; '><br></div>
-    <DIV style="width:80%; margin: 0px auto; ">
+ <div style='border-top: solid 1px #AAAAAA; width:70%; margin:0px auto; '><br></div>
+    <DIV style="width:60%; margin: 0px auto; ">
     
     <form name="frm_reply" id="frm_reply">
       <input type="hidden" name="wno" id="wno" value="${param.wno }">
-      <input type="hidden" name="memberno" id="memberno" value="1">
+      <input type="hidden" name="memberno" id="memberno" value="${sessionScope.memberno }">
+      <c:if test="${sessionScope.memberno!=null}">
       <textarea name="rcontent" id="rcontent" style="width: 100%; height:60px;"placeholder="댓글"></textarea>
       <input type="password" name="rpasswd" id="rpasswd" placeholder="비밀번호">
       <button type="button" id="btn_create" onclick="create_wreply();">등록</button>
+      </c:if>
     </form>
     <HR>
     <DIV id='panel_reply'>

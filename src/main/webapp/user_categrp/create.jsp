@@ -27,7 +27,7 @@
 </head> 
  
 <body>
- 
+ <jsp:include page="/menu/top.jsp" flush='false' />
 <DIV class='title_line' style='width: 40%;'>카테고리 그룹 등록</DIV>
  
 <FORM name='frm' method='POST' action='./create.do'>
@@ -59,7 +59,7 @@
     </ul>
   </fieldset>
 </FORM>
- 
+ <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html> 

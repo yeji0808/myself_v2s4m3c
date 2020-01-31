@@ -47,6 +47,7 @@ function delete_form(userno) {
 </head> 
  
 <body>
+<jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='title_line'>카테고리 그룹</DIV>
   
   <div style="text-align: right; margin-right: 10px;">
@@ -120,7 +121,7 @@ function delete_form(userno) {
   </tbody>
  
 </TABLE>
-
+<jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html> 

@@ -28,6 +28,7 @@
 </head> 
  
 <body>
+ <jsp:include page="/menu/top.jsp" flush='false' />
   <A href="../index.jsp"><IMG src="../solo.png" style="text-align: left;"></A>
 <DIV class='title_line' style='width: 20%;'>관리자 로그인</DIV>
  
@@ -58,7 +59,7 @@
     
   </FORM>
 </DIV>
-
+<jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html>

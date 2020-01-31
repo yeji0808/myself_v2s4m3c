@@ -1,5 +1,7 @@
 package dev.mvc.choice;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface ChoiceProcInter {
@@ -45,4 +47,5 @@ public interface ChoiceProcInter {
    * @return
    */
   public int delete(int cho_no);
+ 
 }

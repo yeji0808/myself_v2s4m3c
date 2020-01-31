@@ -42,6 +42,7 @@
                             dev.mvc.wreply,
                             dev.mvc.rec,
                             dev.mvc.rec_img,
+                            dev.mvc.rec_member,
                             dev.mvc.choice,
                             dev.mvc.menu,
                             dev.mvc.rattachfile,

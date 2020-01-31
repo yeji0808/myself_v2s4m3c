@@ -109,6 +109,7 @@
 	</style>
 </head><!--/head-->
 <body>
+<jsp:include page="/menu/top.jsp" flush='false' />
 <!-- 내 정보 수정 페이지 (가입 페이지에서 아이디 체크, 이메일 체크 스크립트 들어낸 코드) -->
     <section id="single-page-slider" class="no-margin">
         <div class="carousel slide" data-ride="carousel">
@@ -434,6 +435,6 @@
         </section><!-- section -->
     </div>
 
-
+<jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
 </html>

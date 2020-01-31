@@ -26,9 +26,12 @@
       <div style="float: left;clear:both;">
         <A href='./list.do'>추천게시판</A> 
       </div>
-       <div style="float: right; ">
-         <A href="javascript:location.reload();">새로고침 ||</A> 
-         <A href="./create.do?cho_no=${choiceVO.cho_no }">등록</A>
+       <div style="float: right; "> 
+           <A href="../rec_member/list.do">추천 누른 회원 목록 </A> 
+           <A href="javascript:location.reload();">새로고침  </A> 
+         <c:if test="${sessionScope.memberno!=null}">
+           <A href="./create.do?cho_no=${choiceVO.cho_no }">등록</A>
+         </c:if>
       </div>
     <table class="table table-condensed" style='width: 100%;  margin-top: 20px'>
       <colgroup>
@@ -69,6 +72,7 @@
         
       </tbody>
     </table>
+    <DIV class='bottom_menu'>${paging }</DIV>
     <br><br>
   </div>
  

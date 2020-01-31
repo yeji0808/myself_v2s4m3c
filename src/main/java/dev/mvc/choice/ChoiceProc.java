@@ -1,5 +1,7 @@
 package dev.mvc.choice;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +43,5 @@ public class ChoiceProc implements ChoiceProcInter {
     int count = choiceDAO.delete(cho_no);
     return count;
   }
-
+  
 }

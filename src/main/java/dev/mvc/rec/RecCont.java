@@ -17,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import dev.mvc.b_write.WriteVO;
 import dev.mvc.rec_img.Rec_imgProcInter;
 import dev.mvc.rec_img.Rec_imgVO;
+import dev.mvc.rec_member.RecMemberProcInter;
+import dev.mvc.rec_member.RecMemberVO;
 
 
 @Controller
@@ -27,6 +29,9 @@ public class RecCont {
   @Autowired
   @Qualifier("dev.mvc.rec_img.Rec_imgProc")
   private Rec_imgProcInter rec_imgProc;
+  @Autowired
+  @Qualifier("dev.mvc.rec_member.RecMemberProc")
+  private RecMemberProcInter recMemberProc;
  
   public RecCont() {
     System.out.println("--> RecCont create"); 
@@ -139,7 +144,7 @@ public class RecCont {
   }
   
   /**
-   * http://localhost:9090/team1/rec/increase_cnt.do?recom_no=27
+   * http://localhost:9090/team1/rec/increase_cnt.do?recom_no=27&memberno=2
    * @param wno
    * @return
    */
@@ -147,15 +152,50 @@ public class RecCont {
   @RequestMapping(value = "/rec/increase_cnt.do", 
                           method = RequestMethod.POST,
                           produces = "text/plain;charset=UTF-8")
-  public String increase_cnt(int recom_no) { 
+  public String increase_cnt(int recom_no, int memberno) { 
+    JSONObject obj = new JSONObject();
+    
     int count = recProc.increase_cnt(recom_no);
     RecVO recVO = recProc.read(recom_no);
     
-    int cnt= recVO.getCnt();
-    JSONObject obj = new JSONObject();
-    obj.put("cnt", cnt);
-    obj.put("count", count);
+    HashMap<Object, Object> map = new HashMap<Object, Object>();
+    map.put("recom_no", recom_no);
+    map.put("memberno", memberno);
     
+    String msg = "중복 추천 할 수 없습니다.";
+    int countMember=0;
+    int cnt=0;
+    boolean flag = false;
+//    if(memberno!=list.get(2).getMemberno()) {
+     
+  //  }
+      List<RecMemberVO> list = recMemberProc.list_by_recom_no(recom_no);
+    for(int i = 0; i<list.size();i++) {
+      if(memberno!=list.get(i).getMemberno()) {
+        flag = true;
+      } else {
+        flag=false;
+        break;
+      }
+    }
+    if(flag) {
+      countMember =recMemberProc.create(map);
+      cnt= recVO.getCnt();
+
+      obj.put("cnt", cnt);
+      obj.put("count", count);
+      obj.put("countMember", countMember);
+
+    } else {
+      obj.put("cnt", 99999); // 99999: 중복 선택 안됨.  
+      obj.put("count", 0);
+      obj.put("countMember", countMember);
+
+    }
+    
+
+
     return obj.toString();
+   
   }
 }

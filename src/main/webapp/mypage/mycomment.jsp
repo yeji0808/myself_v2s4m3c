@@ -46,6 +46,7 @@
   
 </head><!--/head-->
 <body>
+<jsp:include page="/menu/top.jsp" flush='false' />
 <!-- 내가 작성한 댓글 리스트 페이지 -->
     <section id="single-page-slider" class="no-margin">
         <div class="carousel slide" data-ride="carousel">
@@ -119,7 +120,7 @@
                 </div><!-- row -->  
                 <div class="gap"></div>      
             </div>
-            <div class="text-center">
+            <div class="text-center" style="text-align: center;">
 						<ul class="pagination">
 							<c:if test="${pageMaker.prev}">
               <li><a href=/mycomment?page=${pageMaker.startPage-1}&laquo;></a></li>
@@ -143,6 +144,6 @@
     </div>
 
 
-
+<jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
 </html>

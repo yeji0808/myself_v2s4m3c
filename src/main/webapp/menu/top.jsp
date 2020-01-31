@@ -6,12 +6,13 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color: rgba(255, 255, 255,0.8); background-size: 100%;">
+<body style="background-color: rgba(255, 255, 255,0.8); background-size: 100%;"> 
 
   <!-- 화면 상단 메뉴 --> 
   <div class="headline1" style="background-image: url(${root}/css/images/main_photo.jpg);"> 
@@ -37,7 +38,7 @@
         </c:when>
         <c:when test="${sessionScope.id != null }">
           <div style="color: #8A0829; font-weight: bold;">${sessionScope.id } 님 환영합니다!</div>
-          <A href="${root}/mypage/mypage.jsp" style="color: #dddddd;">마이페이지</A> 
+          <%-- <A href="${root}/mypage/mypage.jsp" style="color: #dddddd;">마이페이지</A>  --%>
           <A href='${root}/members/logout.do' style="color: #dddddd;">회원 Logout</A> <span class=''> | </span>
          </c:when>        
       </c:choose>
@@ -48,9 +49,9 @@
   </div>
   <div class="menubar">
 <ul>
- <li style='width:25%;text-align: center;'><a href="${root }/index.do">Home</a></li>
+ <li style='width:20%;text-align: center;'><a href="${root }/index.do">Home</a></li>
 
-      <li style='width: 25%; text-align: center;'><a href="#">음식
+      <li style='width: 20%; text-align: center;'><a href="#">음식
           정보</a>
         <ul>
           <li><a href="${root }/rest_categrp/list.do">카테고리로 찾기</a></li>
@@ -58,13 +59,15 @@
           <li><a href="${root }/restrnts/create_info.do">음식점등록하기</a></li> 
         </ul>
       </li> 
-      <li style='width: 25%; text-align: center;'><a
+      <li style='width: 20%; text-align: center;'><a
         href="${root}/somoim/list.do">소모임</a></li>
-      <li style='width: 25%; text-align: center;'><a href=""
+      <li style='width: 20%; text-align: center;'><a href=""
         id="current">게시판</a>
         <ul>
           <li><a href="${root }/b_write/list.do">자유게시판</a></li>
           <li><a href="${root }/choice/list.do">추천해주세요</a></li>
         </ul></li>
+        <li style='width: 20%; text-align: center;'><a
+        href="${root}/mypage/mypage.jsp">마이페이지</a></li>
     </ul>
 </div>

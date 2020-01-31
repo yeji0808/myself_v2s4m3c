@@ -26,7 +26,7 @@
 </head> 
  
 <body>
- 
+ <jsp:include page="/menu/top.jsp" flush='false' />
   <ASIDE style='float: left;'>
       <A href='./members/list.do'>회원 목록</A>  
   </ASIDE>
@@ -118,7 +118,7 @@
   <button type='button' onclick="location.href='./create.do'">등록</button>
   <button type='button' onclick="location.reload();">새로 고침</button>
 </DIV>
- 
+ <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html> 

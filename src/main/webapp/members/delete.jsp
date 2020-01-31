@@ -18,7 +18,7 @@
  
 </head> 
 <body>
- 
+ <jsp:include page="/menu/top.jsp" flush='false' />
   <ASIDE style='float: left;'>
       <A href='./members/list.do'>회원 목록</A> > 회원 삭제 
   </ASIDE>
@@ -44,7 +44,7 @@
  
   </FORM>
 </DIV>
- 
+ <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html> 

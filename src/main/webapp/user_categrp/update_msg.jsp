@@ -18,6 +18,7 @@
 
 </head> 
 <body>
+<jsp:include page="/menu/top.jsp" flush='false' />
 <DIV class='message'>
   <fieldset class='fieldset_basic'>
     <UL>
@@ -48,7 +49,7 @@
   </fieldset>
 
 </DIV>
-
+<jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
 
 </html>

@@ -103,7 +103,7 @@
  
  
 <body>
-
+<jsp:include page="/menu/top.jsp" flush='false' />
  
   <!-- Modal 알림창 시작 -->
   <div class="modal fade" id="modal_panel" role="dialog">
@@ -315,7 +315,7 @@
     </div>   
   </FORM>
  
-
+<jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  
 </html> 
