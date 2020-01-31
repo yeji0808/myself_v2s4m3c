@@ -40,7 +40,7 @@
             <span class='span_success'>새로운 글을 등록했습니다.</span>
           </LI>
           <LI class='li_center'>
-            <button type='button' onclick="location.href='../somoim/read.do?somoimno=${param.somoimno}'" class="btn btn-primary">목록</button>
+            <button type='button' onclick="location.href='./list.do?somoimno=${param.somoimno}'" class="btn btn-primary">목록</button>
           </LI>
         </c:when>
         <c:otherwise>
@@ -53,7 +53,7 @@
           <LI class='li_center'>
             <br>
             <button type='button' onclick="history.back()" class="btn btn-primary">다시시도</button>
-            <button type='button' onclick="location.href='../somoim/read.do?somoimno=${param.somoimno}'" class="btn btn-primary">목록</button>
+            <button type='button' onclick="location.href='./list.do?somoimno=${param.somoimno}'" class="btn btn-primary">목록</button>
           </LI>
         </c:otherwise>
       </c:choose>

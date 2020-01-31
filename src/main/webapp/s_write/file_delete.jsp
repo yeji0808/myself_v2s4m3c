@@ -39,7 +39,7 @@
 
   <ASIDE style='float: left;'>
     <A href='../somoim/list.do'>소모임</A> > 
-    <A href='../somoim/read.do?somoimno=${somoimno }'>${somoimVO.name }</A>
+    <A href='./list.do?somoimno=${somoimno }'>${somoimVO.name }</A>
   </ASIDE>
   <ASIDE style='float: right;'>
     <A href="javascript:location.reload();">새로고침</A>

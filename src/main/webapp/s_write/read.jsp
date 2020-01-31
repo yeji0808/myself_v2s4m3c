@@ -20,7 +20,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
   $(function() { // 자동 실행
-    list_by_writeno(${writeVO.writeno });  // JS의 EL 접근
+    // list_by_writeno(${writeVO.writeno });  // JS의 EL 접근
+    
+    if ('${sessionScope.memberno}' != '') { // 로그인된 경우
+        // alert('sessionScope.memberno: ' + '${sessionScope.memberno}');
+
+        var frm_s_reply = $('#frm_s_reply');
+        $('#content', frm_s_reply).attr('placeholder', '댓글 작성');
+      }
   });
    
   function panel_img(file) {
@@ -34,12 +41,12 @@
     $('#atcfile_panel').show();
   }
   
-  function create_reply() {
-    var frm_reply = $('#frm_reply');
-    var params = frm_reply.serialize();
+  function create_s_reply() {
+    var frm_s_reply = $('#frm_s_reply');
+    var params = frm_s_reply.serialize();
     // alert('checkId() 호출됨: ' + params);
     // return;
-    if ($('#memberno', frm_reply).val().length == 0) {
+    if ($('#memberno', frm_s_reply).val().length == 0) {
       $('#modal_title').html('댓글 등록'); // 제목 
       $('#modal_content').html("로그인해야 등록 할 수 있습니다."); // 내용
       $('#modal_panel').modal();            // 다이얼로그 출력
@@ -47,9 +54,9 @@
     }
     
     // 영숫자, 한글, 공백, 특수문자: 글자수 1로 인식, 오라클은 1자가 3바이트임으로 300자로 제한
-    // alert('내용 길이: ' + $('#content', frm_reply).val().length);
+    // alert('내용 길이: ' + $('#content', frm_s_reply).val().length);
     // return;
-    if ($('#content', frm_reply).val().length > 300) {
+    if ($('#content', frm_s_reply).val().length > 300) {
       $('#modal_title').html('댓글 등록'); // 제목 
       $('#modal_content').html("댓글 내용은 300자이상 입력 할 수 없습니다."); // 내용
       $('#modal_panel').modal();           // 다이얼로그 출력
@@ -57,7 +64,7 @@
     }
     
     $.ajax({
-      url: "../reply/create.do", // action 대상 주소
+      url: "../s_reply/create.do", // action 대상 주소
       type: "post",           // get, post
       cache: false,          // 브러우저의 캐시영역 사용안함.
       async: true,           // true: 비동기
@@ -94,7 +101,7 @@
     var params = 'writeno=' + writeno;
 
     $.ajax({
-      url: "../reply/list_by_writeno.do", // action 대상 주소
+      url: "../s_reply/list_by_writeno.do", // action 대상 주소
       type: "get",           // get, post
       cache: false,          // 브러우저의 캐시영역 사용안함.
       async: true,           // true: 비동기
@@ -158,7 +165,7 @@
   <ASIDE style='float: right;'>
     <A href="javascript:location.reload();">새로고침</A> <span
       class='menu_divide'> | </span> <A
-      href='../somoim/read.do?somoimno=${somoimno }'>목록</A>
+      href='./list.do?somoimno=${somoimno }'>목록</A>
 
     <%-- <c:if test='${sessionScope.id != null }'> --%>
       <span class='menu_divide'> | </span>
@@ -225,12 +232,12 @@
   <DIV style='width: 90%;'>
 
     <HR>
-    <FORM name='frm_reply' id='frm_reply'>
+    <FORM name='frm_s_reply' id='frm_s_reply'>
       <input type="hidden" name='writeno' id='writeno' value='${writeno }'> 
       <input type="hidden" name='memberno' id='memberno' value='${sessionScope.memberno }'>
       <textarea name='content' id='content' style='width: 100%; height: 50px; resize: none;' placeholder="댓글 작성"></textarea>
       <input type='password' name='passwd' id='passwd' placeholder="비밀번호">
-      <button type='button' id='btn_create' onclick="create_reply();" class='btn btn-primary btn-sm'>등록</button>
+      <button type='button' id='btn_create' onclick="create_s_reply();" class='btn btn-primary btn-sm'>등록</button>
     </FORM>
     <HR>
 

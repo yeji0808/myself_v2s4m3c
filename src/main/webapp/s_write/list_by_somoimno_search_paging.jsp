@@ -29,19 +29,41 @@
 <body>
 <jsp:include page="/menu/top.jsp" />
 <jsp:include page="/menu/s_top.jsp" />
-
+<form name='frm' id='frm' method='get' action='./list.do'>
+    <input type='hidden' name='somoimno' value='${somoimVO.somoimno }'>
 
 <DIV class='title_line' style='width: 15%; font-size: 20px;'>전체글</DIV>
 
   <ASIDE style='float: left;'>
     <A href="../somoim/list.do">소모임</A> >
     <A href="./read.do?somoimno=${somoimVO.somoimno}">${somoimVO.name }</A>
+     <c:if test="${param.word.length() > 0 }">
+        > [${param.word }] 검색 목록 (${search_count } 건)
+      </c:if> 
   </ASIDE>
   <ASIDE style='float: right;'>
     <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span>
-    <A href="../s_write/create.do?somoimno=${somoimVO.somoimno}&memberno=1">등록</A>
-  </ASIDE> 
+    <%-- <c:if test="${sessionScope.id != null}"> --%>
+      <span class='menu_divide' > | </span>
+      <A href='./create.do?somoimno=${somoimVO.somoimno }'>등록</A>
+    <%-- </c:if> --%>
+    
+    <c:choose>
+        <c:when test="${param.word != '' }">
+          <input type='text' name='word' id='word' value='${param.word }' 
+                     style='width: 35%; margin-bottom: 5px;'>
+        </c:when>
+        <c:otherwise>
+          <input type='text' name='word' id='word' value='${param.word }' style='width: 35%; margin-bottom: 5px;'>
+        </c:otherwise>
+      </c:choose>
+      <button type='submit'>검색</button>
+       <c:if test="${param.word != null}">
+          <button type="button" onclick="location.href='./list.do?somoimno=${param.somoimno }'" style='margin-bottom: 5px;'>검색 취소</button>
+        </c:if>
+    </ASIDE> 
+  </form>
+  
   <DIV class='menu_line' style='clear: both;'></DIV>
      
     <div style='width: 100%;'>
@@ -88,6 +110,7 @@
         
       </tbody>
     </table>
+    <DIV class='bottom_menu'>${paging }</DIV>
     <br><br>
   </div>   
   

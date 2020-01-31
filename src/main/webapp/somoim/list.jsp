@@ -42,7 +42,7 @@
     
     <DIV class='container'>
       <DIV id='panel_create' style='padding: 10px 0px 10px 0px; width: 100%; text-align: center;'>
-        <H1 style='text-align: left; font-size: 20px; font-weight: bold;'>소모임 목록</H1><br>
+        <H1 style='text-align: left; font-size: 20px; font-weight: bold;'>전체 목록</H1><br>
  
         <c:forEach var="somoimVO" items="${list }"> 
         <c:set var="thumb" value="${somoimVO.thumb.toLowerCase() }" /> 
@@ -51,7 +51,7 @@
           
           <c:choose>
           <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
-            <A href="./read.do?somoimno=${somoimVO.somoimno }" title='${somoimVO.name}'>
+            <A href="../s_write/list.do?memberno=1&somoimno=${somoimVO.somoimno }" title='${somoimVO.name}'>
             <IMG src='./storage/${somoimVO.thumb }' class="img-rounded" alt="Cinque Terre" style='width: 100%; height: 150px;'></A>
           </c:when>
           </c:choose><br>

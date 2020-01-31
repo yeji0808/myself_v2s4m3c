@@ -33,7 +33,7 @@
                         onclick="location.href='./read.do?somoimno=${param.somoimno}&writeno=${param.writeno}'"
                         class="btn btn-primary">변경확인</button>
             <button type='button' 
-                        onclick="location.href='../somoim/read.do?somoimno=${param.somoimno}'"
+                        onclick="location.href='./list.do?somoimno=${param.somoimno}'"
                         class="btn btn-primary">목록</button>                        
           </LI>
         </c:when>
@@ -46,7 +46,7 @@
                         onclick="history.back();"
                         class="btn btn-primary">다시시도</button>
             <button type='button' 
-                        onclick="location.href='../somoim/read.do?somoimno=${param.somoimno}'"
+                        onclick="location.href='./list.do?somoimno=${param.somoimno}'"
                         class="btn btn-primary">목록</button>                        
           </LI>
         </c:otherwise>
