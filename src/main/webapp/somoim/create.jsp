@@ -19,11 +19,21 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    
+<script type="text/javascript" src="../js/tool.js"></script>   
 <script type="text/javascript"> 
   $(function(){
  
   });
+  
+  function check_image(fnameMF){
+    // alert(fnameMF);   
+    if (isImage(fnameMF) == false) {
+      alert('이미지 파일이 아닙니다. \n전송 가능한 파일 형식: jpg, png, gif');
+      return false;
+    } 
+    
+    return true;
+  }
 </script>
  
 </head> 
@@ -33,7 +43,8 @@
 
 <DIV class='title_line' style='width: 15%; font-size: 26px;'>소모임 생성</DIV>
  
-<FORM name='frm' method='POST' action='./create.do' enctype="multipart/form-data" class="form-horizontal">
+<FORM name='frm' method='POST' action='./create.do' enctype="multipart/form-data" class="form-horizontal"
+           onsubmit="return check_image(fnameMF.value);">
   <fieldset class='fieldset_basic'>
     <ul>
       <li class='li_center'>

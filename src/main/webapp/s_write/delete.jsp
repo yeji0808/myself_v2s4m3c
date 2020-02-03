@@ -39,7 +39,7 @@ function delete_by_writeno() {
  
   <ASIDE style='float: left;'>
     <A href="../somoim/list.do">소모임</A> >
-    <A href="../somoim/read.do?somoimno=${somoimVO.somoimno}">${somoimVO.name }</A>
+    <A href="./list.do?somoimno=${somoimVO.somoimno}">${somoimVO.name }</A>
   </ASIDE>
   <ASIDE style='float: right;'>
     <A href='javascript:history.back();'>목록</A>

@@ -20,7 +20,7 @@
     <%-- <A href="${root }/somoim/list.do"><img src='${root}/menu/images/logo.jpg' style='width: 5%; margin-left: 100px;'></A> --%>
     <NAV class='top_menu_list' style='text-align: center;'>
       <span class='top_menu1'></span>      
-      <A class='menu_link'  href='${root}/somoim/read.do?somoimno=${param.somoimno}'>
+      <A class='menu_link'  href='${root}/s_write/list.do?somoimno=${param.somoimno}'>
         <span class="glyphicon glyphicon-list-alt" style='color: #ffffff'></span> 전체글 </A> <span class='top_menu1'></span>    
       <A class='menu_link'  href='${root }/atcfile/list.do?somoimno=${param.somoimno}'> 
         <span class="glyphicon glyphicon-picture" style='color: #ffffff'></span> 사진첩 </A> <span class='top_menu1'></span>    

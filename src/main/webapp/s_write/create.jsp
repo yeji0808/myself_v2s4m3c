@@ -32,12 +32,12 @@ window.onload=function() {
 
   <ASIDE style='float: left;'>
     <A href="../somoim/list.do">소모임</A> >
-    <A href="../somoim/read.do?somoimno=${somoimVO.somoimno}">${somoimVO.name }</A>
+    <A href="./list.do?somoimno=${somoimVO.somoimno}">${somoimVO.name }</A>
   </ASIDE>
   <ASIDE style='float: right;'>
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' >│</span>
-    <A href='../somoim/read.do?somoimno=${param.somoimno }'>목록</A>
+    <A href='./list.do?somoimno=${param.somoimno }'>목록</A>
   </ASIDE> 
   <DIV class='menu_line' style='clear: both;'></DIV>
  
@@ -45,7 +45,7 @@ window.onload=function() {
     <FORM name='frm' method='POST' action='./create.do'>
                
       <!-- FK memberno 지정 ▷ test후 이 주석은 지워야함(보안상의 문제) -->
-      <input type='hidden' name='memberno' id='memberno' value='${param.memberno }'>
+      <input type='hidden' name='memberno' id='memberno' value='1'>
       
       <!-- FK categrpno 지정 ▷ test후 이 주석은 지워야함(보안상의 문제) -->
       <input type='hidden' name='somoimno' id='somoim' value='${param.somoimno }'>
@@ -67,7 +67,7 @@ window.onload=function() {
       </div> 
       <DIV class='content_bottom_menu'>
         <button type="submit" class="btn btn-primary">등록</button>
-        <button type="button" onclick="location.href='../somoim/read.do?somoimno=${param.somoimno}'" class="btn btn-primary">취소</button>
+        <button type="button" onclick="location.href='./list.do?somoimno=${param.somoimno}'" class="btn btn-primary">취소</button>
       </DIV>
     </FORM>
   </DIV>
