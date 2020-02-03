@@ -29,8 +29,7 @@
  
 <body>
  <jsp:include page="/menu/top.jsp" flush='false' />
-  <A href="../index.jsp"><IMG src="../solo.png" style="text-align: left;"></A>
-<DIV class='title_line' style='width: 20%;'>관리자 로그인</DIV>
+ <DIV class='title_line' style='width: 20%;'>관리자 로그인</DIV>
  
 <DIV style='width: 80%; margin: 0px auto;'>
   <FORM name='frm' method='POST' action='./login.do'>
