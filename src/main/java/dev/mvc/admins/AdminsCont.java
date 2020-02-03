@@ -52,7 +52,7 @@ public class AdminsCont {
   public ModelAndView login(HttpServletRequest request) {
     ModelAndView mav = new ModelAndView();
     
-    mav.setViewName("/admins/login_form");
+    mav.setViewName("redirect:/admins/login_form");
     return mav;
   }
   
