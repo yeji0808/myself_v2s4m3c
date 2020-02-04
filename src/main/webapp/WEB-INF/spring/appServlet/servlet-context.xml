@@ -50,7 +50,8 @@
   <context:component-scan base-package="dev.mvc.rattachfile" />
   <context:component-scan base-package="dev.mvc.review" />
   <context:component-scan base-package="dev.mvc.admins" />
-    <context:component-scan base-package="dev.mvc.m_rec" />
+  <context:component-scan base-package="dev.mvc.m_rec" />
+
   
   <!-- FORM의 FILE 태그를 읽어 MultipartFile 객체로 변환 -->
   <beans:bean id="multipartResolver"

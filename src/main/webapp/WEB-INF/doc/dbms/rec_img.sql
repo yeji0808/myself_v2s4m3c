@@ -1,7 +1,8 @@
 /**********************************/
 /* Table Name: ÃßÃµ */
 /**********************************/
-drop table recommand cascade constraint
+DROP TABLE recommand cascade constraint
+
 CREATE TABLE recommand(
     recom_no                          NUMBER(10)     NOT NULL    PRIMARY KEY,
     content                           VARCHAR2(100)    NOT NULL,

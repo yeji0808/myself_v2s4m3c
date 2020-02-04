@@ -165,17 +165,17 @@
   <ASIDE style='float: right;'>
     <A href="javascript:location.reload();">새로고침</A> <span
       class='menu_divide'> | </span> <A
-      href='./list.do?somoimno=${somoimno }'>목록</A>
+      href='./list.do?somoimno=${param.somoimno }'>목록</A>
 
     <%-- <c:if test='${sessionScope.id != null }'> --%>
       <span class='menu_divide'> | </span>
-      <A href='./update.do?somoimno=${somoimno }&writeno=${writeno}'>수정</A>
+      <A href='./update.do?somoimno=${param.somoimno }&writeno=${param.writeno}'>수정</A>
       <span class='menu_divide'> | </span>
-      <a href="../atcfile/create.do?writeno=${writeno}&somoimno=${somoimVO.somoimno}">첨부 파일 등록</A>
+      <a href="../atcfile/create.do?writeno=${param.writeno}&somoimno=${param.somoimno}">첨부 파일 등록</A>
       <span class='menu_divide'> | </span>
-      <a href="./file_delete.do?writeno=${writeno}&somoimno=${somoimVO.somoimno}">첨부 파일 삭제</A>
+      <a href="./file_delete.do?writeno=${param.writeno}&somoimno=${param.somoimno}">첨부 파일 삭제</A>
       <span class='menu_divide'> | </span>
-      <A href='./delete.do?somoimno=${somoimno }&writeno=${writeno}'>삭제</A>
+      <A href='./delete.do?somoimno=${param.somoimno }&writeno=${param.writeno}'>삭제</A>
     <%-- </c:if> --%>
 
   </ASIDE>

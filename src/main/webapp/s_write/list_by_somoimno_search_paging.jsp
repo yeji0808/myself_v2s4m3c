@@ -36,7 +36,7 @@
 
   <ASIDE style='float: left;'>
     <A href="../somoim/list.do">소모임</A> >
-    <A href="./read.do?somoimno=${somoimVO.somoimno}">${somoimVO.name }</A>
+    <A href="./list.do?somoimno=${somoimVO.somoimno}">${somoimVO.name }</A>
      <c:if test="${param.word.length() > 0 }">
         > [${param.word }] 검색 목록 (${search_count } 건)
       </c:if> 
@@ -79,7 +79,7 @@
       <thead>
         <tr>
           <th style='text-align: center;'>제목</th>
-          <th style='text-align: center;'>추천</th>
+          <th style='text-align: center;'>조회수</th>
           <th style='text-align: center;'>등록일</th>
           <th style='text-align: center;'>기타</th>
         </tr>
@@ -95,7 +95,7 @@
             <td>
               <a href="../s_write/read.do?somoimno=${somoimVO.somoimno }&writeno=${writeno}">${writeVO.title}</a> 
             </td> 
-            <td style='text-align: center;'>${writeVO.recom}</td>
+            <td style='text-align: center;'>${writeVO.cnt}</td>
             <td style='text-align: center;'>${writeVO.rdate.substring(0, 10)}</td>
             <td style='text-align: center;'>
               <A href="../s_write/update.do?writeno=${writeno}&somoimno=${somoimVO.somoimno}">

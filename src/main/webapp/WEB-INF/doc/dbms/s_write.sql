@@ -1,43 +1,4 @@
 /**********************************/
-/* Table Name: 회원 */
-/**********************************/
-CREATE TABLE member(
-		memberno                     		NUMBER(10)		 NOT NULL		 PRIMARY KEY
-);
-
-COMMENT ON TABLE member is '회원';
-COMMENT ON COLUMN member.member_no is '회원 번호';
-
-SELECT NVL(MAX(memberno), 0)+1 as memberno FROM member;
-
-
-/**********************************/
-/* Table Name: 소모임 그룹 */
-/**********************************/
-CREATE TABLE somoim(
-		somoimno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-		name                          		VARCHAR2(100)		 NOT NULL,
-		somoimtype                    		VARCHAR2(50)		 NOT NULL,
-		seqno                         		NUMBER(7)		 NOT NULL,
-		visible                       		CHAR(1)		 DEFAULT 'Y'		 NOT NULL,
-		rdate                         		DATE		 NOT NULL,
-		membercnt                     		NUMBER(7)		 NOT NULL,
-		memberno                     		NUMBER(10)		 NOT NULL,
-  FOREIGN KEY (memberno) REFERENCES member (memberno)
-);
-
-COMMENT ON TABLE somoim is '소모임 그룹';
-COMMENT ON COLUMN somoim.somoimno is '소모임 번호';
-COMMENT ON COLUMN somoim.name is '소모임 이름';
-COMMENT ON COLUMN somoim.somoimtype is '소모임 분류';
-COMMENT ON COLUMN somoim.seqno is '소모임 출력순서';
-COMMENT ON COLUMN somoim.visible is '소모임 출력 모드';
-COMMENT ON COLUMN somoim.rdate is '소모임 생성일';
-COMMENT ON COLUMN somoim.membercnt is '소모임 회원수';
-COMMENT ON COLUMN somoim.member_no is '회원 번호';
-
-
-/**********************************/
 /* Table Name: 글쓰기 */
 /**********************************/
 DROP TABLE s_write;
@@ -54,7 +15,7 @@ CREATE TABLE s_write(
     rdate                             DATE     NOT NULL,
     word                              VARCHAR2(100)    NULL ,
   FOREIGN KEY (somoimno) REFERENCES somoim (somoimno) ON DELETE CASCADE,
-  FOREIGN KEY (memberno) REFERENCES member (memberno) ON DELETE CASCADE
+  FOREIGN KEY (memberno) REFERENCES members (memberno) ON DELETE CASCADE
 );
 
 COMMENT ON TABLE s_write is '글쓰기';

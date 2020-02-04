@@ -7,6 +7,8 @@ DROP TABLE rest_categrp CASCADE CONSTRAINTS;
 /**********************************/
 /* Table Name: ю╫╫да║ */
 /**********************************/
+DROP TABLE restrnts;
+
 CREATE TABLE restrnts(
 		restno                        		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		rcateno                       		NUMBER(10)		 NULL ,

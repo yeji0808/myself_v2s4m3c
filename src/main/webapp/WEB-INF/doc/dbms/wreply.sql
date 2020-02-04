@@ -1,49 +1,9 @@
 /**********************************/
-/* Table Name: 게시판 */
-/**********************************/
-CREATE TABLE board(
-		boardno                       		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-		name                          		VARCHAR2(300)		 NOT NULL,
-		count                         		NUMBER(10)		 DEFAULT 0		 NOT NULL
-);
-
-COMMENT ON TABLE board is '게시판';
-COMMENT ON COLUMN board.boardno is '게시판번호';
-COMMENT ON COLUMN board.name is '게시판이름';
-COMMENT ON COLUMN board.count is '게시판등록자료수';
-
-
-
-/**********************************/
-/* Table Name: 글 */
-/**********************************/
-CREATE TABLE b_write(
-		wno                           		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
-		wtitle                        		VARCHAR2(100)		 NOT NULL,
-		wcontent                      		CLOB(10)		 NOT NULL,
-		wrecom                        		NUMBER(10)		 DEFAULT 0		 NOT NULL,
-		wreplycnt                     		INTEGER(10)		 DEFAULT 0		 NULL ,
-		rdate                         		DATE		 NOT NULL,
-		wword                         		VARCHAR2(100)		 NULL ,
-		boardno                       		NUMBER(10)		 NULL ,
-  FOREIGN KEY (boardno) REFERENCES board (boardno)
-);
-
-COMMENT ON TABLE b_write is '글';
-COMMENT ON COLUMN b_write.wno is '글 번호';
-COMMENT ON COLUMN b_write.wtitle is '글 제목 ';
-COMMENT ON COLUMN b_write.wcontent is '글 내용';
-COMMENT ON COLUMN b_write.wrecom is '추천 수';
-COMMENT ON COLUMN b_write.wreplycnt is '뎃글 수';
-COMMENT ON COLUMN b_write.rdate is '등록 일자';
-COMMENT ON COLUMN b_write.wword is '검색어';
-COMMENT ON COLUMN b_write.boardno is '게시판번호';
-
-
-drop table w_attach
-/**********************************/
 /* Table Name: 글 댓글 */
 /**********************************/
+
+DROP TABLE wreply;
+
 CREATE TABLE wreply(
 		wreplyno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		rcontent                      		VARCHAR2(1000)		 NOT NULL,
@@ -54,7 +14,7 @@ CREATE TABLE wreply(
   FOREIGN KEY (wno) REFERENCES b_write (wno) on delete cascade,
   FOREIGN KEY (memberno) REFERENCES members (memberno)
 );
-drop table wreply
+
 COMMENT ON TABLE wreply is '글 댓글';
 COMMENT ON COLUMN wreply.wreplyno is '댓글번호';
 COMMENT ON COLUMN wreply.rcontent is '댓글내용';
