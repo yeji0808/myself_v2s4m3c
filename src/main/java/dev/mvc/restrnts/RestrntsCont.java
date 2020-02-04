@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import dev.mvc.m_rec.M_recProcInter;
+import dev.mvc.m_rec.M_recVO;
 import dev.mvc.menu.MenuProcInter;
 import dev.mvc.menu.MenuVO;
 import dev.mvc.rattachfile.RattachfileProcInter;
@@ -32,6 +34,10 @@ import nation.web.tool.Upload;
 
 @Controller
 public class RestrntsCont {
+  @Autowired
+  @Qualifier("dev.mvc.m_rec.M_recProc") // 이름 지정
+  private M_recProcInter m_recProc;
+  
   @Autowired
   @Qualifier("dev.mvc.review.ReviewProc") // 이름 지정
   private ReviewProcInter reviewProc;
@@ -197,9 +203,18 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
   }
  
   // 조회 http://localhost:9090/team/restrnts/read.do?restno=1
-  @RequestMapping(value = "/restrnts/read.do", method = RequestMethod.GET)
-  public ModelAndView read(int restno) {
+  @RequestMapping(value = "/restrnts/read_login.do", method = RequestMethod.GET)
+  public ModelAndView read_login(int restno, int memberno) {
     ModelAndView mav = new ModelAndView();
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("restno", restno);
+    map.put("memberno", memberno);
+    
+    int check_cnt = m_recProc.checkRecom(map); //추천이력 확인
+    if(check_cnt > 0) {
+    M_recVO m_recVO = m_recProc.read(map);
+    mav.addObject("m_recVO", m_recVO);
+    }
     
     RestrntsVO restrntsVO = restrntsProc.read(restno);
     mav.addObject("restrntsVO", restrntsVO);
@@ -219,6 +234,29 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
     return mav;
   }
  
+  //조회 (로그인없이)
+  @RequestMapping(value = "/restrnts/read.do", method = RequestMethod.GET)
+  public ModelAndView read(int restno) {
+    ModelAndView mav = new ModelAndView();
+
+    RestrntsVO restrntsVO = restrntsProc.read(restno);
+    mav.addObject("restrntsVO", restrntsVO);
+
+    RestCategrpVO restcategrpVO = restcategrpProc.read(restrntsVO.getRcateno());
+    mav.addObject("restcategrpVO", restcategrpVO);
+    
+    List<RattachfileVO> attachfile_list = rattachfileProc.list_by_restno(restno);
+    mav.addObject("attachfile_list", attachfile_list);
+    
+    List<MenuVO> menu_list = menuProc.read(restno);
+    mav.addObject("menu_list", menu_list);
+    
+    restrntsProc.increaseCnt(restno);
+    mav.setViewName("/restrnts/read");
+
+    return mav;
+  }
+  
   //글 수정
  @RequestMapping(value = "/restrnts/update_info.do", method = RequestMethod.GET)
  public ModelAndView update(int rcateno, int restno) {
@@ -350,26 +388,6 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
    return obj.toString();
  }
  
-/* *//**
-  * http://localhost:9090/team1/rec/increase_cnt.do?recom_no=27
-  * @param wno
-  * @return
-  *//*
- @ResponseBody
- @RequestMapping(value = "/rec/increase_cnt.do", 
-                         method = RequestMethod.POST,
-                         produces = "text/plain;charset=UTF-8")
- public String increase_cnt(int rrecom) { 
-   int count = restrntsProc.increase_cnt(rrecom);
-   RecVO recVO = restrntsProc.read(recom_no);
-   
-   int cnt= recVO.getCnt();
-   JSONObject obj = new JSONObject();
-   obj.put("cnt", cnt);
-   obj.put("count", count);
-   
-   return obj.toString();
- }*/
 }
   
  

@@ -36,13 +36,12 @@ $(function() { // 자동 실행
 function create_reply() {
   var frm_reply = $('#frm_reply');
   var params = frm_reply.serialize();
-
+  
   len = $('#memberno', frm_reply).val().length;
   // alert('length: ' + len);
   // return;
   
   if (len == 0) {
-    alert('로그인 안됨');
     $('#modal_title').html('댓글 등록'); // 제목 
     $('#modal_content').html("로그인해야 등록 할 수 있습니다."); // 내용
     $('#modal_panel').modal();            // 다이얼로그 출력
@@ -195,25 +194,49 @@ function reply_delete_proc(reviewno) {
   
 }
 
-//추천수 증가
-function increase_recom(cnt) {
+//추천수
+function increase_recom(){
   var frm_recom = $('#frm_recom');
-  var params ="cnt=" +cnt;
-  //alert(params);
+  var params = frm_recom.serialize();
 
+  if ($('#memberno', frm_reply).val().length == 0) {
+    $('#modal_title').html('추천 등록'); // 제목 
+    $('#modal_content').html("로그인해야 추천할 수 있습니다."); // 내용
+    $('#modal_panel').modal();            // 다이얼로그 출력
+    
+    return;  // 실행 종료
+  }
 
   $.ajax({
-    url: "../restrnts/increase_recom.do", // action 대상 주소
+    url: "../m_rec/increase_recom.do", // action 대상 주소
     type: "post",           // get, post
     cache: false,          // 브러우저의 캐시영역 사용안함.
     async: true,           // true: 비동기
     dataType: "json",   // 응답 형식: json, xml, html...
-    data: params,        // 서버로 전달하는 데이터 
+    data: params,        // 서버로 전달하는 데이터
     success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
+
+      var msg = "";
       
-      $('#panel_recom_cnt_'+recom_no,frm_recom).html(rdata.cnt);
+      if (rdata.like == 1) {
+        $('#modal_content').attr('class', 'alert alert-success'); // CSS 변경
+        msg = "추천 완료!";
+        
+        $('#rec_img').attr('src','./images/full_heart.png');
+        $('#panel_recom').html(rdata.rrecom);
+        
+      } else {
+        $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
+        msg = "추천을 취소합니다.";
+        
+        $('#rec_img').attr('src','./images/heart.png');
+        $('#panel_recom').html(rdata.rrecom);
+      }
       
-    }, 
+      $('#modal_title').html('추천 확인'); // 제목 
+      $('#modal_content').html(msg);        // 내용
+      $('#modal_panel').modal();              // 다이얼로그 출력
+    },
     // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
     error: function(request, status, error) { // callback 함수
       var msg = 'ERROR<br><br>';
@@ -317,11 +340,12 @@ function increase_recom(cnt) {
 
  
       <DIV style='margin: 5% 18%; width: 70%;'>
-      <FORM name='frm_recom' id='frm_recom'>        
+      <FORM name='frm_recom' id='frm_recom'>
+        <input type='hidden' name='restno' id='restno' value='${restno}'>       
+        <input type='hidden' name='memberno' id='memberno' value='${sessionScope.memberno}'>
         <div class="container">
-        <div class="row"> 
           <!-- 첨부사진 영역 시작-->
-          <div class="col-5">
+          <div class="col-5" style="width: 40%; float:left;">
           <div class="fotorama" data-autoplay="5000" data-nav="thumbs" data-width="400" data-ratio="220/300" data-max-width="100%" style="margin: 0px auto;">
             <c:forEach var="rattachfileVO" items="${attachfile_list }">
               <c:set var="thumb" value="${rattachfileVO.thumb.toLowerCase() }" />                
@@ -336,12 +360,20 @@ function increase_recom(cnt) {
           <!-- 첨부사진 영역 종료--> 
         
           <!-- 정보 영역 시작 -->
-          <div class="col-6" style="padding: 0%;">
+          <div class="col-6" style="width: 50%; float:left;">
             <h1 class="title">${restrntsVO.rname}</h1>
             <h5 class="card-text">${restrntsVO.rmain}</h5>
             <br><br>
-            <button type="submit" class="btn btn-info btn-lg" >예약하기</button>
-<%--             <img onclick="increase_recom(${restrntsVO.rrecom});" src='./images/heart.png' style='padding-left:0.5em; padding-right:0.3em;'title='추천수' ><span id="panel_recom_cnt_${restrntsVO.rrecom}" style='font-size: 15px;'>${restrntsVO.rrecom}</span> --%>
+            <button type="submit" class="btn btn-info" >예약하기</button>
+            <c:choose>
+              <c:when test="${m_recVO.recno==null}">
+                <A href='javascript:increase_recom();'><IMG src='./images/heart.png' style='padding-left:0.5em; padding-right:0.3em;'title='추천수' id='rec_img'></A><span id="panel_recom" style='font-size: 15px;'>${restrntsVO.rrecom}</span>
+              </c:when>
+              <c:otherwise> 
+                <A href='javascript:increase_recom();'><IMG src='./images/full_heart.png' style='padding-left:0.5em; padding-right:0.3em;'title='추천수' id='rec_img'></A><span id="panel_recom" style='font-size: 15px;'>${restrntsVO.rrecom}</span>
+              </c:otherwise>
+            </c:choose>
+            
             <hr>
             <div class="context"><IMG src='./images/clock.png' style='padding: 0em 1em;'>${restrntsVO.rtime}</div>
             <hr>
@@ -363,7 +395,6 @@ function increase_recom(cnt) {
             <div class="context"><IMG src='./images/search.png' style='padding: 0em 1em;'>${restrntsVO.rword}</div>          
           </div>
           <!-- 정보 영역 종료 -->    
-        </div>
         </div>        
       </FORM>
       

@@ -21,6 +21,11 @@
 		<beans:property name="prefix" value="/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+  
+  <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+    <beans:property name="location" value="/WEB-INF/config/admins.properties"/> 
+    <beans:property name="fileEncoding" value="UTF-8" /> 
+  </beans:bean>
 	
 <context:component-scan base-package="dev.mvc.team" />
    <context:component-scan base-package="dev.mvc.rest_categrp" /> <!-- 왕눈이 -->
@@ -44,6 +49,8 @@
   <context:component-scan base-package="dev.mvc.menu" />
   <context:component-scan base-package="dev.mvc.rattachfile" />
   <context:component-scan base-package="dev.mvc.review" />
+  <context:component-scan base-package="dev.mvc.admins" />
+    <context:component-scan base-package="dev.mvc.m_rec" />
   
   <!-- FORM의 FILE 태그를 읽어 MultipartFile 객체로 변환 -->
   <beans:bean id="multipartResolver"

@@ -1,6 +1,7 @@
 package dev.mvc.restrnts;
 
 import java.util.List;
+import java.util.Map;
 
 // MyBATIS의 <mapper namespace="dev.mvc.categrp.CategrpDAOInter">에 선언 
 public interface RestrntsDAOInter {
@@ -65,6 +66,7 @@ public interface RestrntsDAOInter {
    * 조회수 증가
    */
   public int increaseCnt(int restno);
+  
 
 }
 

@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      SET rcnt = rcnt + 1 
      WHERE restno = #{restno}
    </update>
-
+   
           
 </mapper>
 

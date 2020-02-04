@@ -1,6 +1,7 @@
 package dev.mvc.restrnts;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RestrntsProcInter {
   /**
@@ -63,6 +64,7 @@ public interface RestrntsProcInter {
    */
   public int increaseCnt(int restno);
 
+ 
   
 }
 

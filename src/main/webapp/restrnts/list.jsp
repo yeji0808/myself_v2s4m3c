@@ -48,7 +48,14 @@ function update_img_form(restno) {
         <A href="javascript: update_img_form(${restrntsVO.restno});"><img src="./images/png.png" title="대표사진 수정"  class="update_img"/></a>
           <c:choose>
             <c:when test="${fname.endsWith('jpg') || fname.endsWith('png') || fname.endsWith('gif')}">
-              <a href="./read.do?restno=${restrntsVO.restno}"><IMG src="./storage/${restrntsVO.thumb}" class="card-img"></a>
+              <c:choose>
+                <c:when test="${sessionScope.memberno==null}">
+                  <a href="./read.do?restno=${restrntsVO.restno}"><IMG src="./storage/${restrntsVO.thumb}" class="card-img"></a>
+                </c:when>
+                <c:otherwise>
+                  <a href="./read_login.do?restno=${restrntsVO.restno}&memberno=${sessionScope.memberno}"><IMG src="./storage/${restrntsVO.thumb}" class="card-img"></a>
+                </c:otherwise>
+              </c:choose>
             </c:when>
             <c:otherwise>
               ${restrntsVO.fname }
