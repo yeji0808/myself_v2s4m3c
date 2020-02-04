@@ -50,5 +50,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      DELETE FROM s_write
      WHERE somoimno = #{somoimno}
    </delete>   
+   
+   <!-- 카테고리별 검색 레코드 갯수 -->
+   <select id="search_count" resultType="int" parameterType="HashMap">
+     SELECT COUNT(*) as cnt
+     FROM s_write
+     <choose>
+       <when test="word == null or word == ''">
+         WHERE somoimno=#{somoimno} 
+       </when>
+       <otherwise>
+         WHERE somoimno=#{somoimno} AND word LIKE '%' || #{word} || '%'
+       </otherwise>
+     </choose>
+   </select>  
+   
+   <!-- 카테고리별 검색 목록 + 페이징 -->
+   <select id="list_by_somoimno_search_paging" resultType="S_WriteVO" parameterType="HashMap">
+     SELECT writeno, memberno, somoimno, title, content, 
+               recom, cnt, replycnt, rdate, word, r
+     FROM(
+             SELECT writeno, memberno, somoimno, title, content, 
+                       recom, cnt, replycnt, rdate, word, rownum as r
+             FROM(  
+                     SELECT writeno, memberno, somoimno, title, content, 
+                               recom, cnt, replycnt, rdate, word
+                     FROM s_write
+                      <choose>
+                       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                          WHERE somoimno=#{somoimno} 
+                       </when>
+                       <otherwise>
+                          WHERE somoimno=#{somoimno} AND word LIKE '%' || #{word} || '%'
+                       </otherwise>
+                       </choose>
+                     ORDER BY writeno DESC
+                     )
+     )                
+     WHERE r &gt;= #{startNum} AND r &lt;= #{endNum}  <!-- &gt; → '>' / &lt; → '<' -->       
+   </select>
      
 </mapper>
