@@ -6,6 +6,7 @@ DROP TABLE somoim;
 
 CREATE TABLE somoim(
 		somoimno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+		memberno                        NUMBER(10)     NOT NULL ,
 		name                          		VARCHAR2(100)		 NOT NULL,
 		somoimtype                    		VARCHAR2(50)		 NOT NULL,
 		seqno                         		NUMBER(7)		 NOT NULL,
@@ -15,7 +16,8 @@ CREATE TABLE somoim(
 		fname                     VARCHAR2(100)         NOT NULL,
     fupname                  VARCHAR2(100)         NOT NULL,
     thumb                    VARCHAR2(100)         NULL,
-    fsize                       NUMBER(10)         DEFAULT 0         NOT NULL
+    fsize                       NUMBER(10)         DEFAULT 0         NOT NULL,
+    FOREIGN KEY (memberno) REFERENCES members (memberno) ON DELETE CASCADE
 );
 
 COMMENT ON TABLE somoim is '소모임 그룹';
