@@ -69,8 +69,12 @@ function update_img_form(restno) {
               <small class="text-muted"><IMG src='./images/good.png' title='추천수' > ${restrntsVO.rrecom}</small>
               <small class="text-muted"><IMG src='./images/view.png' title='조회수'> ${restrntsVO.rcnt}</small>
               <small class="text-muted"><IMG src='./images/review.png' title='댓글수'> ${restrntsVO.reviewcnt}</small>
-              <a href="./update_info.do?restno=${restrntsVO.restno}&rcateno=${restcategrpVO.rcateno}"><img src="./images/update.png" title="글 수정" /></a>
-              <a href="./delete.do?restno=${restrntsVO.restno}&rcateno=${restcategrpVO.rcateno}"><img src="./images/delete.png" title="삭제" /></a>
+              <c:choose>
+                <c:when test="${sessionScope.memberno==restrntsVO.memberno}"> 
+                  <a href="./update_info.do?restno=${restrntsVO.restno}&rcateno=${restcategrpVO.rcateno}"><img src="./images/update.png" title="글 수정" /></a>
+                  <a href="./delete.do?restno=${restrntsVO.restno}&rcateno=${restcategrpVO.rcateno}"><img src="./images/delete.png" title="삭제" /></a>
+                </c:when>
+              </c:choose>
             </p>
           </div>
         </div>
