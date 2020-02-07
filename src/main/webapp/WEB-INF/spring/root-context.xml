@@ -47,12 +47,8 @@
                             dev.mvc.menu,
                             dev.mvc.rattachfile,
                             dev.mvc.review,
-<<<<<<< HEAD
-                            dev.mvc.admins"/>
-=======
                             dev.mvc.admins,
                             dev.mvc.m_rec"/>
->>>>>>> branch 'master' of https://github.com/yeji0808/myself_v2s4m3c.git
     <!-- /src/main/resources/mybatis 폴더 -->                   
     <property name="mapperLocations" value="classpath:mybatis/*.xml" />
   </bean>
