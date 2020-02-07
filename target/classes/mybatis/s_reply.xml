@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <insert id="create" parameterType="S_ReplyVO">
     INSERT INTO s_reply(replyno, writeno, memberno, content, passwd, rdate)
     VALUES((SELECT NVL(MAX(replyno), 0) + 1 as replyno FROM s_reply),
-               #{writeno}, #{memberno}, #{content}, #{passwd}, sysdate);
+               #{writeno}, #{memberno}, #{content}, #{passwd}, sysdate)
   </insert>
   
   <select id="list" resultType="S_ReplyVO">

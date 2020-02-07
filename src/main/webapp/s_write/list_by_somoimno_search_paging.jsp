@@ -43,10 +43,10 @@
   </ASIDE>
   <ASIDE style='float: right;'>
     <A href="javascript:location.reload();">새로고침</A>
-    <%-- <c:if test="${sessionScope.id != null}"> --%>
+    <c:if test="${sessionScope.id != null}">
       <span class='menu_divide' > | </span>
       <A href='./create.do?somoimno=${somoimVO.somoimno }'>등록</A>
-    <%-- </c:if> --%>
+    </c:if>
     
     <c:choose>
         <c:when test="${param.word != '' }">

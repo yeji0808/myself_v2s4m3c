@@ -45,7 +45,7 @@ window.onload=function() {
     <FORM name='frm' method='POST' action='./create.do'>
                
       <!-- FK memberno 지정 ▷ test후 이 주석은 지워야함(보안상의 문제) -->
-      <input type='hidden' name='memberno' id='memberno' value='1'>
+      <input type='hidden' name='memberno' id='memberno' value='${sessionScope.memberno }'>
       
       <!-- FK categrpno 지정 ▷ test후 이 주석은 지워야함(보안상의 문제) -->
       <input type='hidden' name='somoimno' id='somoim' value='${param.somoimno }'>
