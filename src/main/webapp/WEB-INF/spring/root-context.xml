@@ -46,7 +46,8 @@
                             dev.mvc.choice,
                             dev.mvc.menu,
                             dev.mvc.rattachfile,
-                            dev.mvc.review"/>
+                            dev.mvc.review,
+                            dev.mvc.admins"/>
     <!-- /src/main/resources/mybatis 폴더 -->                   
     <property name="mapperLocations" value="classpath:mybatis/*.xml" />
   </bean>

@@ -23,7 +23,7 @@ CREATE TABLE somoim(
 		rdate                         		DATE		 NOT NULL,
 		membercnt                     		NUMBER(7)		 NOT NULL,
 		memberno                     		NUMBER(10)		 NOT NULL,
-  FOREIGN KEY (memberno) REFERENCES member (memberno)
+  FOREIGN KEY (memberno) REFERENCES members (memberno)
 );
 
 COMMENT ON TABLE somoim is '소모임 그룹';
