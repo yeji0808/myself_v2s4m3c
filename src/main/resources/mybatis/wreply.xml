@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="list" resultType="WreplyVO">
     SELECT wreplyno, wno, rcontent, rpasswd, rrdate, memberno
     FROM wreply
-    ORDER BY wreplyno DESC;
+    ORDER BY wreplyno DESC
   </select>
 
   <select id="list_by_wno" resultType="WreplyVO" parameterType="int">

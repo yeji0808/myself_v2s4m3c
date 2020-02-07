@@ -46,14 +46,14 @@ public class WreplyCont {
 
   }
   
-  @RequestMapping(value="/wreply/list.do", method=RequestMethod.GET)
+  @RequestMapping(value="/review/list2.do", method=RequestMethod.GET)
   public ModelAndView list(HttpSession session) {
     ModelAndView mav = new ModelAndView();
     
       List<WreplyVO> list = wreplyProc.list();
       
       mav.addObject("list", list);
-      mav.setViewName("/wreply/list"); // /webapp/reply/list.jsp
+      mav.setViewName("/review/list2"); // /webapp/reply/list.jsp
 
     
     return mav;

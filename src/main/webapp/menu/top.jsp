@@ -26,13 +26,13 @@
 
       <c:choose>
         <c:when test="${sessionScope.id_admin == null && sessionScope.id == null}">
-          <A class=''  href='${root}/admins/login.do' style="color: #dddddd;">관리자 Login</A>
+          <A href='${root}/admins/login.do' style="color: #dddddd;">관리자 Login</A>
           <A  href='${root}/members/login.do' style="color: #dddddd;">회원 Login</A> <span class='top_menu1'> | </span>
           <A href="${root}/members/create.do" style="color: #dddddd;">회원가입</A>
         </c:when>
         <c:when test="${sessionScope.id_admin != null}">
           <div style="color: #8A0829; font-weight: bold;">${sessionScope.id_admin } 님 환영합니다!</div>
-          <A class=''  href='${root}/user_categrp/list.do'>댓글 관리</A> <span class=''> | </span>
+          <A class=''  href='${root}/review/list.do'>댓글 관리</A> <span class=''> | </span>
           <A class=''  href='${root}/user_categrp/list.do'>카테고리 그룹</A> <span class=''> | </span>
           <A class=''  href='${root}/admins/logout.do' >관리자 Logout</A>   
         </c:when>
