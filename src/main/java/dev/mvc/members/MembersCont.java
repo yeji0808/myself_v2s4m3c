@@ -300,6 +300,7 @@ public class MembersCont {
      session.setAttribute("memberno", memberVO.getMemberno());
      session.setAttribute("id", memberVO.getId());
      session.setAttribute("name", memberVO.getName());
+     session.setAttribute("userno", memberVO.getUserno());
      
      // -------------------------------------------------------------------
      // id 관련 쿠기 저장

@@ -58,7 +58,7 @@
       <DIV class='content_bottom_menu' style="padding-right: 20%;">
         <button type="submit" class="btn btn-info" >다음</button>
         <button type="button" 
-                    onclick="location.href='./list.do?rcateno=${param.rcateno}'" 
+                    onclick="location.href='../restrnts/list.do?rcateno=${param.rcateno}'" 
                     class="btn btn-info">그만두기[목록]</button>
       </DIV>
       

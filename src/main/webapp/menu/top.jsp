@@ -56,7 +56,7 @@
         <ul>
           <li><a href="${root }/rest_categrp/list.do">카테고리로 찾기</a></li>
           <li><a href="${root }/rest_map/map.do">지도로 찾기</a></li>
-          <c:if test="${sessionScope.id != null}">
+          <c:if test="${sessionScope.userno==2 || sessionScope.id_admin != null}">
           <li><a href="${root }/restrnts/create_info.do">음식점등록하기</a></li> 
           </c:if>
         </ul>

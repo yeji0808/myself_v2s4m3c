@@ -111,7 +111,7 @@
                 message += '<div class="context"><IMG src="./images/pin.png" style="padding-right: 1em;">${restrntsVO.raddress1}${restrntsVO.raddress2}</div><hr>';
                 message += '<div class="context"><IMG src="./images/clock.png" style="padding-right: 1em;">${restrntsVO.rtime}</div><hr>';
                 message += '<div class="context"><IMG src="./images/call.png" style="padding-right: 1em;">${restrntsVO.rcall}</div><hr>';
-                message += '<button type="button" style="float:right;" class="btn btn-info btn-lg" onclick="location.href='
+                message += '<button type="button" style="float:right;" class="btn btn-info" onclick="location.href='
                 message += "'../restrnts/read.do?restno=${restrntsVO.restno}'"
                 message += '">자세히 보기</button>';
                     

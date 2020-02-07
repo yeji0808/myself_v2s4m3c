@@ -1,5 +1,7 @@
 package dev.mvc.restrnts;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +68,27 @@ public interface RestrntsDAOInter {
    * 조회수 증가
    */
   public int increaseCnt(int restno);
+  
+  /**
+   * 카테고리별 검색 목록
+   * @param hashMap
+   * @return
+   */
+  public List<RestrntsVO> list_by_rcateno_search(HashMap<String, Object> hashMap);
+  
+  /**
+   * 카테고리별 검색 레코드 갯수
+   * @param hashMap
+   * @return
+   */
+  public int search_count(HashMap<String, Object> hashMap);
+  
+  /**
+   * 검색 + 페이징 목록
+   * @param map
+   * @return
+   */
+  public ArrayList<RestrntsVO> list_by_rcateno_search_paging(HashMap<String, Object> map);
   
 
 }

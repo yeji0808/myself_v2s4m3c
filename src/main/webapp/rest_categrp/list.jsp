@@ -50,6 +50,8 @@ function delete_form(rcateno) {
  <jsp:include page="/menu/top.jsp" />
   <DIV class='title_line'>카테고리 그룹</DIV>
  
+ <c:choose>
+  <c:when test="${sessionScope.userno==2 || sessionScope.id_admin != null}">
   <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
     <FORM name='frm_create' id='frm_create' method='POST' action='./create.do'>
       <!-- <input type='hidden' name='lang' id='lang' value='en'> --> <!-- ko, en -->
@@ -61,6 +63,8 @@ function delete_form(rcateno) {
       <button type="button" onclick="cancel();">취소</button>
     </FORM>
   </DIV>
+  </c:when>
+ </c:choose>
   
   <%-- <ul class="nav nav-tabs" id="myTab" role="tablist">
     <c:forEach var="restcategrpVO" items = "${list }">

@@ -332,10 +332,14 @@ function increase_recom(){
       
       <span class='menu_divide' > | </span> 
       <A href='./list.do?rcateno=${rcateno }'>목록</A>
-        <span class='menu_divide' > | </span> 
-        <A href='./update_info.do?restno=${restno}&rcateno=${rcateno}'>수정</A>
-        <span class='menu_divide' > | </span> 
-        <A href='./delete.do?restno=${restno}&rcateno=${rcateno}'>삭제</A>
+      <c:choose>
+        <c:when test="${sessionScope.memberno==restrntsVO.memberno}"> 
+          <span class='menu_divide' > | </span> 
+          <A href='./update_info.do?restno=${restno}&rcateno=${rcateno}'>수정</A>
+          <span class='menu_divide' > | </span> 
+          <A href='./delete.do?restno=${restno}&rcateno=${rcateno}'>삭제</A>
+        </c:when>
+      </c:choose>
     </ASIDE> 
 
  
