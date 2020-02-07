@@ -276,22 +276,27 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
 
  //글 수정 처리
  @RequestMapping(value = "/restrnts/update_info.do", method = RequestMethod.POST)
- public ModelAndView update(RedirectAttributes ra, RestrntsVO restrntsVO, int restno) {
+ public ModelAndView update(RedirectAttributes ra, HttpServletRequest request, RestrntsVO restrntsVO) {
    ModelAndView mav = new ModelAndView();
    
        int count = restrntsProc.update(restrntsVO);
 
        ra.addAttribute("rcateno", restrntsVO.getRcateno());
+       ra.addAttribute("restno", restrntsVO.getRestno());
        
-       List<MenuVO> menuVO = menuProc.read(restno);
-       mav.addObject("menuVO", menuVO);
-
+       List<MenuVO> menuVO = menuProc.read(restrntsVO.getRestno());
+       
+       for(int i = 0 ; i < menuVO.size() ; i++) {
+         ra.addAttribute("mname", ((MenuVO) menuVO).getMname());
+         ra.addAttribute("mprice", ((MenuVO) menuVO).getMprice());
+       }
+       
        if(count ==1) {
        mav.setViewName("redirect:/menu/update.jsp");
        }
 
        return mav;
-   
+
  }
  
  //대표사진 수정폼
