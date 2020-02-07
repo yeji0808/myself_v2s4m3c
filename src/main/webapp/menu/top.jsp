@@ -47,25 +47,32 @@
     </div>
     
   </div>
+  
   <div class="menubar">
-<ul>
- <li style='width:20%;text-align: center;'><a href="${root }/index.do">Home</a></li>
+    <ul>
+      <li style='width:20%;text-align: center;'><a href="${root }/index.do">Home</a></li>
 
-      <li style='width: 20%; text-align: center;'><a href="#">음식
-          정보</a>
-        <ul>
-          <li><a href="${root }/rest_categrp/list.do">카테고리로 찾기</a></li>
+      <li class="li1" style='width: 20%; text-align: center;'><a href="#">혼밥하기</a>
+        <ul class="ul1">
+          <li class="li2" ><a href="#">카테고리로 찾기</a>
+            <ul class="ul2">
+              <li><a href="${root }/restrnts/list.do?rcateno=1">한식</a></li>
+              <li><a href="${root }/restrnts/list.do?rcateno=2">중식</a></li>
+            </ul>
+          </li>
           <li><a href="${root }/rest_map/map.do">지도로 찾기</a></li>
           <c:if test="${sessionScope.userno==2 || sessionScope.id_admin != null}">
-          <li><a href="${root }/restrnts/create_info.do">음식점등록하기</a></li> 
+            <li><a href="${root }/restrnts/create_info.do">음식점등록하기</a></li> 
           </c:if>
         </ul>
-      </li> 
+      </li>
+       
+      
       <li style='width: 20%; text-align: center;'><a
         href="${root}/somoim/list.do">소모임</a></li>
-      <li style='width: 20%; text-align: center;'><a href=""
+      <li class="li1" style='width: 20%; text-align: center;'><a href=""
         id="current">게시판</a>
-        <ul>
+        <ul class="ul1">
           <li><a href="${root }/b_write/list.do">자유게시판</a></li>
           <li><a href="${root }/choice/list.do">추천해주세요</a></li>
         </ul></li>

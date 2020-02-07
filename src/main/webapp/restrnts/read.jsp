@@ -141,13 +141,13 @@ function list_by_restno(restno) {
 function reply_delete(reviewno) {
   // alert('reviewno: ' + reviewno);
   var frm_reply_delete = $('#frm_reply_delete');
-  $('#replyno', frm_reply_delete).val(reviewno); // 삭제할 댓글 번호 저장
+  $('#reviewno', frm_reply_delete).val(reviewno); // 삭제할 댓글 번호 저장
   $('#modal_panel_delete').modal();               // 삭제폼 다이얼로그 출력
 }
 
 // 삭제 처리
 function reply_delete_proc(reviewno) {
-  // alert('replyno: ' + replyno);
+  //alert('reviewno: ' + reviewno);
   var params = $('#frm_reply_delete').serialize();
   $.ajax({
     url: "./review_delete.do", // action 대상 주소
@@ -157,7 +157,7 @@ function reply_delete_proc(reviewno) {
     dataType: "json",   // 응답 형식: json, xml, html...
     data: params,        // 서버로 전달하는 데이터
     success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
-      // alert(rdata);
+      //alert(rdata);
       var msg = "";
       
       if (rdata.count ==1) { // 패스워드 일치
@@ -287,13 +287,13 @@ function increase_recom(){
         <div class="modal-body">
           <form name='frm_reply_delete' id='frm_reply_delete' method='POST' 
                     action='./review_delete.do'>
-            <input type='hidden' name='reviewno' id='reviewno' value=''>
+            <input type='hidden' name='reviewno' id='reviewno' value='${param.reviewno}'>
             
             <label>패스워드</label>
             <input type='password' name='passwd' id='passwd' class='form-control'>
             <div style='text-align: right; margin: 5px;'>
               <button type='button' class='btn btn-success' 
-                           onclick="reply_delete_proc(this.form.replyno.value);this.form.passwd.value='';">삭제</button>
+                           onclick="reply_delete_proc(this.form.reviewno.value);this.form.passwd.value='';">삭제</button>
             </div> 
           </form>
         </div>

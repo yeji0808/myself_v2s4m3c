@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
@@ -49,8 +50,10 @@
       <div class="form-group" >        
         <div class="buttons"> 
         <label>1인 메뉴 *</label><br>
-        <c:forEach var="menuVO" items="${menu_list }">                    
+        <c:forEach var="menuVO" items="${param.mname }">                    
           <input type="text" class="form-control-lg" required="required" name="mname" style="width: 30%;"placeholder="메뉴명" value='${menuVO.mname}' >
+        </c:forEach>
+        <c:forEach var="menuVO" items="${param.mprice }">    
           <input type="text" class="form-control-lg" required="required" name="mprice" style="width: 20%;"placeholder="가격" value='${menuVO.mprice}' >
         </c:forEach>
           <input type="button" class="btnAdd" value="추가"><br>        
@@ -59,17 +62,16 @@
       
 
       <DIV class='content_bottom_menu' style="padding-right: 20%;">
-        <button type="submit" class="btn btn-info btn-lg" >다음</button>
+        <button type="submit" class="btn btn-info" >다음</button>
         <button type="button" 
                     onclick="location.href='./read.do?restno=${param.restno}'" 
-                    class="btn btn-info btn-lg">수정 끝내기</button>
+                    class="btn btn-info">수정 끝내기</button>
       </DIV>
-      
-       
+         
     </FORM>
   </DIV>
 
-  
+   <div style='height: 20em;'></div>
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
  

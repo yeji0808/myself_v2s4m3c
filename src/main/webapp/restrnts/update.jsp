@@ -28,8 +28,6 @@
     <DIV class='title_line'>음식점 수정하기</DIV>
   <DIV style='margin-left: 30%; margin-top: 5%; width: 50%;'>
     <FORM name='frm' method='POST' action='./update_info.do' enctype="multipart/form-data"  class="form-horizontal">
-      <input type='hidden' name='rcateno' value='${restcategrpVO.rcateno }'>
-      <input type='hidden' name='restno' value='${restrntsVO.restno }'>
       <!-- FK memberno 지정 -->
       <input type='hidden' name='memberno' id='memberno' value='1'>
   
@@ -84,7 +82,7 @@
       </div>
 
       <DIV class='content_bottom_menu' style="padding-right: 20%;">
-        <button type="submit" class="btn btn-info btn-lg" >다음</button>
+        <button type="submit" class="btn btn-info" >다음</button>
       </DIV>
        
     </FORM>

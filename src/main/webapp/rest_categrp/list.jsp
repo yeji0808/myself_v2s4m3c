@@ -114,7 +114,7 @@ function delete_form(rcateno) {
   </tbody>
  
 </TABLE>
- 
+ <div style='height: 20em;'></div>
 
 </body>
  

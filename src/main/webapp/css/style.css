@@ -571,7 +571,7 @@ color:#FFFFFF;
 text-decoration:none;
 }
 
-.menubar li ul{
+.menubar li.li1 ul.ul1{
 background: rgb(109,109,109);
 display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
 height:auto;
@@ -585,7 +585,25 @@ z-index:200;
 /*left:0;*/
 }
 
-.menubar li:hover ul{
+.menubar li.li2 ul.ul2{
+background: rgb(109,109,109);
+display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
+height:auto;
+padding:0px;
+margin:0px; 
+border:0px;
+float: left;
+width:200px;
+z-index:200;
+/*top:1em;
+/*left:0;*/
+}
+
+.menubar li.li1:hover ul.ul1{
+display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
+}
+
+.menubar li.li2:hover ul.ul2{
 display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
 }
 
@@ -612,7 +630,14 @@ padding:0px 10px 0px 15px;
 text-align:left;
 }
 
-.menubar li ul a:hover, .menubar li ul li:hover a{
+.menubar li.li1 ul.ul1 a:hover, .menubar li.li1 ul.ul1 li.li1:hover a{
+background: rgb(71,71,71);
+border:0px;
+color:#ffffff;
+text-decoration:none; 
+}
+
+.menubar li.li2 ul.ul2 a:hover, .menubar li.li2 ul.ul2 li.li2:hover a{
 background: rgb(71,71,71);
 border:0px;
 color:#ffffff;

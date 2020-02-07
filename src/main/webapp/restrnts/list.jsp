@@ -70,7 +70,7 @@ function update_img_form(restno) {
               <small class="text-muted"><IMG src='./images/view.png' title='조회수'> ${restrntsVO.rcnt}</small>
               <small class="text-muted"><IMG src='./images/review.png' title='댓글수'> ${restrntsVO.reviewcnt}</small>
               <c:choose>
-                <c:when test="${sessionScope.memberno==restrntsVO.memberno}"> 
+                <c:when test="${sessionScope.memberno==restrntsVO.memberno OR }"> 
                   <a href="./update_info.do?restno=${restrntsVO.restno}&rcateno=${restcategrpVO.rcateno}"><img src="./images/update.png" title="글 수정" /></a>
                   <a href="./delete.do?restno=${restrntsVO.restno}&rcateno=${restcategrpVO.rcateno}"><img src="./images/delete.png" title="삭제" /></a>
                 </c:when>
