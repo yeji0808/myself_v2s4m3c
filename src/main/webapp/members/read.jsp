@@ -113,7 +113,7 @@
       <label class="col-md-2 control-label" style='font-size: 0.8em;'>우편번호</label>    
       <div class="col-md-10">
         <input type='text' class="form-control input-lg" name='zipcode' id='zipcode' 
-                   value='${memberVO.zipcode }' required="required" style='width: 30%;' placeholder="우편번호">
+                   value='${membersVO.zipcode }' required="required" style='width: 30%;' placeholder="우편번호">
         <input type="button" onclick="DaumPostcode()" value="우편번호 찾기" class="btn btn-info btn-md">
       </div>
     </div>  
@@ -122,7 +122,7 @@
       <label class="col-md-2 control-label" style='font-size: 0.8em;'>주소</label>    
       <div class="col-md-10">
         <input type='text' class="form-control input-lg" name='address1' id='address1' 
-                   value='${memberVO.address1 }' required="required" style='width: 80%;' placeholder="주소">
+                   value='${membersVO.address1 }' required="required" style='width: 80%;' placeholder="주소">
       </div>
     </div>   
  
@@ -130,7 +130,7 @@
       <label class="col-md-2 control-label" style='font-size: 0.8em;'>상세 주소</label>    
       <div class="col-md-10">
         <input type='text' class="form-control input-lg" name='address2' id='address2' 
-                   value='${memberVO.address2 }' required="required" style='width: 80%;' placeholder="상세 주소">
+                   value='${membersVO.address2 }' required="required" style='width: 80%;' placeholder="상세 주소">
       </div>
     </div>   
  

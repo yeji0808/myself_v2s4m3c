@@ -76,7 +76,7 @@
                                 <div class="center gap fade-down section-heading">
 	                  
 					        			<h2>마이페이지</h2>
-                        <hr><p><a href="./mypage.jsp">예약 목록</a> · <a href="./mycomment.jsp">내 댓글</a> · <a href="./myinfo.jsp">정보수정</a></p>
+                        <hr><p><a href="./mypage.jsp">예약 목록</a> · <a href="../review/list.jsp">내 댓글</a> · <a href="./myinfo.jsp">정보수정</a></p>
 
                                 </div>
                             </div>   

@@ -54,22 +54,22 @@
       
       <%-- table 내용 --%>
       <tbody>
-        <c:forEach var="reviewVO" items="${list }">
+        <c:forEach var="wreplyVO" items="${list }">
           <%-- <c:set var="replyno" value="${replyVO.replyno }" /> --%>
           
           <tr style='height: 50px;'> 
             <td style='text-align: center; vertical-align: middle;'>
-              ${reviewVO.reviewno }
+              ${wreplyVO.wreplyno }
             </td> 
             <td style='text-align: center; vertical-align: middle;'>
-              <A href='../members/read.do?memberno=${reviewVO.memberno }'>${reviewVO.memberno}</A>
+              <A href='../members/read.do?memberno=${wreplyVO.memberno }'>${wreplyVO.memberno}</A>
             </td>
-            <td style='text-align: left; vertical-align: middle;'>${reviewVO.content}</td>
+            <td style='text-align: left; vertical-align: middle;'>${wreplyVO.rcontent}</td>
             <td style='text-align: center; vertical-align: middle;'>
-              ${reviewVO.rdate.substring(0, 10)}
+              ${wreplyVO.rrdate.substring(0, 10)}
             </td>
             <td style='text-align: center; vertical-align: middle;'>
-              <a href="./delete.do?replyno=${reviewVO.reviewno}"><img src="./images/delete.png" title="삭제"  border='0' /></a>
+              <a href="./delete.do?wreplyno=${wreplyVO.wreplyno}"><img src="./images/delete.png" title="삭제"  border='0' /></a>
             </td>
           </tr>
         </c:forEach>

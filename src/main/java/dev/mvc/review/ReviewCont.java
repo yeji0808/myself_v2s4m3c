@@ -48,22 +48,15 @@ public class ReviewCont {
 
   }
   
-/*  @RequestMapping(value="/review/list.do", method=RequestMethod.GET)
+  @RequestMapping(value="/review/list.do", method=RequestMethod.GET)
   public ModelAndView list(HttpSession session) {
     ModelAndView mav = new ModelAndView();
-    
-    if (adminProc.isAdmin(session)) {
-      List<ReviewVO> list = reviewProc.list();
-      
-      mav.addObject("list", list);
-      mav.setViewName("/review/list"); // /webapp/review/list.jsp
+    List<ReviewVO> list = reviewProc.list();
+    mav.addObject("list", list);
+    mav.setViewName("/review/list"); // /webapp/review/list.jsp
 
-    } else {
-      mav.setViewName("redirect:/admin/login_need.jsp"); // /webapp/admin/login_need.jsp
-    }
-    
     return mav;
-  }*/
+  }
  
   @RequestMapping(value = "/review/list_by_restno.do",
                             method = RequestMethod.GET,
