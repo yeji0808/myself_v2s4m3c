@@ -7,6 +7,8 @@ DROP TABLE rest_categrp CASCADE CONSTRAINTS;
 /**********************************/
 /* Table Name: 음식점 */
 /**********************************/
+DROP TABLE restrnts;
+
 CREATE TABLE restrnts(
 		restno                        		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		rcateno                       		NUMBER(10)		 NULL ,
@@ -27,7 +29,12 @@ CREATE TABLE restrnts(
     fupname                        VARCHAR2(100)         NOT NULL,
     thumb                           VARCHAR2(100)         NULL ,
     fsize                              NUMBER(10)         DEFAULT 0         NOT NULL,		
+  CONSTRAINT restrnts_rcateno_fk
   FOREIGN KEY (rcateno) REFERENCES rest_categrp (rcateno)
+  ON DELETE CASCADE,
+  CONSTRAINT restrnts_memberno_fk
+  FOREIGN KEY (memberno) REFERENCES members (memberno)
+  ON DELETE CASCADE
 );
 
 COMMENT ON TABLE restrnts is '음식점';
@@ -94,7 +101,7 @@ WHERE contentsno = 1;
 
 -- 7) 삭제
 DELETE FROM restrnts
-WHERE rcateno=1;
+WHERE rcateno=5;
 -- 8) FK 부모 테이블별 레코드 갯수 산출
 SELECT contentsno, memberno, categrpno, title
 FROM contents

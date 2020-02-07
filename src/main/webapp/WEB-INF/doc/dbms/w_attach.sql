@@ -2,8 +2,9 @@
 /**********************************/
 /* Table Name: Ã·ºÎÆÄÀÏ */
 /**********************************/
+
 DROP table w_attach
-delete from b_write where wno=1 
+
 CREATE TABLE w_attach(
 		w_attachno                    		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		w_attachname              		VARCHAR2(200)		 NOT NULL,

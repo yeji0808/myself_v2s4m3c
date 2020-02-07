@@ -34,7 +34,7 @@ function delete_by_somoimno() {
 <jsp:include page="/menu/s_top.jsp" />
 
 <FORM name='frm_delete_by_somoimno' method='POST' action='../s_write/delete_by_somoimno.do'>
-  <input type='hidden' name='somoimno' value='${somoimVO.somoimno }'>
+  <input type='hidden' name='somoimno' value='${param.somoimno }'>
   
 </FORM> 
 
@@ -69,7 +69,7 @@ function delete_by_somoimno() {
         <c:if test="${count_by_somoimno == 0 }">
           <button type="submit" class="btn btn-primary">삭제 진행</button>
         </c:if>  
-        <button type="button" onclick="history.back();" class="btn btn-primary">취소</button>  
+        <button type="button" onclick="location.href='../s_write/list.do?somoimno=${param.somoimno }'" class="btn btn-primary">취소</button>  
       </li>         
     </ul>
   </fieldset>

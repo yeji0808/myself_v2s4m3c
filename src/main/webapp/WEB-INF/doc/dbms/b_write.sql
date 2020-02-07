@@ -1,23 +1,9 @@
-
-
-/**********************************/
-/* Table Name: 회원 */
-/**********************************/
-drop table members cascade constraint 
-CREATE TABLE members(
-		memberno                      		NUMBER(10)		 NOT NULL		 PRIMARY KEY
-);
-
-COMMENT ON TABLE members is '회원';
-COMMENT ON COLUMN members.memberno is '회원번호';
-
-insert into members(memberno)
-values (1)
-select * from members
-
 /**********************************/
 /* Table Name: 글 */
 /**********************************/
+
+DROP TABLE b_write;
+
 CREATE TABLE b_write(
 		wno                           		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		wtitle                        		VARCHAR2(100)  NOT NULL,
@@ -29,7 +15,7 @@ CREATE TABLE b_write(
 		memberno                      	NUMBER(10)		 NULL,
   FOREIGN KEY (memberno) REFERENCES members (memberno)
 );
-drop table wreply cascade constraint
+
 COMMENT ON TABLE b_write is '글';
 COMMENT ON COLUMN b_write.wno is '글 번호';
 COMMENT ON COLUMN b_write.wtitle is '글 제목 ';

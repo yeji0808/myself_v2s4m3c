@@ -2,7 +2,8 @@
 /**********************************/
 /* Table Name: º±≈√ */
 /**********************************/
-drop table choice cascade constraint
+DROP TABLE choice cascade constraint;
+
 CREATE TABLE choice(
 		cho_no                        		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
 		cho_title                     		VARCHAR2(100)		 NOT NULL,

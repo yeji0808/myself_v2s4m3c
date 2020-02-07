@@ -4,6 +4,8 @@ DROP TABLE users IF EXISTS;
 /**********************************/
 /* Table Name: 유저카테고리 */
 /**********************************/
+DROP TABLE users;
+
 CREATE TABLE users(
 		userno NUMERIC(10) NOT NULL PRIMARY KEY,
 		user_name VARCHAR(50) NOT NULL,

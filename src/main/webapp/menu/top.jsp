@@ -23,7 +23,7 @@
         </span>   
     </div>  
     <div class="login_frame" style="float: right;"> 
-      
+
       <c:choose>
         <c:when test="${sessionScope.id_admin == null && sessionScope.id == null}">
           <A href='${root}/admins/login.do' style="color: #dddddd;">관리자 Login</A>
@@ -56,7 +56,9 @@
         <ul>
           <li><a href="${root }/rest_categrp/list.do">카테고리로 찾기</a></li>
           <li><a href="${root }/rest_map/map.do">지도로 찾기</a></li>
+          <c:if test="${sessionScope.userno==2 || sessionScope.id_admin != null}">
           <li><a href="${root }/restrnts/create_info.do">음식점등록하기</a></li> 
+          </c:if>
         </ul>
       </li> 
       <li style='width: 20%; text-align: center;'><a

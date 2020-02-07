@@ -1,4 +1,5 @@
 /**********************************/
+<<<<<<< HEAD
 /* Table Name: 회원 */
 /**********************************/
 CREATE TABLE member(
@@ -38,6 +39,8 @@ COMMENT ON COLUMN somoim.member_no is '회원 번호';
 
 
 /**********************************/
+=======
+>>>>>>> branch 'master' of https://github.com/yeji0808/myself_v2s4m3c.git
 /* Table Name: 글쓰기 */
 /**********************************/
 DROP TABLE s_write;
@@ -54,7 +57,7 @@ CREATE TABLE s_write(
     rdate                             DATE     NOT NULL,
     word                              VARCHAR2(100)    NULL ,
   FOREIGN KEY (somoimno) REFERENCES somoim (somoimno) ON DELETE CASCADE,
-  FOREIGN KEY (memberno) REFERENCES member (memberno) ON DELETE CASCADE
+  FOREIGN KEY (memberno) REFERENCES members (memberno) ON DELETE CASCADE
 );
 
 COMMENT ON TABLE s_write is '글쓰기';

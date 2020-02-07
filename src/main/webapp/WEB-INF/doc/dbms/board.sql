@@ -2,9 +2,7 @@
 /* Table Name: °Ô½ÃÆÇ */
 /**********************************/
 DROP table board
- SELECT boardno, name, count 
-     FROM board
-     ORDER BY boardno asc
+
 CREATE TABLE board(
 boardno                        NUMBER(10)  NOT NULL  PRIMARY KEY,
 name                           VARCHAR2(300)  NOT NULL,

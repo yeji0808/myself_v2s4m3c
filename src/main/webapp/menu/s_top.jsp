@@ -39,7 +39,7 @@
         <!-- 대표 이미지 -->
         <c:choose>
         <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
-          <A class='menu_link'  href='${root}/somoim/read.do?somoimno=${param.somoimno}'>
+          <A class='menu_link'  href='${root}/s_write/list.do?somoimno=${param.somoimno}'>
           <img src='${root}/somoim/storage/${somoimVO.thumb }' class="img-rounded" alt="Cinque Terre" style='width: 270px; height: 180px;'></A>
         </c:when>
         </c:choose><br>

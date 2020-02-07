@@ -41,10 +41,10 @@
       </div>    
 
       <DIV class='content_bottom_menu' style="padding-right: 20%;">
-        <button type="submit" class="btn btn-info btn-lg" >등록</button>
+        <button type="submit" class="btn btn-info" >등록</button>
         <button type="button" 
                     onclick="location.href='./list.do?rcateno=${param.rcateno}'" 
-                    class="btn btn-info btn-lg">그만두기[목록]</button>
+                    class="btn btn-info">그만두기[목록]</button>
       </DIV>
        
     </FORM>

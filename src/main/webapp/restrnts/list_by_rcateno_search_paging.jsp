@@ -37,6 +37,32 @@ function update_img_form(restno) {
 
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='title_line'>${restcategrpVO.rcatename}</DIV>
+    <form name='frm' id='frm' method='get' action='./list.do'>
+    <input type='hidden' name='rcateno' value='${restcategrpVO.rcateno }'>
+    
+    <ASIDE style='float: left;'>
+      <c:if test="${param.rword.length() > 0 }">
+        [${param.rword }] 검색 목록 (${search_count } 건)
+      </c:if>
+    </ASIDE>
+    
+    <ASIDE style='float: right;'>      
+      <c:choose>
+        <c:when test="${param.rword != '' }">
+          <input type='text' name='rword' id='rword' value='${param.rword }' 
+                     style='width: 60%;'>
+        </c:when>
+        <c:otherwise>
+          <input type='text' name='rword' id='rword' value='' style='width: 60%;'>
+        </c:otherwise>
+      </c:choose>
+      <button type='submit'>검색</button>
+      <c:if test="${param.rword.length() > 0 }">
+        <button type='button' 
+                     onclick="location.href='./list.do?rcateno=${restcategrpVO.rcateno }'">검색 취소</button>  
+      </c:if>
+    </ASIDE> 
+  </form>
   
     <div class="row row-cols-1 row-cols-md-3" style='width: 60%; margin-left: 20%;'>
       <c:forEach var="restrntsVO" items="${list }">
@@ -81,6 +107,11 @@ function update_img_form(restno) {
       </div>
       </c:forEach>
     </div>
+    
+    <br><br>    
+    <br><br>
+    <DIV class='bottom_menu'>${paging }</DIV>
+    <br><br>
 
 </body>
  

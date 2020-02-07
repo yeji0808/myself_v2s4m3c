@@ -14,15 +14,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.AlternativeJdkIdGenerator;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import dev.mvc.m_rec.M_recProcInter;
+import dev.mvc.m_rec.M_recVO;
 import dev.mvc.menu.MenuProcInter;
 import dev.mvc.menu.MenuVO;
 import dev.mvc.rattachfile.RattachfileProcInter;
 import dev.mvc.rattachfile.RattachfileVO;
+import dev.mvc.rec.RecVO;
 import dev.mvc.rest_categrp.RestCategrpProcInter;
 import dev.mvc.rest_categrp.RestCategrpVO;
 import dev.mvc.review.ReviewProcInter;
@@ -31,6 +35,10 @@ import nation.web.tool.Upload;
 
 @Controller
 public class RestrntsCont {
+  @Autowired
+  @Qualifier("dev.mvc.m_rec.M_recProc") // 이름 지정
+  private M_recProcInter m_recProc;
+  
   @Autowired
   @Qualifier("dev.mvc.review.ReviewProc") // 이름 지정
   private ReviewProcInter reviewProc;
@@ -128,7 +136,7 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
   }
   
   // 카테고리 그룹별 목록
-  @RequestMapping(value = "/restrnts/list.do", method = RequestMethod.GET)
+  @RequestMapping(value = "/restrnts/list_cate.do", method = RequestMethod.GET)
   public ModelAndView list_by_rcateno(int rcateno) {
     ModelAndView mav = new ModelAndView();
 
@@ -196,9 +204,18 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
   }
  
   // 조회 http://localhost:9090/team/restrnts/read.do?restno=1
-  @RequestMapping(value = "/restrnts/read.do", method = RequestMethod.GET)
-  public ModelAndView read(int restno) {
+  @RequestMapping(value = "/restrnts/read_login.do", method = RequestMethod.GET)
+  public ModelAndView read_login(int restno, int memberno) {
     ModelAndView mav = new ModelAndView();
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("restno", restno);
+    map.put("memberno", memberno);
+    
+    int check_cnt = m_recProc.checkRecom(map); //추천이력 확인
+    if(check_cnt > 0) {
+    M_recVO m_recVO = m_recProc.read(map);
+    mav.addObject("m_recVO", m_recVO);
+    }
     
     RestrntsVO restrntsVO = restrntsProc.read(restno);
     mav.addObject("restrntsVO", restrntsVO);
@@ -218,6 +235,29 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
     return mav;
   }
  
+  //조회 (로그인없이)
+  @RequestMapping(value = "/restrnts/read.do", method = RequestMethod.GET)
+  public ModelAndView read(int restno) {
+    ModelAndView mav = new ModelAndView();
+
+    RestrntsVO restrntsVO = restrntsProc.read(restno);
+    mav.addObject("restrntsVO", restrntsVO);
+
+    RestCategrpVO restcategrpVO = restcategrpProc.read(restrntsVO.getRcateno());
+    mav.addObject("restcategrpVO", restcategrpVO);
+    
+    List<RattachfileVO> attachfile_list = rattachfileProc.list_by_restno(restno);
+    mav.addObject("attachfile_list", attachfile_list);
+    
+    List<MenuVO> menu_list = menuProc.read(restno);
+    mav.addObject("menu_list", menu_list);
+    
+    restrntsProc.increaseCnt(restno);
+    mav.setViewName("/restrnts/read");
+
+    return mav;
+  }
+  
   //글 수정
  @RequestMapping(value = "/restrnts/update_info.do", method = RequestMethod.GET)
  public ModelAndView update(int rcateno, int restno) {
@@ -236,22 +276,27 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
 
  //글 수정 처리
  @RequestMapping(value = "/restrnts/update_info.do", method = RequestMethod.POST)
- public ModelAndView update(RedirectAttributes ra, RestrntsVO restrntsVO, int restno) {
+ public ModelAndView update(RedirectAttributes ra, HttpServletRequest request, RestrntsVO restrntsVO) {
    ModelAndView mav = new ModelAndView();
    
        int count = restrntsProc.update(restrntsVO);
 
        ra.addAttribute("rcateno", restrntsVO.getRcateno());
+       ra.addAttribute("restno", restrntsVO.getRestno());
        
-       List<MenuVO> menuVO = menuProc.read(restno);
-       mav.addObject("menuVO", menuVO);
-
+       List<MenuVO> menuVO = menuProc.read(restrntsVO.getRestno());
+       
+       for(int i = 0 ; i < menuVO.size() ; i++) {
+         ra.addAttribute("mname", ((MenuVO) menuVO).getMname());
+         ra.addAttribute("mprice", ((MenuVO) menuVO).getMprice());
+       }
+       
        if(count ==1) {
        mav.setViewName("redirect:/menu/update.jsp");
        }
 
        return mav;
-   
+
  }
  
  //대표사진 수정폼
@@ -348,6 +393,60 @@ public ModelAndView create(RedirectAttributes ra, HttpServletRequest request, Re
    
    return obj.toString();
  }
+ 
+ /**
+  * 목록 + 검색 + 페이징 지원
+  * @return
+  */
+ @RequestMapping(value = "/restrnts/list.do", method = RequestMethod.GET)
+ public ModelAndView list_by_rcateno_search_paging(
+     @RequestParam(value="rcateno", defaultValue="1") int rcateno,
+     @RequestParam(value="rword", defaultValue="") String rword,
+     @RequestParam(value="nowPage", defaultValue="1") int nowPage
+     ) { 
+   System.out.println("--> nowPage: " + nowPage);
+   
+   ModelAndView mav = new ModelAndView();
+   // /contents/list_by_categrpno_search_paging.jsp
+   mav.setViewName("/restrnts/list_by_rcateno_search_paging");   
+   
+   // 숫자와 문자열 타입을 저장해야함으로 Obejct 사용
+   HashMap<String, Object> map = new HashMap<String, Object>();
+   map.put("rcateno", rcateno); // #{rcateno}
+   map.put("rword", rword);     // #{word}
+   map.put("nowPage", nowPage);       
+   
+   // 검색 목록
+   List<RestrntsVO> list = restrntsProc.list_by_rcateno_search_paging(map);
+   mav.addObject("list", list);
+   
+   // 검색된 레코드 갯수
+   int search_count = restrntsProc.search_count(map);
+   mav.addObject("search_count", search_count);
+ 
+   RestCategrpVO restcategrpVO = restcategrpProc.read(rcateno);
+   mav.addObject("restcategrpVO", restcategrpVO);
+   
+   /*
+    * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 
+    * 현재 페이지: 11 / 22   [이전] 11 12 13 14 15 16 17 18 19 20 [다음] 
+    * 
+    * @param listFile 목록 파일명 
+    * @param categrpno 카테고리번호 
+    * @param search_count 검색(전체) 레코드수 
+    * @param nowPage     현재 페이지
+    * @param word 검색어
+    * @return 페이징 생성 문자열
+    */ 
+   String paging = restrntsProc.pagingBox("list.do", rcateno, search_count, nowPage, rword);
+   mav.addObject("paging", paging);
+ 
+   mav.addObject("nowPage", nowPage);
+   
+   return mav;
+ }    
+   
+ 
 }
   
  

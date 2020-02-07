@@ -11,17 +11,15 @@
 <title>Resort world</title>
 
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
-
-<!-- Fotorama -->
-  <link href="fotorama.css" rel="stylesheet">
-  <script src="fotorama.js"></script>
   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+<!-- Fotorama -->
+  <link href="fotorama.css" rel="stylesheet">
+  <script src="fotorama.js"></script>
 
 <script type="text/javascript">
 $(function() { // 자동 실행
@@ -38,12 +36,16 @@ $(function() { // 자동 실행
 function create_reply() {
   var frm_reply = $('#frm_reply');
   var params = frm_reply.serialize();
-
   
-  if ($('#memberno', frm_reply).val().length == 0) {
+  len = $('#memberno', frm_reply).val().length;
+  // alert('length: ' + len);
+  // return;
+  
+  if (len == 0) {
     $('#modal_title').html('댓글 등록'); // 제목 
     $('#modal_content').html("로그인해야 등록 할 수 있습니다."); // 내용
     $('#modal_panel').modal();            // 다이얼로그 출력
+    
     return;  // 실행 종료
   }
   
@@ -191,6 +193,59 @@ function reply_delete_proc(reviewno) {
 
   
 }
+
+//추천수
+function increase_recom(){
+  var frm_recom = $('#frm_recom');
+  var params = frm_recom.serialize();
+
+  if ($('#memberno', frm_reply).val().length == 0) {
+    $('#modal_title').html('추천 등록'); // 제목 
+    $('#modal_content').html("로그인해야 추천할 수 있습니다."); // 내용
+    $('#modal_panel').modal();            // 다이얼로그 출력
+    
+    return;  // 실행 종료
+  }
+
+  $.ajax({
+    url: "../m_rec/increase_recom.do", // action 대상 주소
+    type: "post",           // get, post
+    cache: false,          // 브러우저의 캐시영역 사용안함.
+    async: true,           // true: 비동기
+    dataType: "json",   // 응답 형식: json, xml, html...
+    data: params,        // 서버로 전달하는 데이터
+    success: function(rdata) { // 서버로부터 성공적으로 응답이 온경우
+
+      var msg = "";
+      
+      if (rdata.like == 1) {
+        $('#modal_content').attr('class', 'alert alert-success'); // CSS 변경
+        msg = "추천 완료!";
+        
+        $('#rec_img').attr('src','./images/full_heart.png');
+        $('#panel_recom').html(rdata.rrecom);
+        
+      } else {
+        $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
+        msg = "추천을 취소합니다.";
+        
+        $('#rec_img').attr('src','./images/heart.png');
+        $('#panel_recom').html(rdata.rrecom);
+      }
+      
+      $('#modal_title').html('추천 확인'); // 제목 
+      $('#modal_content').html(msg);        // 내용
+      $('#modal_panel').modal();              // 다이얼로그 출력
+    },
+    // Ajax 통신 에러, 응답 코드가 200이 아닌경우, dataType이 다른경우 
+    error: function(request, status, error) { // callback 함수
+      var msg = 'ERROR<br><br>';
+      msg += '<strong>request.status</strong><br>'+request.status + '<hr>';
+      msg += '<strong>error</strong><br>'+error + '<hr>';
+      console.log(msg);
+    }
+  });
+}
 </script>
 
 </head>
@@ -232,7 +287,7 @@ function reply_delete_proc(reviewno) {
         <div class="modal-body">
           <form name='frm_reply_delete' id='frm_reply_delete' method='POST' 
                     action='./review_delete.do'>
-            <input type='hidden' name='replyno' id='replyno' value=''>
+            <input type='hidden' name='reviewno' id='reviewno' value=''>
             
             <label>패스워드</label>
             <input type='password' name='passwd' id='passwd' class='form-control'>
@@ -277,21 +332,24 @@ function reply_delete_proc(reviewno) {
       
       <span class='menu_divide' > | </span> 
       <A href='./list.do?rcateno=${rcateno }'>목록</A>
-        <span class='menu_divide' > | </span> 
-        <A href='./update_info.do?restno=${restno}&rcateno=${rcateno}'>수정</A>
-        <span class='menu_divide' > | </span> 
-        <A href='./delete.do?restno=${restno}&rcateno=${rcateno}'>삭제</A>
+      <c:choose>
+        <c:when test="${sessionScope.memberno==restrntsVO.memberno}"> 
+          <span class='menu_divide' > | </span> 
+          <A href='./update_info.do?restno=${restno}&rcateno=${rcateno}'>수정</A>
+          <span class='menu_divide' > | </span> 
+          <A href='./delete.do?restno=${restno}&rcateno=${rcateno}'>삭제</A>
+        </c:when>
+      </c:choose>
     </ASIDE> 
 
  
       <DIV style='margin: 5% 18%; width: 70%;'>
-      <FORM name='frm' method="get" action='./update.do'>
-      <input type="hidden" name="restno" value="${restno}">
-        
+      <FORM name='frm_recom' id='frm_recom'>
+        <input type='hidden' name='restno' id='restno' value='${restno}'>       
+        <input type='hidden' name='memberno' id='memberno' value='${sessionScope.memberno}'>
         <div class="container">
-        <div class="row"> 
           <!-- 첨부사진 영역 시작-->
-          <div class="col-5">
+          <div class="col-5" style="width: 40%; float:left;">
           <div class="fotorama" data-autoplay="5000" data-nav="thumbs" data-width="400" data-ratio="220/300" data-max-width="100%" style="margin: 0px auto;">
             <c:forEach var="rattachfileVO" items="${attachfile_list }">
               <c:set var="thumb" value="${rattachfileVO.thumb.toLowerCase() }" />                
@@ -303,14 +361,23 @@ function reply_delete_proc(reviewno) {
             </c:forEach>
           </div>
           </div>
-          <!-- 첨부사진 영역 종료-->
+          <!-- 첨부사진 영역 종료--> 
         
           <!-- 정보 영역 시작 -->
-          <div class="col-6" style="padding: 0%;">
+          <div class="col-6" style="width: 50%; float:left;">
             <h1 class="title">${restrntsVO.rname}</h1>
             <h5 class="card-text">${restrntsVO.rmain}</h5>
             <br><br>
-            <button type="submit" class="btn btn-info btn-lg" >예약하기</button>
+            <button type="submit" class="btn btn-info" >예약하기</button>
+            <c:choose>
+              <c:when test="${m_recVO.recno==null}">
+                <A href='javascript:increase_recom();'><IMG src='./images/heart.png' style='padding-left:0.5em; padding-right:0.3em;'title='추천수' id='rec_img'></A><span id="panel_recom" style='font-size: 15px;'>${restrntsVO.rrecom}</span>
+              </c:when>
+              <c:otherwise> 
+                <A href='javascript:increase_recom();'><IMG src='./images/full_heart.png' style='padding-left:0.5em; padding-right:0.3em;'title='추천수' id='rec_img'></A><span id="panel_recom" style='font-size: 15px;'>${restrntsVO.rrecom}</span>
+              </c:otherwise>
+            </c:choose>
+            
             <hr>
             <div class="context"><IMG src='./images/clock.png' style='padding: 0em 1em;'>${restrntsVO.rtime}</div>
             <hr>
@@ -332,7 +399,6 @@ function reply_delete_proc(reviewno) {
             <div class="context"><IMG src='./images/search.png' style='padding: 0em 1em;'>${restrntsVO.rword}</div>          
           </div>
           <!-- 정보 영역 종료 -->    
-        </div>
         </div>        
       </FORM>
       
