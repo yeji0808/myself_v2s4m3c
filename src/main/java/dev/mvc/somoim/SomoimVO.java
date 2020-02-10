@@ -5,6 +5,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class SomoimVO {
   /** 소모임 번호 */
   private int somoimno;
+  /** 회원 번호 */
+  private int memberno;
   /** 소모임 이름 */
   private String name;
   /** 소모임 종류 */
@@ -44,6 +46,12 @@ public class SomoimVO {
   }
   public void setSomoimno(int somoimno) {
     this.somoimno = somoimno;
+  }
+  public int getMemberno() {
+    return memberno;
+  }
+  public void setMemberno(int memberno) {
+    this.memberno = memberno;
   }
   public String getName() {
     return name;

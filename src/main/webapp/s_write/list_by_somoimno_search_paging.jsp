@@ -21,8 +21,28 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     
 <script type="text/javascript">
-
-</script>
+      $(document).ready(function() {
+        $(".clickable-row").css("cursor", "pointer");
+          $(".clickable-row").click(function(event) {
+            if(!$(event.target).hasClass("delcol")) {
+              window.location = $(this).data("href");
+            }
+          });
+          if("${sessionScope.id }"==""){
+            alert("로그인 후 이용해주세요");
+            window.location.href="../members/login.do";
+          }          
+          $("#myinfo").click(function(){            
+              window.location.href="/myinfo";
+          });          
+          $("#mypage_jim").click(function(){      
+              window.location.href="/mypage";
+          });
+          $("#mycomment").click(function(){
+              window.location.href="/mycomment";
+          });
+      });
+    </script>
  
 </head> 
  

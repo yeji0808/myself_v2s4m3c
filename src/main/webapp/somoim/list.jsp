@@ -51,7 +51,7 @@
           
           <c:choose>
           <c:when test="${thumb.endsWith('jpg') || thumb.endsWith('png') || thumb.endsWith('gif')}">
-            <A href="../s_write/list.do?memberno=1&somoimno=${somoimVO.somoimno }" title='${somoimVO.name}'>
+            <A href="../s_write/list.do?memberno=${sessionScope.memberno }&somoimno=${somoimVO.somoimno }" title='${somoimVO.name}'>
             <IMG src='./storage/${somoimVO.thumb }' class="img-rounded" alt="Cinque Terre" style='width: 100%; height: 150px;'></A>
           </c:when>
           </c:choose><br>

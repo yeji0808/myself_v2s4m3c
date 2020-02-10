@@ -45,6 +45,9 @@
  
 <FORM name='frm' method='POST' action='./create.do' enctype="multipart/form-data" class="form-horizontal"
            onsubmit="return check_image(fnameMF.value);">
+
+  <input type="hidden" name="memberno" id="memberno" value="${sessionScope.memberno }">                
+  
   <fieldset class='fieldset_basic'>
     <ul>
       <li class='li_center'>

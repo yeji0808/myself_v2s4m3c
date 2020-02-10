@@ -7,9 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.somoim.SomoimDAOInter"> 
   
   <insert id="create" parameterType="SomoimVO">
-     INSERT INTO somoim(somoimno, name, somoimtype, seqno, visible, rdate, membercnt, fname, fupname, thumb, fsize)
+     INSERT INTO somoim(somoimno, memberno, name, somoimtype, seqno, visible, rdate, membercnt, fname, fupname, thumb, fsize)
      VALUES ((SELECT NVL(MAX(somoimno), 0) + 1 as somoimno FROM somoim),
-                 #{name}, #{somoimtype}, 1, 'y', sysdate, 0, #{fname}, #{fupname}, #{thumb}, #{fsize})
+                 #{memberno}, #{name}, #{somoimtype}, 1, 'y', sysdate, 0, #{fname}, #{fupname}, #{thumb}, #{fsize})
    </insert>
    
    <select id="list_somoimno_asc" resultType="SomoimVO">

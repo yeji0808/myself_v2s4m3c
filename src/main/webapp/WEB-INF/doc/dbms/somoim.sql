@@ -87,7 +87,7 @@ WHERE somoimno = 6
 ON DELETE CASECADE;
 
          
-         
+SELECT * FROM somoim;        
          
          
 
