@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
  
 <!DOCTYPE html>
 <html lang="ko">
@@ -104,14 +105,14 @@ function update_img_form(restno) {
             </p>
           </div>
         </div>
-      </div>
+      </div>    
       </c:forEach>
     </div>
     
-    <br><br>    
-    <br><br>
-    <DIV class='bottom_menu'>${paging }</DIV>
-    <br><br>
+        <br><br>    
+        <br><br>
+        <DIV class='bottom_menu'>${paging }</DIV>
+        <br><br>
 
 </body>
  

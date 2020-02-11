@@ -575,12 +575,13 @@ text-decoration:none;
 background: rgb(109,109,109);
 display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
 height:auto;
+position:absolute;
 padding:0px;
 margin:0px; 
 border:0px;
-position:absolute;
+float: left;
 width:200px;
-z-index:200;
+z-index:300;
 /*top:1em;
 /*left:0;*/
 }
@@ -589,6 +590,7 @@ z-index:200;
 background: rgb(109,109,109);
 display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
 height:auto;
+position:absolute;
 padding:0px;
 margin:0px; 
 border:0px;
@@ -604,7 +606,7 @@ display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
 }
 
 .menubar li.li2:hover ul.ul2{
-display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
+display:inline-block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
 }
 
 .menubar li li {
@@ -663,10 +665,13 @@ clear:left;
  
 }
 .login_frame {
-    width: 50%; 
+    width: 30%; 
     display: table-cell;
-    height: 357px; 
-    padding-right: 50px; 
+    height: 100px; 
+    padding-left: 50px; 
     padding-top: 20px;
+    position: absolute;
+    z-index: 10;
+    float: right;
   }
   

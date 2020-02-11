@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -38,11 +39,9 @@
         <div class="form-group col-md-4">
           <label for="rcateno">분류 *</label>
           <select id="rcateno" class="form-control form-control-lg" required="required" name="rcateno" >
-            <option value="0" selected>분류</option>
-            <option value="1">한식</option>
-            <option value="2">중식</option>
-            <option value="3">양식</option>
-            <option value="4">일식</option>
+            <c:forEach var="restcategrpVO" items="${list }">
+              <option value="${restcategrpVO.rcateno }">${restcategrpVO.rcatename }</option>
+            </c:forEach>
           </select>
         </div>
       </div>

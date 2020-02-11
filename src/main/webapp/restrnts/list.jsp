@@ -81,6 +81,8 @@ function update_img_form(restno) {
       </div>
       </c:forEach>
     </div>
+    
+    
 
 </body>
  

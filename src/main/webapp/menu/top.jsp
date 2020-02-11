@@ -14,7 +14,7 @@
 </head>
 <body style="background-color: rgba(255, 255, 255,0.8); background-size: 100%;"> 
 
-  <!-- 화면 상단 메뉴 --> 
+   <!-- 화면 상단 메뉴 --> 
   <div class="headline1" style="background-image: url(${root}/css/images/main_photo.jpg);"> 
     
     <DIV class="headline2"  >  
@@ -47,17 +47,28 @@
     </div>
     
   </div>
-  
+ 
   <div class="menubar">
     <ul>
       <li style='width:20%;text-align: center;'><a href="${root }/index.do">Home</a></li>
 
       <li class="li1" style='width: 20%; text-align: center;'><a href="#">혼밥하기</a>
         <ul class="ul1">
-          <li class="li2" ><a href="#">카테고리로 찾기</a>
+          <c:choose>
+            <c:when test="${sessionScope.id_admin == null}">
+              <li class="li2" ><a href="#">카테고리로 찾기</a>
+            </c:when>
+            <c:otherwise>
+              <li class="li2" ><a href="${root }/rest_categrp/list.do">카테고리로 찾기</a>
+            </c:otherwise>
+          </c:choose>
             <ul class="ul2">
               <li><a href="${root }/restrnts/list.do?rcateno=1">한식</a></li>
               <li><a href="${root }/restrnts/list.do?rcateno=2">중식</a></li>
+              <li><a href="${root }/restrnts/list.do?rcateno=3">양식</a></li>
+              <li><a href="${root }/restrnts/list.do?rcateno=4">일식</a></li>
+              <li><a href="${root }/restrnts/list.do?rcateno=5">분식</a></li>
+              <li><a href="${root }/restrnts/list.do?rcateno=6">야식</a></li>
             </ul>
           </li>
           <li><a href="${root }/rest_map/map.do">지도로 찾기</a></li>
