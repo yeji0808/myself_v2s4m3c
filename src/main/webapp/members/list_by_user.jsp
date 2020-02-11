@@ -33,8 +33,6 @@
   <ASIDE style='float: right;'>
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' >│</span> 
-    <A href='./create.do'>회원 가입</A>
-    <span class='menu_divide' >│</span> 
     <A href='./create.do'>목록</A>
   </ASIDE> 
  
@@ -82,26 +80,19 @@
     <TD class='td'>${membersVO.birth}</TD>
     <TD class='td'>${membersVO.tel}</TD>
     <TD class='td'>${membersVO.email}</TD>
-<%--     <TD class='td'>
+    
+    <TD class='td'>
       <c:choose>
-        <c:when test="${membersVO.address1.length() > 15 }">
-          ${membersVO.address1.substring(0, 15) }...
-        </c:when>
-        <c:otherwise>
-          ${membersVO.address1}
-        </c:otherwise>
-      </c:choose>
-    </TD> --%> 
-<%--     <TD class='td'>
-    <c:choose>
         <c:when test="${membersVO.userno == 1 }">
           일반
         </c:when>
         <c:otherwise>
           점주
         </c:otherwise>
-      </c:choose>   
-    </TD> --%>
+      </c:choose>    
+    </TD>  
+    
+    
     <TD class='td'>${membersVO.mdate.substring(0, 10)}</TD> <!-- 년월일 -->
     <TD class='td'>
       <A href="./passwd_update.do?memberno=${membersno}"><IMG src='./images/passwd.png' title='패스워드 변경'></A>

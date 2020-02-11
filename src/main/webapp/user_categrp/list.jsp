@@ -50,10 +50,7 @@ function delete_form(userno) {
 <jsp:include page="/menu/top.jsp" flush='false' />
   <DIV class='title_line'>카테고리 그룹</DIV>
   
-  <div style="text-align: right; margin-right: 10px;">
-      <A href="../members/login_ck_form.jsp">로그인</A>
-      <A href="../members/create.do">회원가입</A>
-      </div>
+
  
   <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
     <FORM name='frm_create' id='frm_create' method='POST' action='./create.do'>

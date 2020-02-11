@@ -78,17 +78,9 @@
     <TD class='td'>${membersVO.birth}</TD>
     <TD class='td'>${membersVO.tel}</TD>
     <TD class='td'>${membersVO.email}</TD>
+    
     <TD class='td'>
-      <c:choose>
-        <c:when test="${membersVO.address1.length() > 15 }">
-          ${membersVO.address1.substring(0, 15) }...
-        </c:when>
-        <c:otherwise>
-          ${membersVO.address1}
-        </c:otherwise>
-      </c:choose>
-    </TD>
-    <TD class='td'>
+    000
       <c:choose>
         <c:when test="${membersVO.userno == 1 }">
           일반
@@ -97,7 +89,8 @@
           점주
         </c:otherwise>
       </c:choose>    
-    </TD>
+    </TD>  
+    
     <TD class='td'>${membersVO.mdate.substring(0, 10)}</TD> <!-- 년월일 -->
     <TD class='td'>
       <A href="./passwd_update.do?memberno=${membersno}"><IMG src='./images/passwd.png' title='패스워드 변경'></A>
