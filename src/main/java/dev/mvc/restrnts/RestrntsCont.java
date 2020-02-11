@@ -68,6 +68,10 @@ public class RestrntsCont {
   @RequestMapping(value="/restrnts/create_info.do", method=RequestMethod.GET)
   public ModelAndView create() {
     ModelAndView mav = new ModelAndView();
+    
+    List<RestCategrpVO> list = restcategrpProc.list_categrpno_asc();
+    mav.addObject("list", list);
+    
     mav.setViewName("/restrnts/create"); // /webapp/rest_categrp/create.jsp
     
     return mav;
